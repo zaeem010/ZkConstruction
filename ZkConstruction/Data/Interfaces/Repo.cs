@@ -29,6 +29,14 @@ namespace ZkConstruction.Data.Repository
                 return connection.Query<T>(query).ToList();
             }
         }
+        public IEnumerable<T> GetAllDataSp(string query, SqlParameter[] Parrameters)
+        {
+            using (connection = new SqlConnection(DBHelper.ConnectionString))
+            {
+                connection.Open();
+                return connection.Query<T>(query).ToList();
+            }
+        }
 
         public int GetMaxId(string query)
         {
