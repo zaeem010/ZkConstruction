@@ -201,12 +201,27 @@ namespace ZkConstruction.Controllers
             return RedirectToAction("Indexx", "Home");
         }
         [HttpPost]
-        public IActionResult FlEmAddSave(string[] Empid, int Proid,string type)
+        public IActionResult FlEmAddSave(string[] Empid, int Proid,string type ,string[] CloseDt)
         {
             _context.Database.ExecuteSqlRaw("DELETE FROM EmployeeAssigned WHERE (Type = '"+ type +"') AND (Proid = "+ Proid +")");
             for (int i = 0; i < Empid.Count(); i++)
             {
-                _context.Database.ExecuteSqlRaw("INSERT INTO EmployeeAssigned(Proid, Employeeid, Type) VALUES ('" + Proid + "','" + Empid[i] + "','" + type + "')");
+               _context.Database.ExecuteSqlRaw("INSERT INTO EmployeeAssigned(Proid, Employeeid, Type,CloseDateTime) VALUES ('" + Proid + "','" + Empid[i] + "','" + type + "','" + CloseDt[i] + "')");
+            }
+            TempData["Update"] = "Inserted Successfully";
+            return RedirectToAction("Indexx", "Home");
+        }
+        [HttpPost]
+        public IActionResult FlClosingSave(string[] Empid, int Proid,string type ,string[] CloseDt)
+        {
+            //_context.Database.ExecuteSqlRaw("DELETE FROM EmpassignClose WHERE (Type = '" + type +"') AND (Proid = "+ Proid +")");
+            for (int i = 0; i < CloseDt.Count(); i++)
+            {
+                if (CloseDt[i] != null)
+                {
+                    _context.Database.ExecuteSqlRaw("UPDATE EmployeeAssigned SET CloseDateTime ='" + CloseDt[i] +"' WHERE (Proid = "+ Proid +") AND (Type = 'Flooring') AND (Employeeid = "+ Empid[i] +")");
+                    //_context.Database.ExecuteSqlRaw("INSERT INTO EmpassignClose (Proid, Employeeid, Type, CloseDateTime) VALUES ('" + Proid + "','" + Empid[i] + "','" + type + "','" + CloseDt[i] + "')");
+                }
             }
             TempData["Update"] = "Inserted Successfully";
             return RedirectToAction("Indexx", "Home");

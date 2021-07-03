@@ -7,6 +7,15 @@ using System.Threading.Tasks;
 
 namespace ZkConstruction.ViewModelQuery
 {
+    public class EmpFloorCheckedVMQ 
+    {
+        public int id { get; set; }
+        public int Proid { get; set; }
+        public int Employeeid { get; set; }
+        public string Type { get; set; }
+        public string EmpName { get; set; }
+        public string CloseDateTime { get; set; }
+    }
     public class ManageVMQ
     {
         public string ManagerName { get; set; }

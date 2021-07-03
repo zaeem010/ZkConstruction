@@ -36,6 +36,7 @@ namespace ZkConstruction.Data
         public DbSet<STDDetail> STDDetail { get; set; }
         public DbSet<Worksheet> Worksheet { get; set; }
         public DbSet<Home> Home { get; set; }
+        public DbSet<EmpassignClose> EmpassignClose { get; set; }
         public DbSet<EmployeeAssigned> EmployeeAssigned { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)

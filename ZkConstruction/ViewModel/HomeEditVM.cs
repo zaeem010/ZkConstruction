@@ -17,5 +17,7 @@ namespace ZkConstruction.ViewModel
         public List<DEmployee> ManagerList { get; set; }
         public List<EmployeeAssigned> EmployeeAssignedPaintList { get; set; }
         public List<EmployeeAssigned> EmployeeAssignedFloorList { get; set; }
+        public List<EmpFloorCheckedVMQ> EmployeeAssignedFloorListChecked { get; set; }
+        public List<EmpassignClose> EmpassignCloseFloorList { get; set; }
     }
 }

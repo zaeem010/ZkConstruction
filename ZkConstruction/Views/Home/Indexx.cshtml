@@ -2,7 +2,8 @@
 @{
     ViewData["Title"] = "Indexx";
     string valavailable = "";
-    int PaintEmployees = 0;
+    string valavailable1 = "";
+    //int PaintEmployees = 0;
 }
 <div class="content-wrapper">
     <div class="container-fluid">
@@ -40,10 +41,12 @@
                                     <th>Painting Employee</th>
                                     <th>Painting Hours</th>
                                     <th>Start Date Time</th>
+                                    <th>Closing</th>
                                     <th>Electricity</th>
                                     <th>Flooring Employee</th>
                                     <th>Flooring Hours</th>
                                     <th>Start Date Time</th>
+                                    <th>Closing</th>
                                     <th>Flooring Room</th>
                                     <th>Remaining Hours</th>
                                     <th>Starting Date</th>
@@ -66,11 +69,13 @@
                                     <th>Manager</th>
                                     <th>Painting Employee</th>
                                     <th>Painting Hours</th>
-                                    <th>Start Time</th>
+                                    <th>Start Date Time</th>
+                                    <th>Closing</th>
                                     <th>Electricity</th>
                                     <th>Flooring Employee</th>
                                     <th>Flooring Hours</th>
                                     <th>Start Date Time</th>
+                                    <th>Closing</th>
                                     <th>Flooring Room</th>
                                     <th>Remaining Hours</th>
                                     <th>Starting Date</th>
@@ -140,6 +145,7 @@
                                         </td>
                                         <td><a data-toggle="modal" data-target="#PaintHours-@Lst.Proid"> @Lst.PaintingHours </a></td>
                                         <td><a data-toggle="modal" data-target="#StTime-@Lst.Proid"> @Convert.ToDateTime(Lst.StTime).ToString("dd/MM/yyyy HH:mm")</a></td>
+                                        <td>Close</td>
                                         <td><a data-toggle="modal" data-target="#El-@Lst.Proid">@Lst.Electricity</a></td>
                                         <td>
                                             <a data-toggle="modal" data-target="#FlEmAdd-@Lst.Proid"><span class="badge badge-primary"><i class="fa fa-plus"></i></span></a>
@@ -147,6 +153,7 @@
                                         </td>
                                         <td><a data-toggle="modal" data-target="#FlHours-@Lst.Proid">@Lst.FlooringHours</a></td>
                                         <td><a data-toggle="modal" data-target="#FlStDate-@Lst.Proid">@Convert.ToDateTime(Lst.StdateTimeFlooring).ToString("dd/MM/yyyy HH:mm")</a></td>
+                                        <td><a data-toggle="modal" data-target="#FlClosing-@Lst.Proid"><span class="badge badge-primary"><i class="fa fa-eye"></i></span></a></td>
                                         <td><a data-toggle="modal" data-target="#FlRoom-@Lst.Proid">_@Lst.FlooringRoom</a></td>
                                         <td><a data-toggle="modal" data-target="#RmHours-@Lst.Proid">@Lst.RemainingHours</a></td>
                                         <td><a data-toggle="modal" data-target="#St-@Lst.Proid">@Convert.ToDateTime(Lst.StDate).ToString("dd/MM/yyyy")</a></td>
@@ -746,13 +753,13 @@
                                                                     {
                                                                         if (List.AccountNo == ListCheckFloor.Employeeid && Lst.Proid == ListCheckFloor.Proid)
                                                                         {
-                                                                            <li class="list-group-item"><span class="badge"><input type="checkbox" checked name="Empid" value="@List.AccountNo" /></span> @List.Name </li>
+                                                                            <li class="list-group-item"><span class="badge"><input type="checkbox" checked name="Empid" value="@List.AccountNo" /></span> @List.Name <input type="hidden" name="CloseDt" value="@ListCheckFloor.CloseDateTime" /> </li>
                                                                             valavailable = "Yes";
                                                                         }
                                                                     }
                                                                     @if (valavailable == "NO")
                                                                     {
-                                                                        <li class="list-group-item"><span class="badge"><input type="checkbox" name="Empid" value="@List.AccountNo" /></span> @List.Name </li>
+                                                                        <li class="list-group-item"><span class="badge"><input type="checkbox" name="Empid" value="@List.AccountNo" /></span> @List.Name <input type="hidden" name="CloseDt" value="" /> </li>
                                                                     }
 
                                                                 }
@@ -769,7 +776,6 @@
                                             </div>
                                         </div>
                                     </div>
-
                                     <!-- Manager Modal -->
                                     <div class="modal fade" id="Manager-@Lst.Proid" tabindex="-1" role="dialog" aria-labelledby="SiteLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
@@ -800,7 +806,6 @@
                                             </div>
                                         </div>
                                     </div>
-
                                     <!-- FlStDate Modal -->
                                     <div class="modal fade" id="FlStDate-@Lst.Proid" tabindex="-1" role="dialog" aria-labelledby="SiteLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
@@ -829,6 +834,48 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <!-- FlClosing Modal -->
+                                    <div class="modal fade" id="FlClosing-@Lst.Proid" tabindex="-1" role="dialog" aria-labelledby="SiteLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Closing</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">×</span>
+                                                    </button>
+                                                </div>
+                                                <form method="post" asp-action="FlClosingSave" asp-controller="HomeEdit">
+                                                    <div class="modal-body">
+                                                        <div class="row">
+                                                            <ul class="list-group">
+                                                                @foreach (var FlClose in Model.EmployeeAssignedFloorListChecked)
+                                                                {
+
+                                                                    if (Lst.Proid == FlClose.Proid)
+                                                                    {
+                                                                                <li class="list-group-item">
+                                                                                <input type="hidden" value="@FlClose.Employeeid" name="Empid" />
+                                                                                @FlClose.EmpName
+                                                                                <span class="badge">
+                                                                                <input type="datetime-local" name="CloseDt" value="@FlClose.CloseDateTime" class="form-control" />
+                                                                                </span>
+                                                                                </li>
+                                                                        }
+                                                                    }
+                                                                
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-primary">Save changes</button>
+                                                    </div>
+                                                    <input type="hidden" name="Proid" value="@Lst.Proid" />
+                                                    <input type="hidden" name="type" value="Flooring" />
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
                                 }
 
                             </tbody>
@@ -840,9 +887,6 @@
         <!-- Multiple Open Accordion ends -->
     </div>
 
-</div>
-<div class="col-md-12">
-    
 </div>
 
 <script>
