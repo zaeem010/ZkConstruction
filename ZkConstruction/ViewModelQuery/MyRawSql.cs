@@ -35,6 +35,7 @@ namespace ZkConstruction.ViewModelQuery
         public int FlEm { get; set; }
         public int Manager { get; set; }
         public string FlooringRoom { get; set; }
+        public string StdateTimeFlooring { get; set; }
     }
     public class SiteVisit1VMQ
     {

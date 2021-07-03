@@ -28,5 +28,6 @@ namespace ZkConstruction.Models
         public int FlooringHours { get; set; }
         public int RemainingHours { get; set; }
         public string StTime { get; set; }
+        public string StdateTimeFlooring { get; set; }
     }
 }

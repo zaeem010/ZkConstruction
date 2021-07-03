@@ -162,6 +162,13 @@ namespace ZkConstruction.Controllers
             return RedirectToAction("Indexx", "Home");
         }
         [HttpPost]
+        public IActionResult FlStDateSave(string StTime, int Proid)
+        {
+            _context.Database.ExecuteSqlRaw("Update Home Set StdateTimeFlooring = '" + StTime + "' WHERE (Proid = " + Proid + ")");
+            TempData["Update"] = "Updated Successfully";
+            return RedirectToAction("Indexx", "Home");
+        }
+        [HttpPost]
         public IActionResult FlHoursSave(string FlHours, int Proid)
         {
             _context.Database.ExecuteSqlRaw("Update Home Set FlooringHours = '" + FlHours + "' WHERE (Proid = " + Proid + ")");
