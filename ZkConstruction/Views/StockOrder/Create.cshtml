@@ -1,0 +1,215 @@
+﻿@model ZkConstruction.ViewModel.STOVM
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="content-wrapper">
+
+    <!-- Container-fluid starts -->
+    <!-- Main content starts -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="main-header">
+            </div>
+            <div id="mydiv" class="col-md-3">
+                <p class="bg-success text-center">@TempData["Insert"]</p>
+                <p class="bg-danger">@TempData["Duplicate"]</p>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <a asp-action="Index" asp-controller="StockOrder" class="btn btn-skype offset-lg-10"><i class="fa fa-list"></i> Ordered Stock</a>
+            <div class="card" style="margin-top:20px">
+                <div class="card-header">
+                    <h5 class="card-header-text"><u>Product Form</u></h5>
+                </div>
+                <div class="card-block">
+                    @using (Html.BeginForm("Save", "StockOrder", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label>Date Of Order</label>
+                            <input type="date" asp-for="STOMaster.DateOrder" required value="@Model.STOMaster.DateOrder"  class="form-control"/>
+                        </div>
+                        <div class="col-md-3">
+                            <label>Required On</label>
+                            <input type="date" asp-for="STOMaster.RequiredDate" required value="@Model.STOMaster.RequiredDate" class="form-control"/>
+                        </div>
+                        <div class="col-md-3">
+                            <label>Delievery Person</label>
+                            <select asp-for="STOMaster.DelieverPerson" class="form-control chosen-select" required>
+                                <option value="">Select</option>
+                                @foreach (var Employee in Model.EmployeeList)
+                                {
+                                    <option value="@Employee.AccountNo">@Employee.Name</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label>Site</label>
+                            <select asp-for="STOMaster.Siteid" class="form-control chosen-select" required>
+                                <option value="">Select</option>
+                                @foreach (var lst in Model.SiteList)
+                                {
+                                    <option value="@lst.id">@lst.Name</option>
+                                }
+                            </select>
+                        </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-5 top">
+                                <label>Products</label>
+                                <select class="form-control" id="ItemName" onChange="Action(this.value)">
+                                    <option value="">Select</option>
+                                    @foreach (var lst in Model.ProductList)
+                                    {
+                                        <option value="@lst.id">@lst.Name</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="col-md-3 top">
+                                <label>Qty</label>
+                                <input type="text" class="form-control" value="0" onkeyup="sum();" id="Qty"/>
+                                <input type="hidden" class="form-control" value="" id="Itemid"/>
+                                <input type="hidden" class="form-control" value="" id="Cp"/>
+                                <input type="hidden" class="form-control" value="" id="Total"/>
+                            </div>
+                            <div class="col-md-3" style="margin-top:45px">
+                                <a class="btn btn-skype" onclick='return add()'><i class="fa fa-plus"></i> Add</a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 top">
+                                <table id="Item" class="table table-bordered table-hover table-striped ">
+                                    @if (Model.STOMaster.id == 0)
+                                    {
+                                        <thead class="bordered-darkorange">
+                                            <tr style="background-color:#00AFF0;color:white">
+                                                <th>Action</th>
+                                                <th>Name</th>
+                                                <th>Qty</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    }
+                                    else
+                                    {
+                                        <thead class="bordered-darkorange">
+                                            <tr style="background-color:#00AFF0;color:white">
+                                                <th>Action</th>
+                                                <th>Name</th>
+                                                <th>Qty</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var lst in Model.STODetailList)
+                                            {
+                                                <tr>
+                                                    <td style="width:80px !important"><a class="badge badge-danger" onclick="return deleteRow(this)"><i class="fa fa-trash-o"></i></a></td>
+                                                    <td><input type="text" name="ItemName" value="@lst.itemName" readonly class="form-control" autocomplete="off"></td>
+                                                    <td><input type="text" name="Qty" value="@lst.Qty" readonly class="form-control" autocomplete="off"></td>
+                                                    <td style="display:none"><input type="text" name="Cp" value="@lst.Price" readonly class="form-control" autocomplete="off"></td>
+                                                    <td style="display:none"><input type="text" name="Total" value="@lst.Total" readonly class="form-control" autocomplete="off"></td>
+                                                    <td style="display:none"><input type="text" name="Itemid" value="@lst.Itemid" readonly class="form-control" autocomplete="off"></td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    }
+                                </table>
+                            </div>
+                        </div>
+                        <div class="offset-md-4 col-md-6 " style="margin-top:20px">
+                            @if (Model.STOMaster.id == 0)
+                            {
+                                <button type="submit" class="btn btn-primary pull-right col-md-8" onclick="return confirm('Do you want to Save ..')" style="margin-top:0px"><i class="fa fa-plus"></i> Save </button>
+                            }
+                            else
+                            {
+                                <button type="submit" class="btn btn-primary pull-right col-md-8" onclick="return confirm('Do you want to Update ..')" style="margin-top:0px"><i class="fa fa-plus"></i> Update </button>
+                            }
+
+                        </div>
+                        @Html.HiddenFor(m => m.STOMaster.id)
+                        @Html.HiddenFor(m => m.STOMaster.Invid)
+                    }
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- Main content ends -->
+    <!-- Container-fluid ends -->
+</div>
+<script>
+    $('.chosen-select').chosen();
+
+    function add() {
+
+        var selObj = document.getElementById("ItemName");
+        var ItemName = selObj.options[selObj.selectedIndex].text;
+        var Qty = document.getElementById("Qty").value;
+        var Itemid = document.getElementById("Itemid").value;
+        var Costprice = document.getElementById("Cp").value;
+        var Total = document.getElementById("Total").value;
+        //alert(Itemid);
+
+
+        if (ItemName == "" || ItemName == "Select" || ItemName == 0)
+        {
+            alert("Please Select Item");
+        }
+        else if (Qty == "" || Qty == 0)
+        {
+            alert("Please Insert Qty");
+        }
+        else
+        {
+            var htmlRows = '';
+            htmlRows += '<tr>';
+            htmlRows += '<td style="width:80px !important"><a class="badge badge-danger" onclick="return deleteRow(this)" ><i class="fa fa-trash-o"></i></a></td>';
+            htmlRows += '<td><input type="text"  name="ItemName"  value="' + ItemName + '" readonly class="form-control" autocomplete="off"></td>';
+            htmlRows += '<td><input type="text"  name="Qty"  value="' + Qty + ' "   readonly class="form-control" autocomplete="off"></td>';
+            htmlRows += '<td style="display:none"><input type="text"  name="Cp"  value="' + Costprice + '"  readonly class="form-control" autocomplete="off"></td>';
+            htmlRows += '<td style="display:none"><input type="text"  name="Total"  value="' + Total + '"  readonly class="form-control" autocomplete="off"></td>';
+            htmlRows += '<td style="display:none"><input type="text"  name="Itemid"  value="' + Itemid + '"  readonly class="form-control" autocomplete="off"></td>';
+            $('#Item').append(htmlRows);
+            $('#ItemName').val('');
+            $('#Qty').val('0');
+            $('#Itemid').val('');
+            $('#Cp').val('');
+            $('#Total').val('');
+            
+        }
+    };
+    function deleteRow(btn) {
+        if (confirm("Are you sure want to delete the row?"))
+            $(btn).closest("tr").remove();
+    };
+    function Action(code) {
+        //alert(code);
+        $.ajax({
+            type: "GET",
+            url: "/StockOrder/Itemid?id=" + code,
+            data: "{}",
+            success: function (data) {
+                var Itemids = data.id;
+                var Cps = data.costPrice;
+          //      alert(Itemids);
+                document.getElementById("Itemid").value = Itemids;
+                document.getElementById("Cp").value = Cps;
+            }
+        });
+        //var Costprice = document.getElementById("Cp").value;
+        //var Qty = document.getElementById("Qty").value;
+        //var total = parseFloat(Costprice) * parseFloat(Qty);
+        //document.getElementById("Total").value = total.toFixed(2);
+    };
+    function sum()
+    {
+        var Costprice = document.getElementById("Cp").value;
+        var Qty = document.getElementById("Qty").value;
+        var total = parseFloat(Costprice) * parseFloat(Qty);
+        document.getElementById("Total").value = total.toFixed(2);
+    };
+</script>

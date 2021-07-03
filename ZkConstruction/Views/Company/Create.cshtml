@@ -1,0 +1,63 @@
+﻿@model ZkConstruction.Models.Company
+@{
+    ViewData["Title"] = "Create";
+}
+<div class="content-wrapper">
+
+    <!-- Container-fluid starts -->
+    <!-- Main content starts -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="main-header">
+            </div>
+            <div id="mydiv" class="col-md-3">
+                <p class="bg-success text-center">@TempData["Insert"]</p>
+                <p class="bg-danger">@TempData["Duplicate"]</p>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <a asp-action="Index" asp-controller="Company" class="btn btn-skype offset-lg-10"><i class="fa fa-list"></i> Company List</a>
+            <div class="card" style="margin-top:20px">
+                <div class="card-header">
+                    <h5 class="card-header-text"><u>Company Form</u></h5>
+                </div>
+                <div class="card-block">
+                    @using (Html.BeginForm("Save", "Company", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="row">
+                            <span id="uname_response"></span>
+                            <div class="col-md-6">
+                                <label><b>Company Name</b></label>
+                                <input type="text" asp-for="Name" required class="form-control" />
+                            </div>
+                        
+                            <div class="offset-md-4 col-md-6 " style="margin-top:20px">
+                                @if (Model.id == 0)
+                                {
+                                    <button type="submit" class="btn btn-primary pull-right col-md-8" onclick="return confirm('Do you want to Save ..')" style="margin-top:0px"><i class="fa fa-plus"></i> Save </button>
+                                }
+                                else
+                                {
+                                    <button type="submit" class="btn btn-primary pull-right col-md-8" onclick="return confirm('Do you want to Update ..')" style="margin-top:0px"><i class="fa fa-plus"></i> Update </button>
+                                }
+
+                            </div>
+                            @Html.HiddenFor(m => m.id)
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- Main content ends -->
+    <!-- Container-fluid ends -->
+</div>
+<script>
+    $('.chosen-select').chosen();
+    setTimeout(function () {
+        $('#mydiv').fadeOut('fast');
+    }, 3000); // <-- time in milliseconds
+</script>

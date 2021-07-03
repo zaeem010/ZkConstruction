@@ -1,0 +1,118 @@
+﻿@model ZkConstruction.ViewModel.WorkProcessVM
+@{
+    Layout = null;
+  
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Favicon icon -->
+    <link rel="shortcut icon" href="~/Content/assets/images/favicon.png" type="image/x-icon">
+    <link rel="icon" href="~/Content/assets/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" **media="screen" **>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>Work Process Report</title>
+</head>
+<body onload="">
+    <div class="container">
+        <h3 class="text-center"><b>Work Process Report</b></h3>
+        <br />
+        <div class="row">
+            <div class="col-md-4">
+                <label><b>Date :</b></label> <u>@Convert.ToDateTime(Model.WorkProcessDetailVMQ.Date).ToString("dd-MMM-yyyy")</u>
+            </div>
+            <div class="col-md-4">
+                <label><b>Project Name :</b></label> <u>@Model.WorkProcessDetailVMQ.ProjectName</u>
+            </div>
+            <div class="col-md-4">
+                <label><b>Site :</b></label> <u>@Model.WorkProcessDetailVMQ.SiteName</u>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <h3 class="text-center"><b>Summary</b></h3>
+            <br />
+            <div class="col-md-12">
+                @using (Html.BeginForm("Save", "WorkProcess", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <table class="table table-bordered">
+                        <tr>
+                            <th>Employee id</th>
+                            <th>Employee Name</th>
+                            <th>Section Name</th>
+                            <th>Sub Section Name</th>
+                            <th>Status</th>
+                        </tr>
+                        @foreach (var lst in Model.WorkProcessListVMQ)
+                        {
+                            <tr>
+                                <td>@lst.Employeeid<input type="hidden" name="Empid" value="@lst.Employeeid" /></td>
+                                <td>@lst.EmployeeName</td>
+                                <td>@lst.SectionName</td>
+                                <td>@lst.SubSectionName</td>
+                                <td>
+                                    <select name="Status" class="form-control">
+                                        @if (lst.Status == "Pending")
+                                        {
+                                            <option value="Pending" selected>Pending</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="Pending">Pending</option>
+                                        }@if (lst.Status == "Finished")
+                                        {
+                                            <option value="Finished" selected>Finished</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="Finished">Finished</option>
+                                        }@if (lst.Status == "In Process")
+                                        {
+                                            <option value="In Process" selected>In Process</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="In Process">In Process</option>
+                                        }
+                                        @if (lst.Status == "Not Finished")
+                                        {
+                                            <option value="Not Finished" selected>Not Finished</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="Not Finished">Not Finished</option>
+                                        }@if (lst.Status == "Postponed")
+                                        {
+                                            <option value="Postponed" selected>Postponed</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="Postponed">Postponed</option>
+                                        }@if (lst.Status == "Cancelled")
+                                        {
+                                        <option value="Cancelled" selected>Cancelled</option>
+                                        }
+                                        else 
+                                        {
+                                    <option value="Cancelled">Cancelled</option>
+                                        }
+                                        </select>
+                                </td>
+
+                            </tr>
+                        }
+                    </table>
+                    <input type="hidden" name="Sheduleid" value="@Model.WorkProcessDetailVMQ.Sheduleid" />
+                    <div class="col-md-4 " style="margin-top:20px">
+                            <button type="submit" class="btn btn-primary pull-right col-md-12" onclick="return confirm('Do you want to Save ..')" style="margin-top:0px"><i class="fa fa-plus"></i> Save </button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</body>
+</html>

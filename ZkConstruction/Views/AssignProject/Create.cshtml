@@ -1,0 +1,227 @@
+﻿@model ZkConstruction.ViewModel.Assign_VM
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string valavailable = "";
+}
+<div class="content-wrapper">
+
+    <!-- Container-fluid starts -->
+    <!-- Main content starts -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="main-header">
+            </div>
+            <div id="mydiv" class="col-md-3">
+                <p class="bg-success text-center">@TempData["Insert"]</p>
+                <p class="bg-danger">@TempData["Duplicate"]</p>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <a asp-action="Index" asp-controller="AssignProject" class="btn btn-skype offset-lg-10"><i class="fa fa-list"></i> Planed Projects</a>
+            <div class="card" style="margin-top:20px">
+                <div class="card-header">
+                    <h5 class="card-header-text"><u>Project Form</u></h5>
+                </div>
+                <div class="card-block">
+                    @using (Html.BeginForm("save", "AssignProject", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(m => m.projectAssign.Assignid)
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label><b>Starting Date</b></label>
+                                @if (Model.projectAssign.id == 0)
+                                {
+                                    <input type="date" asp-for="projectAssign.StDate" id="date" class="form-control" value="@Model.projectAssign.StDate" />
+                                }
+                                else
+                                {
+                                    <input type="date" asp-for="projectAssign.StDate" class="form-control" value="@Model.projectAssign.StDate" />
+                                }
+                            </div>
+                            <div class="col-md-4">
+                                <label><b>Ending Date</b></label>
+                                @if (Model.projectAssign.id == 0)
+                                {
+                                    <input type="date" asp-for="projectAssign.EnDate" id="dates" class="form-control" value="@Model.projectAssign.EnDate" />
+                                }
+                                else
+                                {
+                                    <input type="date" asp-for="projectAssign.EnDate" class="form-control" value="@Model.projectAssign.EnDate" />
+                                }
+                            </div>
+                            <div class="col-md-4 ">
+                                <label><b>Project</b></label>
+                                <select class="form-control chosen-select" asp-for="projectAssign.Projectid" onChange="Action(this.value)">
+                                    <option value="">Select Project</option>
+                                    @foreach (var lst in Model.ProjectList)
+                                    {
+                                        <option value="@lst.Proid">@lst.Name</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                            <div class="row">
+                                <div class="col-md-6 top">
+                                    <label><b>Task</b></label>
+                                    <select class="form-control" id="Sec" asp-for="projectAssign.Secid"  onChange="Actionsub(this.value)">
+                                        <option value="">Select Task</option>
+                                        @if (Model.projectAssign.id != 0)
+                                        {
+                                            foreach (var lst in Model.ProjectchildList)
+                                            {
+                <option value="@lst.Secid" data="@if (Convert.ToInt32(lst.Secid) == Convert.ToInt32(Model.projectAssign.Secid)){ <text>selected</text>} ">@lst.Name</option>
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                                <div class="col-md-6 top">
+                                    <label><b>Sub Task</b></label>
+                                    <select class="form-control" id="Subsec" asp-for="projectAssign.SubSecid" >
+                                        <option value="">Select Sub Task</option>
+                                        @if (Model.projectAssign.id != 0)
+                                        {
+                                            foreach (var lst in Model.SubsectionList)
+                                            {
+                                                <option value="@lst.id" data="@if (Convert.ToInt32(lst.id) == Convert.ToInt32(Model.projectAssign.SubSecid))
+                                                { <text>Selected</text>} ">
+                                                    @lst.Name
+                                                </option>
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <br />
+                            <br />
+                            <div class="row text-center ">
+                                <div class="col-md-8">
+                                  
+                                    <table id="table1" class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Action</th>
+                                                <th>Name</th>
+                                                <th>Designation</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if (Model.projectAssign.id == 0)
+                                            {
+                                                @foreach (var lst in Model.EmployeeList)
+                                                {
+                                                    <tr>
+                                                        <td style="width:30px"><input type="checkbox" name="child" value=@lst.AccountNo></td>
+                                                        <td style="height:4px;width:50px">@lst.Name</td>
+                                                        <td style="height:10px;width:50px">@lst.Designation</td>
+                                                    </tr>
+                                                }
+                                            }
+                                            else
+                                            {
+                                                @foreach (var lstsec in Model.EmployeeList)
+                                                {
+                                                    valavailable = "NO";
+                                                    <tr>
+                                                        <td style="width:30px">
+                                                            @foreach (var lstpchild in Model.AssignchildList)
+                                                            {
+                                                                if (Convert.ToInt32(lstsec.AccountNo) == Convert.ToInt32(lstpchild.EmployeeAcc))
+                                                                {
+                                                                    <input type="checkbox" name="child" value=@lstsec.AccountNo checked>
+                                                                    valavailable = "YES";
+                                                                }
+                                                            }
+                                                            @if (valavailable == "NO")
+                                                            {
+                                                                <input type="checkbox" name="child" value=@lstsec.AccountNo>
+                                                            }
+                                                        </td>
+                                                        <td>@lstsec.Name</td>
+                                                        <td>@lstsec.Designation</td>
+                                                    </tr>
+                                                }
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        <div class="offset-md-4 col-md-6 " style="margin-top:20px">
+                            @if (Model.projectAssign.id == 0)
+                            {
+                                <button type="submit" class="btn btn-primary pull-right col-md-8" onclick="return confirm('Do you want to Save ..')" style="margin-top:0px"><i class="fa fa-plus"></i> Save </button>
+                            }
+                            else
+                            {
+                                <button type="submit" class="btn btn-primary pull-right col-md-8" onclick="return confirm('Do you want to Update ..')" style="margin-top:0px"><i class="fa fa-plus"></i> Update </button>
+                            }
+                        </div>
+                        @Html.HiddenFor(m => m.projectAssign.id)
+                    }
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- Main content ends -->
+    <!-- Container-fluid ends -->
+</div>
+<script>
+    $('.chosen-select').chosen();
+    setTimeout(function () {
+        $('#mydiv').fadeOut('fast');
+    }, 3000); // <-- time in milliseconds
+    //start
+    $(document).ready(function () {
+        var table1 = $('#table1').DataTable({
+            "paging": true,
+            "ordering": true,
+            "info": true,
+        });
+    });
+    //Cascading section
+        function Action(code) {
+        //alert(code);
+        $.ajax({
+            type: "GET",
+            url: "/AssignProject/ProductList?id=" + code,
+            data: "{}",
+            success: function (data) {
+                var s = '<option value="-1">Select Task</option>';
+                for (var i = 0; i < data.length; i++) {
+                    s += '<option value="' + data[i].secid + '">' + data[i].name + '</option>';
+                }
+                $('#Sec').html(s);
+            }
+        });
+    };
+    //Cascading sub section
+    function Actionsub(code) {
+        //alert(code);
+        $.ajax({
+            type: "GET",
+            url: "/AssignProject/SubSection?id=" + code,
+            data: "{}",
+            success: function (data) {
+                var s = '<option value="-1">Select Sub Task</option>';
+                for (var i = 0; i < data.length; i++) {
+                    s += '<option value="' + data[i].id + '">' + data[i].name + '</option>';
+                }
+                $('#Subsec').html(s);
+            }
+        });
+    };
+    $(document).ready(function () {
+        var now = new Date();
+        var month = (now.getMonth() + 1);
+        var day = now.getDate();
+        if (month < 10)
+            month = "0" + month;
+        if (day < 10)
+            day = "0" + day;
+        var today = now.getFullYear() + '-' + month + '-' + day;
+        $('#date').val(today);
+        $('#dates').val(today);
+    });
+</script>

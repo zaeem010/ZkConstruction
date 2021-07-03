@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31005.135
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZkConstruction", "ZkConstruction\ZkConstruction.csproj", "{1AA0B1CF-FEE4-4CE2-9D8E-031D323DA9E4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1AA0B1CF-FEE4-4CE2-9D8E-031D323DA9E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1AA0B1CF-FEE4-4CE2-9D8E-031D323DA9E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1AA0B1CF-FEE4-4CE2-9D8E-031D323DA9E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1AA0B1CF-FEE4-4CE2-9D8E-031D323DA9E4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5CFDB76A-AA72-4DE5-9F2B-7F62DCB239AA}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,93 @@
+﻿@using Microsoft.AspNetCore.Http;
+@model ZkConstruction.ViewModel.Dashboard_VM
+@{
+    ViewData["Title"] = "Home Page";
+}
+<div class="content-wrapper">
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="main-header">
+            </div>
+            <div id="mydiv" class="col-md-3">
+                <p class="bg-success text-center">@TempData["update"]</p>
+                <p class="bg-danger text-center">@TempData["Delete"]</p>
+            </div>
+        </div>
+        <!-- Multiple Open Accordion start -->
+        <div class="col-lg-10">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-header-text">Projects</h5>
+@*                    <h5 class="card-header-text">@Context.Session.GetString("MyAwesomeSessionValue")</h5>*@
+                    <a href="@Url.Action("Projects",new { status = "Cancelled"})" class="btn btn-danger pull-right" style="margin-left:20px">Cancelled</a>
+                    <a href="@Url.Action("Projects",new { status = "Finished"})" class="btn btn-success pull-right" style="margin-left:20px">Finished</a>
+                    <a href="@Url.Action("Projects",new { status = "Pending"})" class="btn pull-right" style="margin-left:20px;background-color: yellow; color: White">Pending</a>
+                    <a href="@Url.Action("Projects",new { status = "All"})" class="btn btn-primary pull-right" style="margin-left:20px">All</a>
+                </div>
+                <div class="card-block accordion-block">
+                    <div id="accordion" role="tablist" aria-multiselectable="true">
+
+                        @foreach (var lstpro in Model.ProjectsVMQList)
+                            {
+                                
+                                <div class="accordion-panel">
+                                <div class="accordion-heading" role="tab" id="heading-@lstpro.Proid">
+                                    <h3 class="card-title accordion-title">
+                                        <a class="accordion-msg" data-toggle="collapse" data-parent="#accordion" href="#collapse-@lstpro.Proid" aria-expanded="false" aria-controls="collapse-@lstpro.Proid"><span>Project:</span>&nbsp;&nbsp;<span>@lstpro.Name</span> <span style="margin-left:100px"></span>&nbsp;&nbsp;<span style=""><button style="background-color: yellow; color: black" class="badge">!</button></span> <span style="margin-left:100px"></span>&nbsp;&nbsp; <span>@Convert.ToDateTime(lstpro.StDate).ToString("dd-MMM-yyyy") TO @Convert.ToDateTime(lstpro.HandDate).ToString("dd-MMM-yyyy")</span></a>
+                                    </h3>
+                                </div>
+                                <div id="collapse-@lstpro.Proid" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-@lstpro.Proid">
+                                    <div class="accordion-content accordion-desc">
+                                        <table class="table table-bordered">
+                                            <tr>
+                                                <th>Site</th>
+                                                <th>Status</th>
+                                                <th>Docs</th>
+                                                <th>Start Date</th>
+                                                <th>Delivery Date</th>
+                                                <th>Action</th>
+                                            </tr>
+                                            @foreach (var lst in Model.ProjectsVMQList)
+                                            {
+                                                if (Convert.ToInt32(lstpro.Proid) == Convert.ToInt32(lst.Proid))
+                                                {
+                                                    <tr>
+                                                        <td>@lst.Site</td>
+                                                        <td style="background-color:yellow;color:black">Pending</td>
+                                                        <td align="center"><i style="font-size:large" class="fa fa-file-pdf-o"></i></td>
+                                                        <td>@lst.StDate</td>
+                                                        <td>@lst.HandDate</td>
+                                                        <td align="center">
+                                                        <a href="@Url.Action("Index","Management", new { id = lst.Proid })"><i style="font-size:large" class="fa fa-search"></i></a>
+                                                        <br />
+                                                        <a href="@Url.Action("Report","Management", new { Proid = lst.Proid , Siteid = lst.Siteid })" target="_blank"><i style="font-size:large" class="fa fa-print"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                }
+
+                                            }
+
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Multiple Open Accordion ends -->
+    </div>
+
+</div>
+<script>
+    $('.chosen-select').chosen();
+    setTimeout(function () {
+        $('#mydiv').fadeOut('fast');
+    }, 3000); // <-- time in milliseconds
+    $(document).ready(function () {
+        $('.toast').toast('show');
+    });
+</script>

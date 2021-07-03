@@ -1,0 +1,95 @@
+﻿@model ZkConstruction.ViewModel.Gantt_VM
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Gantt.cshtml";
+}
+<br />
+@*Container-fluid starts
+    Main content starts*@
+<div class="container-fluid">
+    <div class="col-md-12">
+        <h3 class="text-center" style=" color: white; text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;"><u>Project Planning</u></h3>
+    </div>
+    <br />
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-block">
+                <div class="container-fluid row">
+                    <div class="col-md-4">
+                        <label><b>Project Name :</b>&nbsp; @Model.GanttVMQ.Name</label>
+                    </div>
+                    <div class="col-md-4">
+                        <label><b>Project Start Date :</b>&nbsp; @Model.GanttVMQ.StDate</label>
+                    </div>
+                    <div class="col-md-4">
+                        <label><b>Project Delivery Date :</b>&nbsp; @Model.GanttVMQ.HandDate</label>
+                    </div>
+                    <div class="col-md-4 ">
+                        <label><b>Site :</b>&nbsp; @Model.GanttVMQ.Site</label>
+                    </div>
+                    <div class="col-md-4 ">
+                        <label><b>Supervisor :</b>&nbsp; @Model.GanttVMQ.Supervisor </label>
+                    </div>
+                    <div class="col-md-4 ">
+                        <label><b>Engineer/Manager :</b>&nbsp; @Model.GanttVMQ.Manager</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<br />
+<div class="container-fluid">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-block">
+                            <div id="chart_div"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*Main content ends
+    Container-fluid ends*@
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+    google.charts.load('current', { 'packages': ['gantt'] });
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Task ID');
+        data.addColumn('string', 'Task Name');
+        data.addColumn('string', 'Resource');
+        data.addColumn('date', 'Start Date');
+        data.addColumn('date', 'End Date');
+        data.addColumn('number', 'Duration');
+        data.addColumn('number', 'Percent Complete');
+        data.addColumn('string', 'Dependencies');
+
+        data.addRows([
+            @foreach (var lst in Model.Gantt_VMQLists)
+            {
+                <text>['@lst.Name', '@lst.Name', '@lst.Name,', new Date(@Convert.ToDateTime(lst.StDate).ToString("yyyy, M, dd")), new Date(@Convert.ToDateTime(lst.EnDate).ToString("yyyy, M, dd")), null,100 , null],</text>
+
+            }
+        ]);
+        var options = {
+            height: 400,
+            gantt: {
+                trackHeight: 30
+            }
+        };
+                var chart = new google.visualization.Gantt(document.getElementById('chart_div'));
+                chart.draw(data, options);
+    }
+</script>
+

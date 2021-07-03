@@ -1,0 +1,167 @@
+﻿@model ZkConstruction.ViewModel.Employee_VM
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="content-wrapper">
+
+    <!-- Container-fluid starts -->
+    <!-- Main content starts -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="main-header">
+            </div>
+            <div id="mydiv" class="col-md-3">
+                <p class="bg-success text-center">@TempData["Insert"]</p>
+                <p class="bg-danger text-center">@TempData["Duplicate"]</p>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <a asp-action="Index" asp-controller="Employee" class="btn btn-skype offset-lg-10"><i class="fa fa-list"></i> Employee List</a>
+            <div class="card" style="margin-top:20px">
+                <div class="card-header">
+                    <h5 class="card-header-text"><u>Employee Form</u></h5>
+                </div>
+                <div class="card-block">
+                    @using (Html.BeginForm("save", "Employee", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(m=>m.DEmployee.Image)
+
+                        <div class="row">
+                            <span id="uname_response"></span>
+                            <div class="col-md-3">
+                                <label><b>Employee Name</b></label>
+                                <input type="text" asp-for="DEmployee.Name" required class="form-control" value="@Model.DEmployee.Name" />
+                            </div>
+                            <div class="col-md-3">
+                                <label><b>Date Of Birth</b></label>
+                                @if (Model.DEmployee.id == 0)
+                                {
+                                    <input type="date" asp-for="DEmployee.DOB" id="date" required class="form-control" value="@Model.DEmployee.DOB" />
+                                }
+                                else
+                                {
+                                    <input type="date" asp-for="DEmployee.DOB" class="form-control" value="@Model.DEmployee.DOB" />
+                                }
+                            </div>
+                            <div class="col-md-3">
+                                <label><b>Email</b></label>
+                                <input type="email" asp-for="DEmployee.Email" class="form-control" value="@Model.DEmployee.Email" />
+                            </div>
+                            <div class="col-md-3">
+                                <label><b>Mobile No</b></label>
+                                <input type="number" asp-for="DEmployee.Mobile" class="form-control" value="@Model.DEmployee.Mobile" />
+                            </div>
+                            <div class="col-md-4 top">
+                                <label><b>Designation</b></label>
+                                <select class="form-control chosen-select" asp-for="DEmployee.Designation" required>
+                                    <option value="">Select Designation</option>
+                                    @foreach (var lst in Model.Designationlist)
+                                    {
+                                        <option value="@lst.id" >@lst.Name   </option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="col-md-4 top">
+                                <label><b>Date Of Joinng</b></label>
+                                @if (Model.DEmployee.id == 0)
+                                {
+                                    <input type="date" asp-for="DEmployee.DOJ" class="form-control" id="dates" value="@Model.DEmployee.DOJ" />
+                                }
+                                else
+                                {
+                                    <input type="date" asp-for="DEmployee.DOJ" class="form-control" value="@Model.DEmployee.DOJ" />
+                                }
+                            </div>
+                            <div class="col-md-4 top">
+                                <label><b>Per Hour Salary</b></label>
+                                <input type="number" asp-for="DEmployee.PerHourSalary" class="form-control" value="@Model.DEmployee.PerHourSalary" />
+                            </div>
+                            <div class="col-md-4 top">
+                                <label><b>Start Time</b></label>
+                                <input type="time" asp-for="DEmployee.StTime" class="form-control" />
+                            </div>
+                            <div class="col-md-4 top">
+                                <label><b>End Time</b></label>
+                                <input type="time" asp-for="DEmployee.EnTime" class="form-control" />
+                            </div>
+                            <div class="col-md-4 top">
+                                <label><b>City</b></label>
+                                <select class="form-control chosen-select" asp-for="DEmployee.City">
+                                    <option value="">Select City</option>
+                                    @foreach (var lst in Model.Cities)
+                                    {
+                                        <option value="@lst.id">@lst.Name</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3 top">
+                                <label><b>Country</b></label>
+                                <input type="text" asp-for="DEmployee.Country" class="form-control" value="@Model.DEmployee.Country" />
+                            </div>
+                            <div class="col-md-3 top">
+                                <label><b>Image</b></label>
+                                <input type="file" id="file" value="" asp-for="DEmployee.Image" onchange="loadFile(event)" class="form-control" />
+
+                                @if (Model.DEmployee.Image == null)
+                                {
+                                    <img id="output" height="90" width="90" style="border:thin;margin-top:20px" class="img-fluid" src="~/Uploads/demo.jpg" />
+                                }
+                                else
+                                {
+                                    <img id="output" height="90" width="90" style="border:thin;margin-top:20px" class="img-fluid" src="~/Uploads/@Model.DEmployee.Image" />
+                                }
+                            </div>
+                            <div class="col-md-6 top">
+                                <label><b>Address</b></label>
+                                <textarea class="form-control" asp-for="DEmployee.Address" rows="3" cols="10" value="@Model.DEmployee.Address"></textarea>
+                            </div>
+                        </div>
+                        <div class="offset-md-4 col-md-6 " style="margin-top:20px">
+                            @if (Model.DEmployee.id == 0)
+                            {
+                                <button type="submit" class="btn btn-primary pull-right col-md-8" onclick="return confirm('Do you want to Save ..')" style="margin-top:0px"><i class="fa fa-plus"></i> Save </button>
+                            }
+                            else
+                            {
+                                <button type="submit" class="btn btn-primary pull-right col-md-8" onclick="return confirm('Do you want to Update ..')" style="margin-top:0px"><i class="fa fa-plus"></i> Update </button>
+                            }
+
+                        </div>
+                        @Html.HiddenFor(m => m.DEmployee.id)
+                        @Html.HiddenFor(m => m.DEmployee.AccountNo)
+                    }
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- Main content ends -->
+    <!-- Container-fluid ends -->
+</div>
+<script>
+    $('.chosen-select').chosen();
+    setTimeout(function () {
+        $('#mydiv').fadeOut('fast');
+    }, 3000); // <-- time in milliseconds
+    $(document).ready(function () {
+        var now = new Date();
+        var month = (now.getMonth() + 1);
+        var day = now.getDate();
+        if (month < 10)
+            month = "0" + month;
+        if (day < 10)
+            day = "0" + day;
+        var today = now.getFullYear() + '-' + month + '-' + day;
+        $('#date').val(today);
+        $('#dates').val(today);
+    });
+    var loadFile = function (event) {
+        var output = document.getElementById('output');
+        output.src = URL.createObjectURL(event.target.files[0]);
+    };
+
+</script>

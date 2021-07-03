@@ -1,0 +1,288 @@
+﻿@model ZkConstruction.ViewModel.DailyShedule_VM
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="content-wrapper">
+
+    <!-- Container-fluid starts -->
+    <!-- Main content starts -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="main-header">
+            </div>
+            <div id="mydiv" class="col-md-3">
+                <p class="bg-success text-center">@TempData["Insert"]</p>
+                <p class="bg-danger">@TempData["Duplicate"]</p>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <a asp-action="Index" asp-controller="DailyShedule" class="btn btn-skype offset-lg-9"><i class="fa fa-list"></i> Daily Shedule Projects</a>
+            <div class="card" style="margin-top:20px">
+                <div class="card-header">
+                    <h5 class="card-header-text"><u>Daily Shedule Form</u></h5>
+                </div>
+                <div class="card-block">
+                    @using (Html.BeginForm("save", "DailyShedule", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(m => m.DailyShedule.Sheduleid)
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label><b>Date</b></label>
+                                @if (Model.DailyShedule.id == 0)
+                                {
+                                    <input type="date" asp-for="DailyShedule.Date" id="date" class="form-control" />
+                                }
+                                else
+                                {
+                                    <input type="date" asp-for="DailyShedule.Date" class="form-control" value="@Model.DailyShedule.Date" />
+                                }
+                            </div>
+                            <div class="col-md-4 ">
+                                <label><b>Project</b></label>
+                                <select class="form-control chosen-select" asp-for="DailyShedule.Projectid" onChange="Action(this.value)">
+                                    <option value="">Select Project</option>
+                                    @foreach (var lst in Model.ProjectList)
+                                    {
+                                        <option value="@lst.Proid">@lst.Name</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label><b>Site</b></label>
+                                <select class="form-control chosen-select" asp-for="DailyShedule.Siteid">
+                                    <option value="">Select Site</option>
+                                    @foreach (var lst in Model.SiteList)
+                                    {
+                                        <option value="@lst.id">@lst.Name </option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                            <div class="row">
+                                <div class="col-md-3 top">
+                                    <label><b>Employee</b></label>
+                                    <select class="form-control" id="employee" onChange="Actionempl(this.value)">
+                                        <option value="">Select Employee</option>
+                                        @foreach (var lst in Model.EmployeeList)
+                                        {
+                                            <option value="@lst.AccountNo">@lst.Name &nbsp;&nbsp; @lst.Designation</option>
+                                        }
+                                    </select>
+                                    <input type="hidden" name="" id="EmployeeAcc" value="" />
+                                </div>
+                                <div class="col-md-3 top">
+                                    <label><b>Task</b></label>
+                                    <select class="form-control" id="Sec" onChange="Actionsub(this.value)" onclick="Actiontask(this.value)">
+                                        <option value="">Select Task</option>
+                                        @if (Model.DailyShedule.id != 0)
+                                        {
+                                            @foreach (var lst in Model.ProjectchildList)
+                                            {
+                                                <option value="@lst.Secid">@lst.Name</option>
+                                            }
+                                        }
+
+                                    </select>
+                                    <input type="hidden" id="TaskName" value="" />
+                                </div>
+                                <div class="col-md-3 top">
+                                    <label><b>Sub Task</b></label>
+                                    <select class="form-control" id="Subsec"  onChange="ActionSubtask(this.value)">
+                                        <option value="">Select Sub Task</option>
+                                    </select>
+                                    <input type="hidden" id="SubTaskName" value="" />
+                                    <a class="btn btn-wide pull-right" onclick='return add()' style="margin-right:-100px;margin-top:-30px;background-color:#60f78b"> <i class="fa fa-plus"></i> Add</a> &nbsp;&nbsp;
+                                </div>
+                                <div class="col-md-12 top">
+                                    <div class="table-responsive">
+                                        <table id="invoiceItem" class="table table-bordered table-hover table-striped ">
+                                            <thead class="bordered-darkorange">
+                                                <tr style="background-color:#00AFF0;color:white">
+                                                    <th>Action</th>
+                                                    <th>Employee</th>
+                                                    <th>Task</th>
+                                                    <th>Sub Task</th>
+                                                </tr>
+                                            </thead>
+                                            @if (Model.DailyShedule.id == 0)
+                                            {
+                                                <tbody>
+                                                </tbody>
+                                            }
+                                            else
+                                            {
+                                                @foreach (var lst in Model.DailysheduleVMQList)
+                                                {
+                                                    <tr>
+                                                        <td style="width:80px !important"><a class="badge badge-danger" onclick="return deleteRow(this)"><i class="fa fa-trash-o"></i></a></td>
+                                                        <td><input type="text" name="" value="@lst.EmployeeName &nbsp;&nbsp; @lst.Designation" readonly class="form-control" autocomplete="off"></td>
+                                                        <td><input type="text" name="" value="@lst.SectionName" readonly class="form-control" autocomplete="off"></td>
+                                                        <td><input type="text" name="" value="@lst.SubsectionName" readonly class="form-control" autocomplete="off"></td>
+                                                        <td style="display:none"><input type="text" name="Employee" value="@lst.Employeeid" readonly class="form-control" autocomplete="off"></td>
+                                                        <td style="display:none"><input type="text" name="Section" value="@lst.Sectionid" readonly class="form-control" autocomplete="off"></td>
+                                                        <td style="display:none"><input type="text" name="Subsec" value="@lst.Subsectionid" readonly class="form-control" autocomplete="off"></td>
+                                                    </tr>
+                                                }
+                                            }
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                        <div class="offset-md-4 col-md-6 " style="margin-top:20px">
+                            @if (Model.DailyShedule.id == 0)
+                            {
+                                <button type="submit" class="btn btn-primary pull-right col-md-8" onclick="return confirm('Do you want to Save ..')" style="margin-top:0px"><i class="fa fa-plus"></i> Save </button>
+                            }
+                            else
+                            {
+                                <button type="submit" class="btn btn-primary pull-right col-md-8" onclick="return confirm('Do you want to Update ..')" style="margin-top:0px"><i class="fa fa-plus"></i> Update </button>
+                            }
+
+                        </div>
+                        @Html.HiddenFor(m => m.DailyShedule.id)
+                    }
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- Main content ends -->
+    <!-- Container-fluid ends -->
+</div>
+<script>
+    function add() {
+
+        var selObj = document.getElementById("employee");
+        var employee = selObj.options[selObj.selectedIndex].text;
+        var selObj = document.getElementById("Sec");
+        var Sec = selObj.options[selObj.selectedIndex].value;
+        var selObj = document.getElementById("Subsec");
+        var Subsec = selObj.options[selObj.selectedIndex].value;
+        var Account = document.getElementById("EmployeeAcc").value;
+        var TaskName = document.getElementById("TaskName").value;
+        var SubTaskName = document.getElementById("SubTaskName").value;
+        //alert(Account);
+
+
+        if (employee == "" || employee == 0 || employee == "Select Employee") {
+            alert("Please Select Employee");
+        }
+        else if (Sec == "" || Sec == 0) {
+            alert("Please Select Task");
+        }
+        else if (Subsec == "" || Subsec == 0) {
+
+            alert("Please Enter  Sub Task");
+        }
+        else {
+            var htmlRows = '';
+            htmlRows += '<tr>';
+            htmlRows += '<td style="width:80px !important"><a class="badge badge-danger" onclick="return deleteRow(this)" ><i class="fa fa-trash-o"></i></a></td>';
+            htmlRows += '<td><input type="text"  name=""  value="' + employee + '" readonly class="form-control" autocomplete="off"></td>';
+            htmlRows += '<td><input type="text"  name=""  value="' + TaskName + ' "   readonly class="form-control" autocomplete="off"></td>';
+            htmlRows += '<td><input type="text"  name=""  value="' + SubTaskName + '"  readonly class="form-control" autocomplete="off"></td>';
+            htmlRows += '<td style="display:none"><input type="text"  name="Employee"  value="' + Account + '"  readonly class="form-control" autocomplete="off"></td>';
+            htmlRows += '<td style="display:none"><input type="text"  name="Section"  value="' + Sec + ' "   readonly class="form-control" autocomplete="off"></td>';
+            htmlRows += '<td style="display:none"><input type="text"  name="Subsec"  value="' + Subsec + ' "   readonly class="form-control" autocomplete="off"></td>';
+            $('#invoiceItem').append(htmlRows);
+            $('#employee').val('');
+            $('#Sec').val('');
+            $('#Subsec').val('');
+            $('#SubTaskName').val('');
+            $('#TaskName').val('');
+            $('#EmployeeAcc').val('');
+        }
+    };
+    function deleteRow(btn) {
+        if (confirm("Are you sure want to delete the row?"))
+            $(btn).closest("tr").remove();
+    };
+    function Actionempl(code) {
+        $.ajax({
+            type: "GET",
+            url: "/DailyShedule/EployeeName?id=" + code,
+            data: "{}",
+            success: function (data) {
+                var AccountTitleName = data.accountNo;
+                document.getElementById("EmployeeAcc").value = AccountTitleName
+            }
+        });
+    };
+    function Actiontask(code) {
+        //alert(code);
+        $.ajax({
+            type: "GET",
+            url: "/DailyShedule/TaskName?id=" + code,
+            data: "{}",
+            success: function (data) {
+                var AccountTitleName = data.name;
+                //alert(AccountTitleName);
+                document.getElementById("TaskName").value = AccountTitleName
+            }
+        });
+    };
+    function ActionSubtask(code) {
+        //alert(code);
+        $.ajax({
+            type: "GET",
+            url: "/DailyShedule/SubTaskName?id=" + code,
+            data: "{}",
+            success: function (data) {
+                var AccountTitleName = data.name;
+                //alert(AccountTitleName);
+                document.getElementById("SubTaskName").value = AccountTitleName
+            }
+        });
+    };
+    $('.chosen-select').chosen();
+    setTimeout(function () {
+        $('#mydiv').fadeOut('fast');
+    }, 3000); // <-- time in milliseconds
+    //Cascading section
+        function Action(code) {
+        //alert(code);
+        $.ajax({
+            type: "GET",
+            url: "/DailyShedule/ProductList?id=" + code,
+            data: "{}",
+            success: function (data) {
+                var s = '<option value="-1">Select Task</option>';
+                for (var i = 0; i < data.length; i++) {
+                    s += '<option value="' + data[i].secid + '">' + data[i].name + '</option>';
+                }
+                $('#Sec').html(s);
+            }
+        });
+    };
+    //Cascading sub section
+    function Actionsub(code) {
+        //alert(code);
+        $.ajax({
+            type: "GET",
+            url: "/DailyShedule/SubSection?id=" + code,
+            data: "{}",
+            success: function (data) {
+                var s = '<option value="-1">Select Sub Task</option>';
+                for (var i = 0; i < data.length; i++) {
+                    s += '<option value="' + data[i].id + '">' + data[i].name + '</option>';
+                }
+                $('#Subsec').html(s);
+            }
+        });
+    };
+    $(document).ready(function () {
+        var now = new Date();
+        var month = (now.getMonth() + 1);
+        var day = now.getDate();
+        if (month < 10)
+            month = "0" + month;
+        if (day < 10)
+            day = "0" + day;
+        var today = now.getFullYear() + '-' + month + '-' + day;
+        $('#date').val(today);
+        $('#dates').val(today);
+    });
+</script>

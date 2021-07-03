@@ -1,0 +1,93 @@
+﻿@model ZkConstruction.ViewModel.Contractor_VM
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="content-wrapper">
+
+    <!-- Container-fluid starts -->
+    <!-- Main content starts -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="main-header">
+            </div>
+            <div id="mydiv" class="col-md-3">
+                <p class="bg-success text-center">@TempData["Insert"]</p>
+                <p class="bg-danger">@TempData["Duplicate"]</p>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <a asp-action="Index" asp-controller="Contractor" class="btn btn-skype offset-lg-10"><i class="fa fa-list"></i> Contractor List</a>
+            <div class="card" style="margin-top:20px">
+                <div class="card-header">
+                    <h5 class="card-header-text"><u>Contractor Form</u></h5>
+                </div>
+                <div class="card-block">
+                    @using (Html.BeginForm("save", "Contractor", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="row">
+                            <span id="uname_response"></span>
+                            <div class="col-md-3">
+                                <label><b>Contractor Name</b></label>
+                                <input type="text" asp-for="Contractor.Name" required class="form-control" value="@Model.Contractor.Name" />
+                            </div>
+                            <div class="col-md-3">
+                                <label><b>Email</b></label>
+                                <input type="email" asp-for="Contractor.Email" class="form-control" value="@Model.Contractor.Email" />
+                            </div>
+
+                            <div class="col-md-3">
+                                <label><b>Mobile No</b></label>
+                                <input type="number" asp-for="Contractor.Mobile" class="form-control" value="@Model.Contractor.Mobile" />
+                            </div>
+
+                            <div class="col-md-3">
+                                <label><b>City</b></label>
+                                <select class="form-control chosen-select" asp-for="Contractor.City">
+                                    <option value="">Select City</option>
+                                    @foreach (var lst in Model.Cities)
+                                    {
+                                        <option value="@lst.id">@lst.Name</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="col-md-4 top">
+                                <label><b>Country</b></label>
+                                <input type="text" asp-for="Contractor.Country" class="form-control" value="@Model.Contractor.Country" />
+                            </div>
+
+                            <div class="col-md-8 top">
+                                <label><b>Address</b></label>
+                                <textarea class="form-control" asp-for="Contractor.Address" rows="3" cols="10" value="@Model.Contractor.Address"></textarea>
+                            </div>
+                            <div class="offset-md-4 col-md-6 " style="margin-top:20px">
+                                @if (Model.Contractor.id == 0)
+                                {
+                                    <button type="submit" class="btn btn-primary pull-right col-md-8" onclick="return confirm('Do you want to Save ..')" style="margin-top:0px"><i class="fa fa-plus"></i> Save </button>
+                                }
+                                else
+                                {
+                                    <button type="submit" class="btn btn-primary pull-right col-md-8" onclick="return confirm('Do you want to Update ..')" style="margin-top:0px"><i class="fa fa-plus"></i> Update </button>
+                                }
+
+                            </div>
+                            @Html.HiddenFor(m => m.Contractor.id)
+                            @Html.HiddenFor(m => m.Contractor.AccountNo)
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- Main content ends -->
+    <!-- Container-fluid ends -->
+</div>
+<script>
+    $('.chosen-select').chosen();
+    setTimeout(function () {
+        $('#mydiv').fadeOut('fast');
+    }, 3000); // <-- time in milliseconds
+</script>

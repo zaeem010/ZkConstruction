@@ -1,0 +1,96 @@
+﻿@model ZkConstruction.ViewModel.STDVM 
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="content-wrapper">
+
+    <!-- Container-fluid starts -->
+    <!-- Main content starts -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="main-header">
+            </div>
+            <div id="mydiv" class="col-md-3">
+                <p class="bg-success text-center">@TempData["Insert"]</p>
+                <p class="bg-danger">@TempData["Duplicate"]</p>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <a asp-action="Index" asp-controller="StockDelievery" class="btn btn-skype offset-lg-10"><i class="fa fa-list"></i> Delievered Stock</a>
+            <div class="card" style="margin-top:20px">
+                <div class="card-header">
+                    <h5 class="card-header-text"><u>Stock Delievery Form</u></h5>
+                </div>
+                <div class="card-block">
+                    @using (Html.BeginForm("Save", "StockDelievery", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label>Date Of Delivery</label>
+                                <input type="date" asp-for="STDMaster.DateDelivery" required value="@Model.STDMaster.DateDelivery" class="form-control" />
+                            </div>
+                            <div class="col-md-3">
+                                <label>Receieving Person</label>
+                                <select asp-for="STDMaster.ReciverPerson" class="form-control chosen-select" required>
+                                    <option value="">Select</option>
+                                    @foreach (var Employee in Model.EmployeeList)
+                                    {
+                                        <option value="@Employee.AccountNo">@Employee.Name</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label>Site</label>
+                                <select asp-for="STDMaster.Siteid" class="form-control chosen-select" required>
+                                    <option value="">Select</option>
+                                    @foreach (var lst in Model.SiteList)
+                                    {
+                                        <option value="@lst.id">@lst.Name</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 top">
+                                <table id="Item" class="table table-bordered table-hover table-striped ">
+                                        <thead class="bordered-darkorange">
+                                            <tr style="background-color:#00AFF0;color:white">
+                                                <th>Name</th>
+                                                <th>Qty</th>
+                                                <th>Qty Delieverd</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var lst in Model.STODetailList)
+                                            {
+                                                <tr>
+                                                    <td><input type="text" name="ItemName" value="@lst.itemName" readonly class="form-control" autocomplete="off"></td>
+                                                    <td><input type="text" name="Qty" value="@lst.Qty" readonly class="form-control" autocomplete="off"></td>
+                                                    <td><input type="text" name="QtyDeliever" value="@lst.Qty" class="form-control" autocomplete="off"></td>
+                                                    <td style="display:none"><input type="text" name="Cp" value="@lst.Price" readonly class="form-control" autocomplete="off"></td>
+                                                    <td style="display:none"><input type="text" name="Total" value="@lst.Total" readonly class="form-control" autocomplete="off"></td>
+                                                    <td style="display:none"><input type="text" name="Itemid" value="@lst.Itemid" readonly class="form-control" autocomplete="off"></td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="offset-md-4 col-md-6 " style="margin-top:20px">
+                                <button type="submit" class="btn btn-primary pull-right col-md-8" onclick="return confirm('Do you want to Save ..')" style="margin-top:0px"><i class="fa fa-plus"></i> Save </button>
+                        </div>
+                        <input type="hidden" name="id" value="@Model.Invid"/>
+                    }
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- Main content ends -->
+    <!-- Container-fluid ends -->
+</div>
+<script>
+    $('.chosen-select').chosen();
+</script>

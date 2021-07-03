@@ -1,0 +1,61 @@
+﻿ @model ZkConstruction.ViewModel.STDReportVM
+@{
+    Layout = null;
+    int sr = 0;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Favicon icon -->
+    <link rel="shortcut icon" href="~/Content/assets/images/favicon.png" type="image/x-icon">
+    <link rel="icon" href="~/Content/assets/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" **media="screen" **>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>Stock Delievery Report</title>
+</head>
+<body onload="">
+    <div class="container">
+        <h3 class="text-center"><b>Stock Delievery Report</b></h3>   
+        <br />
+        <div class="row">
+            <div class="col-md-4">
+                <label><b>Date OF Delievery :</b></label> <u>@Convert.ToDateTime(Model.STDMasterRepoVMQ.DateDelivery).ToString("dd-MMM-yyyy")</u>
+            </div>
+            <div class="col-md-4">
+                <label><b>Receieving Person :</b></label> <u>@Model.STDMasterRepoVMQ.ReciverPerson</u>
+            </div>
+            <div class="col-md-4">
+                <label><b>Site :</b></label> <u>@Model.STDMasterRepoVMQ.SiteName</u>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <h3 class="text-center"><b>Summary</b></h3>
+            <br />
+            <div class="col-md-12">
+                <table class="table table-bordered">
+                    <tr>
+                        <th>#</th>
+                        <th>Item Name</th>
+                        <th>Qty</th>
+                        <th>Qty Delieverd</th>
+                    </tr>
+                    @foreach (var lst in Model.STDDetailLList) 
+                    {
+                    <tr>
+                        <td>@{sr++;}@sr</td>
+                        <td>@lst.itemName</td>
+                        <td>@lst.Qty</td>
+                        <td>@lst.QtyDelievered</td>
+                    </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

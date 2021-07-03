@@ -1,0 +1,155 @@
+﻿@model ZkConstruction.ViewModel.ProjectReportVM
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Favicon icon -->
+    <link rel="shortcut icon" href="~/Content/assets/images/favicon.png" type="image/x-icon">
+    <link rel="icon" href="~/Content/assets/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" **media="screen" **>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>Project Report</title>
+</head>
+<body>
+    <div class="container">
+        <h3 class="text-center"><b>Project Detail</b></h3>
+        <br />
+        <div class="row">
+            <div class="col-md-4">
+                <label><b>Start Date :</b></label> <u>@Convert.ToDateTime(Model.ProjectReport1VMQ.StDate).ToString("dd-MMM-yyyy")</u>
+            </div>
+            <div class="col-md-4">
+                <label><b>Expected End Date :</b></label> <u>@Convert.ToDateTime(Model.ProjectReport1VMQ.HandDate).ToString("dd-MMM-yyyy")</u>
+            </div>
+            <div class="col-md-4">
+                <label><b>Project Name :</b></label> <u>@Model.ProjectReport1VMQ.Name</u>
+            </div>
+            <div class="col-md-4">
+                <label><b>Site Name:</b></label> <u>@Model.ProjectReport1VMQ.SiteName</u>
+            </div>
+            <div class="col-md-4">
+                <label><b>Supervisor Name:</b></label> <u>@Model.ProjectReport1VMQ.SupervisorName</u>
+            </div>
+            <div class="col-md-4">
+                <label><b>Manager Name:</b></label> <u>@Model.ProjectReport1VMQ.ManagerName</u>
+            </div>
+        </div>
+        <hr />
+        <h3 class="text-center"><b>Assigned Employees Summary</b></h3>
+        <br />
+        <div class="row">
+            <div class="col-md-4">
+                <label><b>Section Name :</b></label> @if (Model.ProjectReport2VMQ != null) { <u>@Model.ProjectReport2VMQ.SecName</u> }
+            </div>
+            <div class="col-md-4">
+                <label><b>Sub Section Name :</b></label> @if (Model.ProjectReport2VMQ !=null) {  <u>@Model.ProjectReport2VMQ.SubName</u>}
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-bordered">
+                    <tr>
+                        <th>Employee Name</th>
+                        <th>Designation</th>
+                    </tr>
+                    @foreach (var lst in Model.ProjectReport2ListVMQ)
+                    {
+                        <tr>
+                            <td>@lst.EmployeeName</td>
+                            <td>@lst.DesignationName</td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <h3 class="text-center"><b>Daily Scheduling</b></h3>
+            @foreach (var Lst1 in Model.DailyShedule1List)
+            {
+                <h3><b>@Convert.ToDateTime(Lst1.Date).ToString("dd-MMM-yyyy")</b></h3>
+                <table class="table table-bordered">
+                    <tr>
+                        <th>Employee Name</th>
+                        <th>Section Name</th>
+                        <th>Sub Section Name</th>
+                        <th>Status</th>
+                    </tr>
+                    @foreach (var Lst2 in Model.DailySheduleChildVMQList)
+                    {
+                        if (Lst1.Sheduleid == Lst2.Sheduleid)
+                        {
+                            <tr>
+                                <td>@Lst2.EmployeeName</td>
+                                <td>@Lst2.SectionName</td>
+                                <td>@Lst2.SubName</td>
+                                <td>@Lst2.Status</td>
+                            </tr>
+                        }
+                    }
+                </table>
+            }
+        </div>
+        <hr />
+        <div class="row">
+            <h3 class="text-center"><b>Site Visit</b></h3>
+            <br />
+            <div class="col-md-3">
+                <label><b>Date :</b></label> @if (Model.SiteVisit1VMQ!=null) {<u>@Model.SiteVisit1VMQ.Date</u>}
+            </div>
+            <div class="col-md-3">
+                <label><b>Surveyor Name :</b></label> @if (Model.SiteVisit1VMQ != null){<u>@Model.SiteVisit1VMQ.EmployeeName</u>}
+            </div>
+            <div class="col-md-3">
+                <label><b>Area :</b></label> @if (Model.SiteVisit1VMQ != null){<u>@Model.SiteVisit1VMQ.Area</u>}
+            </div>
+            <div class="col-md-3">
+                <label><b>Photos :</b></label>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Open</button>
+            </div>
+        </div>
+        <br />
+        <br />
+        <br />
+    </div>
+    
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Site Images</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        @foreach (var lst in Model.SitevisitImage) 
+                        {
+                        <div class="col-md-3">
+                            <a href="~/Uploads/@lst.Image" target="_blank">
+                                <img src="~/Uploads/@lst.Image" alt="Alternate Text" class="img img-fluid img-thumbnail" />
+                            </a>
+                        </div>
+                        }
+                        
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

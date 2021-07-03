@@ -1,0 +1,76 @@
+﻿@model List<ZkConstruction.ViewModelQuery.STDMasterVMQ>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int sr = 0;
+}
+<div class="content-wrapper">
+    @*Container-fluid starts
+        Main content starts*@
+    <div class="container-fluid">
+        <div class="row">
+            <div class="main-header">
+            </div>
+            <div id="mydiv" class="col-md-3">
+                <p class="bg-success text-center">@TempData["Insert"]</p>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            @*<a asp-action="Create" asp-controller="StockDelievery" class="btn btn-skype offset-lg-10"><i class="fa fa-plus"></i>Create New</a>*@
+            <div class="card" style="margin-top:20px">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-header-text"><u>Delievered Stock</u></h5>
+                            </div>
+                            <div class="card-block">
+                                <table id="table1" class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Sr#</th>
+                                            <th>Receiver Name</th>
+                                            <th>Site</th>
+                                            <th>Receieving Date</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var lst in Model)
+                                        {
+                                            <tr>
+                                                <td>@{sr++;}@sr</td>
+                                                <td>@lst.EmployeeName</td>
+                                                <td>@lst.SiteName</td>
+                                                <td>@lst.DateDelivery</td>
+                                                <td style="width:30px; text-align:center;">
+                                                    <a href="@Url.Action("Report", new { id = lst.Invid })" target="_blank" class="badge badge-warning" data-toggle="tooltip" data-placement="left" title="Click Me To Print"><i class="fa fa-print"></i></a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*Main content ends
+        Container-fluid ends*@
+</div>
+<script>
+    $('.chosen-select').chosen();
+    setTimeout(function () {
+        $('#mydiv').fadeOut('fast');
+    }, 3000); // <-- time in milliseconds
+    //start
+    $(document).ready(function () {
+        var table1 = $('#table1').DataTable({
+            "paging": true,
+            "ordering": true,
+            "info": true,
+        });
+    });
+</script>
