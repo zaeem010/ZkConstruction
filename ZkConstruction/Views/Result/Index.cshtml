@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+<div class="content-wrapper">
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="main-header">
+            </div>
+            <div id="mydiv" class="col-md-3">
+                <p class="bg-success text-center">@TempData["update"]</p>
+                <p class="bg-danger text-center">@TempData["Delete"]</p>
+            </div>
+        </div>
+        <!-- Multiple Open Accordion start -->
+        <div class="col-lg-10">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-header-text">Results</h5>
+                </div>
+                <div class="card-block">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <label>Check Status</label>
+                            <input type="radio" name="Emp" value="" />
+                        </div>
+                    </div> 
+                </div>
+            </div>
+        </div>
+        <!-- Multiple Open Accordion ends -->
+    </div>
+
+</div>
+<script>
+    $('.chosen-select').chosen();
+    setTimeout(function () {
+        $('#mydiv').fadeOut('fast');
+    }, 3000); // <-- time in milliseconds
+    $(document).ready(function () {
+        $('.toast').toast('show');
+    });
+</script>
