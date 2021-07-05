@@ -43,8 +43,8 @@ namespace ZkConstruction.Controllers
                 EmployeeAssignedPaintList = _context.EmployeeAssigned.FromSqlRaw("SELECT * FROM EmployeeAssigned WHERE(Type = 'Painting')").ToList(),
                 EmployeeAssignedFloorList = _context.EmployeeAssigned.FromSqlRaw("SELECT * FROM EmployeeAssigned WHERE(Type = 'Flooring')").ToList(),
                 EmployeeAssignedFloorListChecked = new Repo<EmpFloorCheckedVMQ>().GetAllData("SELECT EmployeeAssigned.id, EmployeeAssigned.Proid, EmployeeAssigned.Employeeid, EmployeeAssigned.Type, DEmployee.Name AS EmpName, EmployeeAssigned.CloseDateTime FROM EmployeeAssigned INNER JOIN DEmployee ON EmployeeAssigned.Employeeid = DEmployee.AccountNo WHERE(EmployeeAssigned.Type = 'Flooring')").ToList(),
+                EmployeeAssignedPaintListChecked = new Repo<EmpFloorCheckedVMQ>().GetAllData("SELECT EmployeeAssigned.id, EmployeeAssigned.Proid, EmployeeAssigned.Employeeid, EmployeeAssigned.Type, DEmployee.Name AS EmpName, EmployeeAssigned.CloseDateTime FROM EmployeeAssigned INNER JOIN DEmployee ON EmployeeAssigned.Employeeid = DEmployee.AccountNo WHERE(EmployeeAssigned.Type = 'Painting')").ToList(),
                 ManagerList=_context.DEmployee.FromSqlRaw("SELECT * FROM DEmployee WHERE (Designation = 1)").ToList(),
-                //EmpassignCloseFloorList = _context.EmpassignClose.FromSqlRaw("SELECT * FROM EmpassignClose WHERE (Type = 'Flooring')").ToList(), 
             };
             return View(VM);
         }

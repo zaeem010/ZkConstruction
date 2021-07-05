@@ -190,23 +190,35 @@ namespace ZkConstruction.Controllers
             return RedirectToAction("Indexx", "Home");
         }
         [HttpPost]
-        public IActionResult PaEmAddSave(string[] Empid, int Proid,string type)
+        public IActionResult PaEmAddSave(int[] Empid, int Proid,string type, string[] CloseDt, int[] AllEmp)
         {
             _context.Database.ExecuteSqlRaw("DELETE FROM EmployeeAssigned WHERE (Type = '"+ type +"') AND (Proid = "+ Proid +")");
-            for (int i = 0; i < Empid.Count(); i++)
+            for (int i = 0; i < AllEmp.Count(); i++)
             {
-                _context.Database.ExecuteSqlRaw("INSERT INTO EmployeeAssigned(Proid, Employeeid, Type) VALUES ('" + Proid + "','" + Empid[i] + "','" + type + "')");
+                for (int j = 0; j < Empid.Count(); j++)
+                {
+                    if (AllEmp[i] == Empid[j])
+                    {
+                        _context.Database.ExecuteSqlRaw("INSERT INTO EmployeeAssigned(Proid, Employeeid, Type,CloseDateTime) VALUES ('" + Proid + "','" + AllEmp[i] + "','" + type + "','" + CloseDt[i] + "')");
+                    }
+                }
             }
             TempData["Update"] = "Inserted Successfully";
             return RedirectToAction("Indexx", "Home");
         }
         [HttpPost]
-        public IActionResult FlEmAddSave(string[] Empid, int Proid,string type ,string[] CloseDt)
+        public IActionResult FlEmAddSave(int[] Empid, int Proid,string type ,string[] CloseDt,int [] AllEmp)
         {
             _context.Database.ExecuteSqlRaw("DELETE FROM EmployeeAssigned WHERE (Type = '"+ type +"') AND (Proid = "+ Proid +")");
-            for (int i = 0; i < Empid.Count(); i++)
+            for (int i = 0; i < AllEmp.Count(); i++)
             {
-               _context.Database.ExecuteSqlRaw("INSERT INTO EmployeeAssigned(Proid, Employeeid, Type,CloseDateTime) VALUES ('" + Proid + "','" + Empid[i] + "','" + type + "','" + CloseDt[i] + "')");
+                for (int j = 0; j < Empid.Count(); j++)
+                {
+                    if (AllEmp[i] == Empid[j])
+                    {
+                        _context.Database.ExecuteSqlRaw("INSERT INTO EmployeeAssigned(Proid, Employeeid, Type,CloseDateTime) VALUES ('" + Proid + "','" + AllEmp[i] + "','" + type + "','" + CloseDt[i] + "')");
+                    }
+                }
             }
             TempData["Update"] = "Inserted Successfully";
             return RedirectToAction("Indexx", "Home");
@@ -214,13 +226,24 @@ namespace ZkConstruction.Controllers
         [HttpPost]
         public IActionResult FlClosingSave(string[] Empid, int Proid,string type ,string[] CloseDt)
         {
-            //_context.Database.ExecuteSqlRaw("DELETE FROM EmpassignClose WHERE (Type = '" + type +"') AND (Proid = "+ Proid +")");
             for (int i = 0; i < CloseDt.Count(); i++)
             {
                 if (CloseDt[i] != null)
                 {
-                    _context.Database.ExecuteSqlRaw("UPDATE EmployeeAssigned SET CloseDateTime ='" + CloseDt[i] +"' WHERE (Proid = "+ Proid +") AND (Type = 'Flooring') AND (Employeeid = "+ Empid[i] +")");
-                    //_context.Database.ExecuteSqlRaw("INSERT INTO EmpassignClose (Proid, Employeeid, Type, CloseDateTime) VALUES ('" + Proid + "','" + Empid[i] + "','" + type + "','" + CloseDt[i] + "')");
+                    _context.Database.ExecuteSqlRaw("UPDATE EmployeeAssigned SET CloseDateTime ='" + CloseDt[i] +"' WHERE (Proid = "+ Proid +") AND (Type = '"+ type +"') AND (Employeeid = "+ Empid[i] +")");
+                }
+            }
+            TempData["Update"] = "Inserted Successfully";
+            return RedirectToAction("Indexx", "Home");
+        }
+        [HttpPost]
+        public IActionResult PaClosingSave(string[] Empid, int Proid,string type ,string[] CloseDt)
+        {
+            for (int i = 0; i < CloseDt.Count(); i++)
+            {
+                if (CloseDt[i] != null)
+                {
+                    _context.Database.ExecuteSqlRaw("UPDATE EmployeeAssigned SET CloseDateTime ='" + CloseDt[i] +"' WHERE (Proid = "+ Proid +") AND (Type = '"+ type +"') AND (Employeeid = "+ Empid[i] +")");
                 }
             }
             TempData["Update"] = "Inserted Successfully";
