@@ -160,117 +160,117 @@
                     <!-- Sidebar Menu-->
                     @if (Context.Session.GetString("UserId") != "")
                     {
-                        <ul class="sidebar-menu">
+                    <ul class="sidebar-menu">
 
-                            <li class="treeview"><a class="waves-effect waves-dark" href="@Url.Action("Indexx", "Home")"><i class="fa fa-home" style="color:deepskyblue"></i><span> DashBoard One</span></a></li>
-                            <li class="treeview"><a class="waves-effect waves-dark" href="@Url.Action("Index", "Home")"><i class="fa fa-home" style="color:deepskyblue"></i><span> DashBoard Two</span></a></li>
+                        <li class="treeview"><a class="waves-effect waves-dark" href="@Url.Action("Indexx", "Home")"><i class="fa fa-home" style="color:deepskyblue"></i><span> DashBoard One</span></a></li>
+                        <li class="treeview"><a class="waves-effect waves-dark" href="@Url.Action("Index", "Home")"><i class="fa fa-home" style="color:deepskyblue"></i><span> DashBoard Two</span></a></li>
 
-                            <li class="treeview">
-                                <a class="waves-effect waves-dark" href="#">
-                                    <i class="fa fa-modx" style="color:lightskyblue"></i><span>Registrations</span><i class="icon-arrow-down"></i>
-                                </a>
-                                <ul class="treeview-menu">
-                                    <li><a class="waves-effect waves-dark" href="@Url.Action("Index", "Project")"><i class="fa fa-mail-forward"></i> Projects</a></li>
-                                    <li><a class="waves-effect waves-dark" href="@Url.Action("Index", "Section")"><i class="fa fa-mail-forward"></i> Secitons</a></li>
-                                    <li><a class="waves-effect waves-dark" href="@Url.Action("Index", "SubSection")"><i class="fa fa-mail-forward"></i> Sub Secitons</a></li>
-                                    <li><a class="waves-effect waves-dark" href="@Url.Action("Index", "Site")"><i class="fa fa-mail-forward"></i> Sites</a></li>
-                                    <li><a class="waves-effect waves-dark" href="@Url.Action("Index", "Customer")"><i class="fa fa-mail-forward"></i> Customers</a></li>
-                                    <li><a class="waves-effect waves-dark" href="@Url.Action("Index", "Designation")"><i class="fa fa-mail-forward"></i> Designations</a></li>
-                                    <li><a class="waves-effect waves-dark" href="@Url.Action("Index", "Employee")"><i class="fa fa-mail-forward"></i> Employees</a></li>
-                                    <li><a class="waves-effect waves-dark" href="@Url.Action("Index", "Contractor")"><i class="fa fa-mail-forward"></i> Contractors</a></li>
-                                    <li><a class="waves-effect waves-dark" href="@Url.Action("Index", "Product")"><i class="fa fa-mail-forward"></i> Products</a></li>
-                                    <li><a class="waves-effect waves-dark" href="@Url.Action("Index", "Company")"><i class="fa fa-mail-forward"></i> Companys</a></li>
-                                </ul>
-                            </li>
+                        <li class="treeview">
+                            <a class="waves-effect waves-dark" href="#">
+                                <i class="fa fa-modx" style="color:lightskyblue"></i><span>Registrations</span><i class="icon-arrow-down"></i>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a class="waves-effect waves-dark" href="@Url.Action("Index", "Project")"><i class="fa fa-mail-forward"></i> Projects</a></li>
+                                <li><a class="waves-effect waves-dark" href="@Url.Action("Index", "Section")"><i class="fa fa-mail-forward"></i> Secitons</a></li>
+                                <li><a class="waves-effect waves-dark" href="@Url.Action("Index", "SubSection")"><i class="fa fa-mail-forward"></i> Sub Secitons</a></li>
+                                <li><a class="waves-effect waves-dark" href="@Url.Action("Index", "Site")"><i class="fa fa-mail-forward"></i> Sites</a></li>
+                                <li><a class="waves-effect waves-dark" href="@Url.Action("Index", "Customer")"><i class="fa fa-mail-forward"></i> Customers</a></li>
+                                <li><a class="waves-effect waves-dark" href="@Url.Action("Index", "Designation")"><i class="fa fa-mail-forward"></i> Designations</a></li>
+                                <li><a class="waves-effect waves-dark" href="@Url.Action("Index", "Employee")"><i class="fa fa-mail-forward"></i> Employees</a></li>
+                                <li><a class="waves-effect waves-dark" href="@Url.Action("Index", "Contractor")"><i class="fa fa-mail-forward"></i> Contractors</a></li>
+                                <li><a class="waves-effect waves-dark" href="@Url.Action("Index", "Product")"><i class="fa fa-mail-forward"></i> Products</a></li>
+                                <li><a class="waves-effect waves-dark" href="@Url.Action("Index", "Company")"><i class="fa fa-mail-forward"></i> Companys</a></li>
+                            </ul>
+                        </li>
 
-                            <li class="treeview">
-                                <a class="waves-effect waves-dark" href="#">
-                                    <i class="fa fa-google-wallet" style="color:lightskyblue"></i><span> Planning & Shedule</span><i class="icon-arrow-down"></i>
-                                </a>
-                                <ul class="treeview-menu">
-                                    <li><a class="waves-effect waves-dark" href="@Url.Action("Index", "AssignProject")"><i class="fa fa-mail-forward"></i> Project Planning</a></li>
-                                    <li><a class="waves-effect waves-dark" href="@Url.Action("Index", "DailyShedule")"><i class="fa fa-mail-forward"></i> Daily Shedule</a></li>
-                                </ul>
-                            </li>
-                            <li class="treeview"><a class="waves-effect waves-dark" href="@Url.Action("Index", "SiteVisit")"><i class="fa fa-dollar" style="color:deepskyblue"></i><span> Site Visit</span></a></li>
-
-                            @*Mobile*@
-                            <!--<li class="treeview">
-                                <a class="waves-effect waves-dark" href="#">
-                                    <i class="fa fa-google-wallet" style="color:lightskyblue"></i><span> Mobile App</span><i class="icon-arrow-down"></i>
-                                </a>
-                                <ul class="treeview-menu">
-                                    <li><a class="waves-effect waves-dark" href="@Url.Action("Index", "Home")"><i class="fa fa-mail-forward"></i> Dashboard</a></li>
-                                    <li><a class="waves-effect waves-dark" href="@Url.Action("Index", "AppProject")"><i class="fa fa-mail-forward"></i> Projects</a></li>
-                                    <li><a class="waves-effect waves-dark" href="@Url.Action("Index", "Attendance")"><i class="fa fa-mail-forward"></i> Staff Attendance</a></li>
-                                    <li><a class="waves-effect waves-dark" href="@Url.Action("Index", "AppSiteVisit")"><i class="fa fa-mail-forward"></i> Site Survey</a></li>
-                                    <li><a class="waves-effect waves-dark" href="@Url.Action("Index", "StockOrder")"><i class="fa fa-mail-forward"></i> Stock Order</a></li>
-                                    <li><a class="waves-effect waves-dark" href="@Url.Action("Index", "WorkProcess")"><i class="fa fa-mail-forward"></i> Work Process</a></li>
-                                    <li><a class="waves-effect waves-dark" href="@Url.Action("Index", "StockDelievery")"><i class="fa fa-mail-forward"></i> Stock Delivery</a></li>-->
-                                    @*<li><a class="waves-effect waves-dark" href="@Url.Action("Index", "Home")"><i class="fa fa-mail-forward"></i> Allow Staff</a></li>*@
-                                    <!--<li><a class="waves-effect waves-dark" href="@Url.Action("Index", "WorkSheet")"><i class="fa fa-mail-forward"></i> Worksheet</a></li>
-                                </ul>
-                            </li>-->
-                            @*<li class="treeview"><a class="waves-effect waves-dark" href="@Url.Action("Index", "ChartofAccount")"><i class="fa fa-wpforms" style="color:deepskyblue"></i><span> Chart Of Account</span></a></li>
-                <li class="treeview"><a class="waves-effect waves-dark" href="@Url.Action("Index", "Ledger")"><i class="fa fa-hashtag" style="color:deepskyblue"></i><span> Ledgers</span></a></li>
-                <li class="treeview">
-                    <a href="#!"><i class="fa fa-google-wallet" style="color:lightskyblue"></i><span> Vouchers</span><i class="icon-arrow-down"></i></a>
-                    <ul class="treeview-menu">
-                        <li><a class="waves-effect waves-dark" href="@Url.Action("IndexE", "CashPayment")"><i class="fa fa-mail-forward"></i> Daily Expense Sheet</a></li>
-                        <li><a class="waves-effect waves-dark" href="@Url.Action("Index", "CashPayment")"><i class="fa fa-mail-forward"></i> Cash Payment Voucher</a></li>
-                        <li><a class="waves-effect waves-dark" href="@Url.Action("Index", "CashRecepit")"><i class="fa fa-mail-forward"></i> Cash Recipt Voucher</a></li>
-                        <li><a class="waves-effect waves-dark" href="@Url.Action("Index", "BankPayment")"><i class="fa fa-mail-forward"></i> Bank Payment Voucher</a></li>
-                        <li><a class="waves-effect waves-dark" href="@Url.Action("Index", "BankRecepit")"><i class="fa fa-mail-forward"></i> Bank Recipt Voucher</a></li>*@
-                            @* <li><a class="waves-effect waves-dark" href="@Url.Action("Index", "JournalVoucher")"><i class="fa fa-mail-forward"></i> Journal Vouchers</a></li>*@
-                            <!--</ul>
-            </li>
+                        <li class="treeview">
+                            <a class="waves-effect waves-dark" href="#">
+                                <i class="fa fa-google-wallet" style="color:lightskyblue"></i><span> Planning & Shedule</span><i class="icon-arrow-down"></i>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a class="waves-effect waves-dark" href="@Url.Action("Index", "AssignProject")"><i class="fa fa-mail-forward"></i> Project Planning</a></li>
+                                <li><a class="waves-effect waves-dark" href="@Url.Action("Index", "DailyShedule")"><i class="fa fa-mail-forward"></i> Daily Shedule</a></li>
+                            </ul>
+                        </li>
+                        <li class="treeview"><a class="waves-effect waves-dark" href="@Url.Action("Index", "SiteVisit")"><i class="fa fa-dollar" style="color:deepskyblue"></i><span> Site Visit</span></a></li>
+                        <li class="treeview"><a class="waves-effect waves-dark" href="@Url.Action("Index", "Result")"><i class="fa fa-dollar" style="color:deepskyblue"></i><span> Result</span></a></li>
+                        @*Mobile*@
+                        <!--<li class="treeview">
+        <a class="waves-effect waves-dark" href="#">
+            <i class="fa fa-google-wallet" style="color:lightskyblue"></i><span> Mobile App</span><i class="icon-arrow-down"></i>
+        </a>
+        <ul class="treeview-menu">
+            <li><a class="waves-effect waves-dark" href="@Url.Action("Index", "Home")"><i class="fa fa-mail-forward"></i> Dashboard</a></li>
+            <li><a class="waves-effect waves-dark" href="@Url.Action("Index", "AppProject")"><i class="fa fa-mail-forward"></i> Projects</a></li>
+            <li><a class="waves-effect waves-dark" href="@Url.Action("Index", "Attendance")"><i class="fa fa-mail-forward"></i> Staff Attendance</a></li>
+            <li><a class="waves-effect waves-dark" href="@Url.Action("Index", "AppSiteVisit")"><i class="fa fa-mail-forward"></i> Site Survey</a></li>
+            <li><a class="waves-effect waves-dark" href="@Url.Action("Index", "StockOrder")"><i class="fa fa-mail-forward"></i> Stock Order</a></li>
+            <li><a class="waves-effect waves-dark" href="@Url.Action("Index", "WorkProcess")"><i class="fa fa-mail-forward"></i> Work Process</a></li>
+            <li><a class="waves-effect waves-dark" href="@Url.Action("Index", "StockDelievery")"><i class="fa fa-mail-forward"></i> Stock Delivery</a></li>-->
+                        @*<li><a class="waves-effect waves-dark" href="@Url.Action("Index", "Home")"><i class="fa fa-mail-forward"></i> Allow Staff</a></li>*@
+                        <!--<li><a class="waves-effect waves-dark" href="@Url.Action("Index", "WorkSheet")"><i class="fa fa-mail-forward"></i> Worksheet</a></li>
+        </ul>
+    </li>-->
+                        @*<li class="treeview"><a class="waves-effect waves-dark" href="@Url.Action("Index", "ChartofAccount")"><i class="fa fa-wpforms" style="color:deepskyblue"></i><span> Chart Of Account</span></a></li>
+        <li class="treeview"><a class="waves-effect waves-dark" href="@Url.Action("Index", "Ledger")"><i class="fa fa-hashtag" style="color:deepskyblue"></i><span> Ledgers</span></a></li>
+        <li class="treeview">
+            <a href="#!"><i class="fa fa-google-wallet" style="color:lightskyblue"></i><span> Vouchers</span><i class="icon-arrow-down"></i></a>
+            <ul class="treeview-menu">
+                <li><a class="waves-effect waves-dark" href="@Url.Action("IndexE", "CashPayment")"><i class="fa fa-mail-forward"></i> Daily Expense Sheet</a></li>
+                <li><a class="waves-effect waves-dark" href="@Url.Action("Index", "CashPayment")"><i class="fa fa-mail-forward"></i> Cash Payment Voucher</a></li>
+                <li><a class="waves-effect waves-dark" href="@Url.Action("Index", "CashRecepit")"><i class="fa fa-mail-forward"></i> Cash Recipt Voucher</a></li>
+                <li><a class="waves-effect waves-dark" href="@Url.Action("Index", "BankPayment")"><i class="fa fa-mail-forward"></i> Bank Payment Voucher</a></li>
+                <li><a class="waves-effect waves-dark" href="@Url.Action("Index", "BankRecepit")"><i class="fa fa-mail-forward"></i> Bank Recipt Voucher</a></li>*@
+                        @* <li><a class="waves-effect waves-dark" href="@Url.Action("Index", "JournalVoucher")"><i class="fa fa-mail-forward"></i> Journal Vouchers</a></li>*@
+                        <!--</ul>
+    </li>
+    <li class="treeview">
+        <a href="#"><i class="fa fa-medium " style="color:deepskyblue"></i><span> Transcation Details</span><i class="icon-arrow-down"></i></a>
+        <ul class="treeview-menu">
+            <li><a class="waves-effect waves-dark" href="@Url.Action("Index", "Transactions")"><i class="fa fa-mail-forward"></i> Open Transcation</a></li>
+            <li><a class="waves-effect waves-dark" href="@Url.Action("TransactionOut", "Transactions")"><i class="fa fa-mail-forward"></i> Daily Cash Closed</a></li>
+        </ul>
+    </li>
+    <li class="treeview">
+        <a class="waves-effect waves-dark" href="#"><i class="fa fa-balance-scale" style="color:lightskyblue"></i><span> Financial Statements</span><i class="icon-arrow-down"></i></a>
+        <ul class="treeview-menu">
             <li class="treeview">
-                <a href="#"><i class="fa fa-medium " style="color:deepskyblue"></i><span> Transcation Details</span><i class="icon-arrow-down"></i></a>
+                <a href="#"><i class="fa fa-align-justify"></i><span> Trail Balance</span><i class="icon-arrow-down"></i></a>
                 <ul class="treeview-menu">
-                    <li><a class="waves-effect waves-dark" href="@Url.Action("Index", "Transactions")"><i class="fa fa-mail-forward"></i> Open Transcation</a></li>
-                    <li><a class="waves-effect waves-dark" href="@Url.Action("TransactionOut", "Transactions")"><i class="fa fa-mail-forward"></i> Daily Cash Closed</a></li>
+                    <li><a class="waves-effect waves-dark" href="@Url.Action("Index", "TrialBalance")"><i class="fa fa-mail-forward"></i> Open Trail Balance</a></li>
+                    <li><a class="waves-effect waves-dark" href="@Url.Action("Group", "TrialBalance")"><i class="fa fa-mail-forward"></i> Group Trail Balance</a></li>
                 </ul>
             </li>
             <li class="treeview">
-                <a class="waves-effect waves-dark" href="#"><i class="fa fa-balance-scale" style="color:lightskyblue"></i><span> Financial Statements</span><i class="icon-arrow-down"></i></a>
+                <a href="#"><i class="fa fa-align-justify"></i><span> Balance Sheet</span><i class="icon-arrow-down"></i></a>
                 <ul class="treeview-menu">
-                    <li class="treeview">
-                        <a href="#"><i class="fa fa-align-justify"></i><span> Trail Balance</span><i class="icon-arrow-down"></i></a>
-                        <ul class="treeview-menu">
-                            <li><a class="waves-effect waves-dark" href="@Url.Action("Index", "TrialBalance")"><i class="fa fa-mail-forward"></i> Open Trail Balance</a></li>
-                            <li><a class="waves-effect waves-dark" href="@Url.Action("Group", "TrialBalance")"><i class="fa fa-mail-forward"></i> Group Trail Balance</a></li>
-                        </ul>
-                    </li>
-                    <li class="treeview">
-                        <a href="#"><i class="fa fa-align-justify"></i><span> Balance Sheet</span><i class="icon-arrow-down"></i></a>
-                        <ul class="treeview-menu">
-                            <li><a class="waves-effect waves-dark" href="@Url.Action("Index", "BalanceSheet")"><i class="fa fa-mail-forward"></i> Open Balance Sheet</a></li>
-                        </ul>
-                    </li>
-                    <li class="treeview">
-                        <a href="#"><i class="fa fa-align-justify"></i><span> Income Statement</span><i class="icon-arrow-down"></i></a>
-                        <ul class="treeview-menu">
-                            <li><a class="waves-effect waves-dark" href="#"><i class="fa fa-mail-forward"></i> Open Income Statement</a></li>
-                        </ul>
-                    </li>
+                    <li><a class="waves-effect waves-dark" href="@Url.Action("Index", "BalanceSheet")"><i class="fa fa-mail-forward"></i> Open Balance Sheet</a></li>
                 </ul>
             </li>
-
             <li class="treeview">
-                <a href="#!"><i class="fa fa-users" style="color:lightskyblue"></i><span> User Management</span><i class="icon-arrow-down"></i></a>
+                <a href="#"><i class="fa fa-align-justify"></i><span> Income Statement</span><i class="icon-arrow-down"></i></a>
                 <ul class="treeview-menu">
-                    <li><a class="waves-effect waves-dark" href="@Url.Action("Index", "User")"><i class="fa fa-mail-forward"></i> Register User</a></li>
+                    <li><a class="waves-effect waves-dark" href="#"><i class="fa fa-mail-forward"></i> Open Income Statement</a></li>
                 </ul>
             </li>
+        </ul>
+    </li>
 
-            <li class="treeview">
-                <a href="#!"><i class="fa fa-cog" style="color:lightskyblue"></i><span> General Setting</span><i class="icon-arrow-down"></i></a>
-                <ul class="treeview-menu">
-                    <li><a class="waves-effect waves-dark" href="@Url.Action("Index", "Settings")"><i class="fa fa-mail-forward"></i> Go to settings</a></li>
-                </ul>
-            </li>-->
+    <li class="treeview">
+        <a href="#!"><i class="fa fa-users" style="color:lightskyblue"></i><span> User Management</span><i class="icon-arrow-down"></i></a>
+        <ul class="treeview-menu">
+            <li><a class="waves-effect waves-dark" href="@Url.Action("Index", "User")"><i class="fa fa-mail-forward"></i> Register User</a></li>
+        </ul>
+    </li>
 
-                        </ul>
+    <li class="treeview">
+        <a href="#!"><i class="fa fa-cog" style="color:lightskyblue"></i><span> General Setting</span><i class="icon-arrow-down"></i></a>
+        <ul class="treeview-menu">
+            <li><a class="waves-effect waves-dark" href="@Url.Action("Index", "Settings")"><i class="fa fa-mail-forward"></i> Go to settings</a></li>
+        </ul>
+    </li>-->
+
+                    </ul>
                     }
                 </section>
             </aside>

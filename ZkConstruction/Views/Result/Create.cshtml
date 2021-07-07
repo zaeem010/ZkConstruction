@@ -1,6 +1,6 @@
-﻿
+﻿@model ZkConstruction.ViewModel.ResultVM
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Create";
 }
 <div class="content-wrapper">
 
@@ -14,36 +14,32 @@
             </div>
         </div>
         <!-- Multiple Open Accordion start -->
-        <div class="col-lg-10">
-            
-            <div class="card">
+        <div class="col-lg-12">
+            <a asp-action="Index" class="btn btn-skype offset-lg-10"><i class="fa fa-backward"></i>Back</a>
+            <div class="card" style="margin-top:20px">
                 <div class="card-header">
-                    <h5 class="card-header-text">Results</h5>
+                    <h5 class="card-header-text">Results Searched</h5>
                 </div>
                 <div class="card-block">
-                    <form method="post" asp-action="Create">
+                    <form method="post" asp-action="Search">
                         <div class="row">
-                            <div class="col-md-2">
-                                <ul class="list-group">
-                                    <li class="list-group-item">
-                                        Managers <span class="badge"><input type="radio" name="Emp" value="1" /></span>
-                                    </li>
-                                    <li class="list-group-item">
-                                        Employees <span class=""><input type="radio" name="Emp" value="0" /></span>
-                                    </li>
-                                </ul>
+                            <div class="col-md-4">
+                                <label>Employees</label>
+                                <select class="form-control chosen-select" name="Empid" required asp-items="@(new SelectList(Model.EmployeeList,"AccountNo","Name"))">
+                                    <option selected hidden>Select</option>
+                                </select>
                             </div>
                             <div class="col-md-4">
                                 <label>Start Date</label>
-                                <input type="date" name="Stdate" value="" class="form-control" required />
+                                <input type="date" name="Stdate" value="@Model.Stdate" class="form-control" />
                             </div>
                             <div class="col-md-4">
                                 <label>End Date</label>
-                                <input type="date" name="Endate" value="" class="form-control" required />
+                                <input type="date" name="Endate" value="@Model.Endate" class="form-control" />
                             </div>
                         </div>
                         <div class="offset-md-4 col-md-6 " style="margin-top:20px">
-                            <button type="submit" class="btn btn-primary pull-right col-md-8"  style="margin-top:0px"><i class="fa fa-search"></i> Search </button>
+                            <button type="submit" class="btn btn-primary pull-right col-md-8" style="margin-top:0px"><i class="fa fa-search"></i> Search </button>
                         </div>
                     </form>
 
@@ -59,7 +55,4 @@
     setTimeout(function () {
         $('#mydiv').fadeOut('fast');
     }, 3000); // <-- time in milliseconds
-    $(document).ready(function () {
-        $('.toast').toast('show');
-    });
 </script>
