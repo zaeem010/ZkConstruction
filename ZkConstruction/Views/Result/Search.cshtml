@@ -1,6 +1,6 @@
 ﻿@model ZkConstruction.ViewModel.ResultVM
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Search";
 }
 <div class="content-wrapper">
 
@@ -25,7 +25,7 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <label>Employees</label>
-                                <select class="form-control chosen-select" name="Empid" required asp-items="@(new SelectList(Model.EmployeeList,"AccountNo","Name"))">
+                                <select class="form-control chosen-select" name="Empid" required asp-items="@(new SelectList(Model.EmployeeList,"AccountNo","Name",Model.Eid))">
                                     <option selected hidden>Select</option>
                                 </select>
                             </div>
@@ -43,7 +43,48 @@
                         </div>
                         <input type="hidden" name="Emp" value="@Model.E" />
                     </form>
-
+                </div>
+                <div class="card-block" style="margin-top:20px">
+                    <table id="advanced-table" class="table dt-responsive table-striped">
+                        <thead>
+                            <tr>
+                                <th>Site Name</th>
+                                <th>In</th>
+                                <th>Out</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>Site Name</th>
+                                <th>In</th>
+                                <th>Out</th>
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            @foreach (var lst in Model.ResultVMQList)
+                            {
+                            <tr>
+                                <td>@lst.SiteName</td>
+                                @if (lst.StartDateTime != "")
+                                {
+                                    <td>@Convert.ToDateTime(lst.StartDateTime).ToString("dd/MM/yyyy HH:mm")</td>
+                                }
+                                else
+                                {
+                                    <td></td>
+                                }
+                                @if (lst.CloseDateTime != "")
+                                {
+                                <td>@Convert.ToDateTime(lst.CloseDateTime).ToString("dd/MM/yyyy HH:mm")</td>
+                                }
+                                else
+                                {
+                                    <td></td>
+                                }
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
