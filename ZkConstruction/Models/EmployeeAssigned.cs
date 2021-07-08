@@ -13,5 +13,6 @@ namespace ZkConstruction.Models
         public int Employeeid { get; set; }
         public string Type { get; set; }
         public string CloseDateTime { get; set; }
+        public string StartDateTime { get; set; }
     }
 }

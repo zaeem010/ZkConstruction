@@ -15,6 +15,7 @@ namespace ZkConstruction.ViewModelQuery
         public string Type { get; set; }
         public string EmpName { get; set; }
         public string CloseDateTime { get; set; }
+        public string StartDateTime { get; set; }
     }
     public class ManageVMQ
     {
@@ -43,6 +44,7 @@ namespace ZkConstruction.ViewModelQuery
         public int PaEm { get; set; }
         public int FlEm { get; set; }
         public int Manager { get; set; }
+        public int site { get; set; }
         public string FlooringRoom { get; set; }
         public string StdateTimeFlooring { get; set; }
     }

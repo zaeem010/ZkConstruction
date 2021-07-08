@@ -32,6 +32,8 @@
     <Compile Include="Migrations\20210705083149_djksahd.Designer.cs" />
     <Compile Include="Migrations\20210708062305_tblsadsadas.cs" />
     <Compile Include="Migrations\20210708062305_tblsadsadas.Designer.cs" />
+    <Compile Include="Migrations\20210708064820_tbl23.cs" />
+    <Compile Include="Migrations\20210708064820_tbl23.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

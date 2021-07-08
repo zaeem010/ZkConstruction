@@ -41,12 +41,12 @@
                                     <th>Painting Employee</th>
                                     <th>Painting Hours</th>
                                     <th>Start Date Time</th>
-                                    <th>Check Out</th>
+                                    <th>Check In/Out</th>
                                     <th>Electricity</th>
                                     <th>Flooring Employee</th>
                                     <th>Flooring Hours</th>
                                     <th>Start Date Time</th>
-                                    <th>Check Out</th>
+                                    <th>Check In/Out</th>
                                     <th>Flooring Room</th>
                                     <th>Remaining Hours</th>
                                     <th>Starting Date</th>
@@ -145,7 +145,10 @@
                                     </td>
                                     <td><a data-toggle="modal" data-target="#PaintHours-@Lst.Proid"> @Lst.PaintingHours </a></td>
                                     <td><a data-toggle="modal" data-target="#StTime-@Lst.Proid"> @Convert.ToDateTime(Lst.StTime).ToString("dd/MM/yyyy HH:mm")</a></td>
-                                    <td><a data-toggle="modal" data-target="#PaClosing-@Lst.Proid"><span class="badge badge-primary"><i class="fa fa-eye"></i></span></a></td>
+                                    <td>
+                                        <a data-toggle="modal" data-target="#Pastart-@Lst.Proid"><span class="badge badge-success"><i class="fa fa-eye"></i>&nbsp; In</span></a>
+                                        <a data-toggle="modal" data-target="#PaClosing-@Lst.Proid"><span class="badge badge-danger"><i class="fa fa-eye"></i>&nbsp; Out</span></a>
+                                    </td>
                                     <td><a data-toggle="modal" data-target="#El-@Lst.Proid">@Lst.Electricity</a></td>
                                     <td>
                                         <a data-toggle="modal" data-target="#FlEmAdd-@Lst.Proid"><span class="badge badge-primary"><i class="fa fa-plus"></i></span></a>
@@ -153,7 +156,10 @@
                                     </td>
                                     <td><a data-toggle="modal" data-target="#FlHours-@Lst.Proid">@Lst.FlooringHours</a></td>
                                     <td><a data-toggle="modal" data-target="#FlStDate-@Lst.Proid">@Convert.ToDateTime(Lst.StdateTimeFlooring).ToString("dd/MM/yyyy HH:mm")</a></td>
-                                    <td><a data-toggle="modal" data-target="#FlClosing-@Lst.Proid"><span class="badge badge-primary"><i class="fa fa-eye"></i></span></a></td>
+                                    <td>
+                                        <a data-toggle="modal" data-target="#FlStart-@Lst.Proid"><span class="badge badge-success"><i class="fa fa-eye"></i>&nbsp; In</span></a>
+                                        <a data-toggle="modal" data-target="#FlClosing-@Lst.Proid"><span class="badge badge-danger"><i class="fa fa-eye"></i>&nbsp; Out</span></a>
+                                    </td>
                                     <td><a data-toggle="modal" data-target="#FlRoom-@Lst.Proid">_@Lst.FlooringRoom</a></td>
                                     <td><a data-toggle="modal" data-target="#RmHours-@Lst.Proid">@Lst.RemainingHours</a></td>
                                     <td><a data-toggle="modal" data-target="#St-@Lst.Proid">@Convert.ToDateTime(Lst.StDate).ToString("dd/MM/yyyy")</a></td>
@@ -703,22 +709,23 @@
                                                     <div class="row">
                                                         <ul class="list-group">
                                                             @foreach (var List in Model.EmployeeList)
+                                                            {
+                                                                valavailable = "NO";
+                                                                @foreach (var ListCheck in Model.EmployeeAssignedPaintList)
                                                                 {
-                                                                    valavailable = "NO";
-                                                            @foreach (var ListCheck in Model.EmployeeAssignedPaintList)
+                                                                    if (List.AccountNo == ListCheck.Employeeid && Lst.Proid == ListCheck.Proid)
                                                                     {
-                                                                        if (List.AccountNo == ListCheck.Employeeid && Lst.Proid == ListCheck.Proid)
-                                                                        {
-                                                            <li class="list-group-item"><span class="badge"><input type="checkbox" checked name="Empid" value="@List.AccountNo" /></span> @List.Name <input type="hidden" name="CloseDt" value="@ListCheck.CloseDateTime" /> </li>
-                                                                            valavailable = "Yes";
-                                                                        }
+                                                                        <li class="list-group-item"><span class="badge"><input type="checkbox" checked name="Empid" value="@List.AccountNo" /></span> @List.Name <input type="hidden" name="CloseDt" value="@ListCheck.CloseDateTime" /> </li>
+                                                                        valavailable = "Yes";
                                                                     }
-                                                            @if (valavailable == "NO")
-                                                                    {
-                                                            <li class="list-group-item"><span class="badge"><input type="checkbox" name="Empid" value="@List.AccountNo" /></span> @List.Name  <input type="hidden" name="CloseDt" value="" /></li>
-                                                                    }
-                                                            <input type="hidden" name="AllEmp" value="@List.AccountNo" />
                                                                 }
+                                                                @if (valavailable == "NO")
+                                                                {
+                                                                    <li class="list-group-item"><span class="badge"><input type="checkbox" name="Empid" value="@List.AccountNo" /></span> @List.Name  <input type="hidden" name="CloseDt" value="" /></li>
+                                                                }
+                                                                <input type="hidden" name="AllEmp" value="@List.AccountNo" />
+
+                                                            }
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -728,6 +735,7 @@
                                                 </div>
                                                 <input type="hidden" name="Proid" value="@Lst.Proid" />
                                                 <input type="hidden" name="type" value="Painting" />
+                                                <input type="hidden" name="Siteid" value="@Lst.site" />
                                             </form>
                                         </div>
                                     </div>
@@ -772,6 +780,7 @@
                                                 </div>
                                                 <input type="hidden" name="Proid" value="@Lst.Proid" />
                                                 <input type="hidden" name="type" value="Flooring" />
+                                                <input type="hidden" name="Siteid" value="@Lst.site" />
                                             </form>
                                         </div>
                                     </div>
@@ -839,7 +848,7 @@
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Closing</h5>
+                                                <h5 class="modal-title" id="exampleModalLabel">Closing Date Time</h5>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">×</span>
                                                 </button>
@@ -881,7 +890,7 @@
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Closing</h5>
+                                                <h5 class="modal-title" id="exampleModalLabel">Closing Date Time</h5>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">×</span>
                                                 </button>
@@ -918,7 +927,89 @@
                                         </div>
                                     </div>
                                 </div>
-                                  
+                                 <!-- PaStart Modal -->
+                                <div class="modal fade" id="Pastart-@Lst.Proid" tabindex="-1" role="dialog" aria-labelledby="SiteLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Starting Date Time</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">×</span>
+                                                </button>
+                                            </div>
+                                            <form method="post" asp-action="PastartSave" asp-controller="HomeEdit">
+                                                <div class="modal-body">
+                                                    <div class="row">
+                                                        <ul class="list-group">
+                                                            @foreach (var FlClose in Model.EmployeeAssignedPaintListChecked)
+                                                                {
+
+                                                                    if (Lst.Proid == FlClose.Proid)
+                                                                    {
+                                                            <li class="list-group-item">
+                                                                <input type="hidden" value="@FlClose.Employeeid" name="Empid" />
+                                                                @FlClose.EmpName
+                                                                <span class="badge">
+                                                                    <input type="datetime-local" name="StartDt" value="@FlClose.StartDateTime" class="form-control" />
+                                                                </span>
+                                                            </li>
+                                                                        }
+                                                                    }
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-primary">Save changes</button>
+                                                </div>
+                                                <input type="hidden" name="Proid" value="@Lst.Proid" />
+                                                <input type="hidden" name="type" value="Painting" />
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- FlStart Modal -->
+                                <div class="modal fade" id="FlStart-@Lst.Proid" tabindex="-1" role="dialog" aria-labelledby="SiteLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Starting Date Time</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">×</span>
+                                                </button>
+                                            </div>
+                                            <form method="post" asp-action="FlStartSave" asp-controller="HomeEdit">
+                                                <div class="modal-body">
+                                                    <div class="row">
+                                                        <ul class="list-group">
+                                                            @foreach (var FlClose in Model.EmployeeAssignedFloorListChecked)
+                                                                {
+
+                                                                    if (Lst.Proid == FlClose.Proid)
+                                                                    {
+                                                            <li class="list-group-item">
+                                                                <input type="hidden" value="@FlClose.Employeeid" name="Empid" />
+                                                                @FlClose.EmpName
+                                                                <span class="badge">
+                                                                    <input type="datetime-local" name="StartDt" value="@FlClose.StartDateTime" class="form-control" />
+                                                                </span>
+                                                            </li>
+                                                                        }
+                                                                    }
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-primary">Save changes</button>
+                                                </div>
+                                                <input type="hidden" name="Proid" value="@Lst.Proid" />
+                                                <input type="hidden" name="type" value="Flooring" />
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
                                 }
 
                             </tbody>

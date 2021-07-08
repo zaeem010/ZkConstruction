@@ -190,7 +190,7 @@ namespace ZkConstruction.Controllers
             return RedirectToAction("Indexx", "Home");
         }
         [HttpPost]
-        public IActionResult PaEmAddSave(int[] Empid, int Proid,string type, string[] CloseDt, int[] AllEmp)
+        public IActionResult PaEmAddSave(int[] Empid, int Proid,string type, string[] CloseDt, int[] AllEmp,int Siteid)
         {
             _context.Database.ExecuteSqlRaw("DELETE FROM EmployeeAssigned WHERE (Type = '"+ type +"') AND (Proid = "+ Proid +")");
             for (int i = 0; i < AllEmp.Count(); i++)
@@ -199,7 +199,7 @@ namespace ZkConstruction.Controllers
                 {
                     if (AllEmp[i] == Empid[j])
                     {
-                        _context.Database.ExecuteSqlRaw("INSERT INTO EmployeeAssigned(Proid, Employeeid, Type,CloseDateTime) VALUES ('" + Proid + "','" + AllEmp[i] + "','" + type + "','" + CloseDt[i] + "')");
+                        _context.Database.ExecuteSqlRaw("INSERT INTO EmployeeAssigned(Proid, Employeeid, Type,CloseDateTime,Siteid) VALUES ('" + Proid + "','" + AllEmp[i] + "','" + type + "','" + CloseDt[i] + "','"+ Siteid +"')");
                     }
                 }
             }
@@ -207,7 +207,7 @@ namespace ZkConstruction.Controllers
             return RedirectToAction("Indexx", "Home");
         }
         [HttpPost]
-        public IActionResult FlEmAddSave(int[] Empid, int Proid,string type ,string[] CloseDt,int [] AllEmp)
+        public IActionResult FlEmAddSave(int[] Empid, int Proid,string type ,string[] CloseDt,int [] AllEmp, int Siteid)
         {
             _context.Database.ExecuteSqlRaw("DELETE FROM EmployeeAssigned WHERE (Type = '"+ type +"') AND (Proid = "+ Proid +")");
             for (int i = 0; i < AllEmp.Count(); i++)
@@ -216,7 +216,7 @@ namespace ZkConstruction.Controllers
                 {
                     if (AllEmp[i] == Empid[j])
                     {
-                        _context.Database.ExecuteSqlRaw("INSERT INTO EmployeeAssigned(Proid, Employeeid, Type,CloseDateTime) VALUES ('" + Proid + "','" + AllEmp[i] + "','" + type + "','" + CloseDt[i] + "')");
+                        _context.Database.ExecuteSqlRaw("INSERT INTO EmployeeAssigned(Proid, Employeeid, Type,CloseDateTime,Siteid) VALUES ('" + Proid + "','" + AllEmp[i] + "','" + type + "','" + CloseDt[i] + "','" + Siteid + "')");
                     }
                 }
             }
@@ -244,6 +244,32 @@ namespace ZkConstruction.Controllers
                 if (CloseDt[i] != null)
                 {
                     _context.Database.ExecuteSqlRaw("UPDATE EmployeeAssigned SET CloseDateTime ='" + CloseDt[i] +"' WHERE (Proid = "+ Proid +") AND (Type = '"+ type +"') AND (Employeeid = "+ Empid[i] +")");
+                }
+            }
+            TempData["Update"] = "Inserted Successfully";
+            return RedirectToAction("Indexx", "Home");
+        }
+        [HttpPost]
+        public IActionResult PastartSave(string[] Empid, int Proid,string type ,string[] StartDt)
+        {
+            for (int i = 0; i < StartDt.Count(); i++)
+            {
+                if (StartDt[i] != null)
+                {
+                    _context.Database.ExecuteSqlRaw("UPDATE EmployeeAssigned SET StartDateTime ='" + StartDt[i] +"' WHERE (Proid = "+ Proid +") AND (Type = '"+ type +"') AND (Employeeid = "+ Empid[i] +")");
+                }
+            }
+            TempData["Update"] = "Inserted Successfully";
+            return RedirectToAction("Indexx", "Home");
+        }
+        [HttpPost]
+        public IActionResult FlStartSave(string[] Empid, int Proid,string type ,string[] StartDt)
+        {
+            for (int i = 0; i < StartDt.Count(); i++)
+            {
+                if (StartDt[i] != null)
+                {
+                    _context.Database.ExecuteSqlRaw("UPDATE EmployeeAssigned SET StartDateTime ='" + StartDt[i] +"' WHERE (Proid = "+ Proid +") AND (Type = '"+ type +"') AND (Employeeid = "+ Empid[i] +")");
                 }
             }
             TempData["Update"] = "Inserted Successfully";
