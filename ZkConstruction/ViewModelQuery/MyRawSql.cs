@@ -7,6 +7,18 @@ using System.Threading.Tasks;
 
 namespace ZkConstruction.ViewModelQuery
 {
+    public class ResultManagerSecondVMQ
+    {
+        public int Site { get; set; }
+        public string EmpName { get; set; }
+        public string StartDateTime { get; set; }
+        public string CloseDateTime { get; set; }
+    }
+    public class ResultManagerFirstVMQ
+    {
+        public int Site { get; set; }
+        public string SiteName { get; set; }
+    }
     public class ResultVMQ
     {
         public int Siteid { get; set; }

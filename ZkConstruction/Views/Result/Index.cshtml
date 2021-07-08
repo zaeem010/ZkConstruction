@@ -1,4 +1,4 @@
-﻿
+﻿@model ZkConstruction.ViewModel.ResultVM
 @{
     ViewData["Title"] = "Index";
 }
@@ -14,36 +14,48 @@
             </div>
         </div>
         <!-- Multiple Open Accordion start -->
-        <div class="col-lg-10">
-            
+        <div class="col-lg-12">
+
             <div class="card">
                 <div class="card-header">
                     <h5 class="card-header-text">Results</h5>
                 </div>
                 <div class="card-block">
-                    <form method="post" asp-action="Create">
+                    <form method="post" asp-action="Search">
                         <div class="row">
                             <div class="col-md-2">
                                 <ul class="list-group">
                                     <li class="list-group-item">
-                                        Managers <span class="badge"><input type="radio" name="Emp" value="1" /></span>
+                                        Managers <span class="badge"><input type="radio" name="Emp" value="1" id="toggle"/></span>
                                     </li>
                                     <li class="list-group-item">
-                                        Employees <span class=""><input type="radio" name="Emp" value="0" /></span>
+                                        Employees <span class=""><input type="radio" name="Emp" value="0" id="toggle2" /></span>
                                     </li>
                                 </ul>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3 desc" id="1">
+                                <label>Manager</label>
+                                <select class="form-control chosen-select" name="Mangerid" required asp-items="@(new SelectList(Model.ManagerList,"AccountNo","Name"))">
+                                    <option selected hidden>Select</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3 desc" id="0" >
+                                <label>Employee</label>
+                                <select class="form-control chosen-select" name="Empid" required asp-items="@(new SelectList(Model.EmployeeList,"AccountNo","Name"))">
+                                    <option selected hidden>Select</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
                                 <label>Start Date</label>
                                 <input type="date" name="Stdate" value="" class="form-control" required />
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <label>End Date</label>
                                 <input type="date" name="Endate" value="" class="form-control" required />
                             </div>
                         </div>
                         <div class="offset-md-4 col-md-6 " style="margin-top:20px">
-                            <button type="submit" class="btn btn-primary pull-right col-md-8"  style="margin-top:0px"><i class="fa fa-search"></i> Search </button>
+                            <button type="submit" class="btn btn-primary pull-right col-md-8" style="margin-top:0px"><i class="fa fa-search"></i> Search </button>
                         </div>
                     </form>
 
@@ -60,6 +72,36 @@
         $('#mydiv').fadeOut('fast');
     }, 3000); // <-- time in milliseconds
     $(document).ready(function () {
-        $('.toast').toast('show');
+        $("div.desc").hide();
+        $("input[name$='Emp']").click(function () {
+            var test = $(this).val();
+            $("div.desc").hide('slow');
+            $("#" + test).show('slow');
+        });
     });
+
+    //const targetDiv = document.getElementById("third");
+    //const Emp = document.getElementById("Sec");
+    //const btn = document.getElementById("toggle");
+    //btn.onclick = function () {
+    //    if (targetDiv.style.display !== "none") {
+    //        targetDiv.style.display = "none";
+    //    } else {
+    //        targetDiv.style.display = "block";
+    //    }
+        
+    //};
+ 
+</script>
+<script>
+    //$('input[type="radio"]').click(function () {
+    //    if ($(this).attr("value") == "1") {
+    //        $(".Box").hide('slow');
+    //    }
+    //    if ($(this).attr("value") == "0") {
+    //        $(".Box").show('slow');
+
+    //    }
+    //});
+    //$('input[type="radio"]').trigger('click');
 </script>

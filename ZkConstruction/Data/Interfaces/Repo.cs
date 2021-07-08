@@ -20,7 +20,7 @@ namespace ZkConstruction.Data.Repository
                 return connection.Query<T>(query).FirstOrDefault();
             }
         }
-
+        
         public IEnumerable<T> GetAllData(string query)
         {
             using (connection = new SqlConnection(DBHelper.ConnectionString))
@@ -47,7 +47,15 @@ namespace ZkConstruction.Data.Repository
             }
             //throw new NotImplementedException();
         }
-
+        public string Getstring(string query)
+        {
+            using (connection = new SqlConnection(DBHelper.ConnectionString))
+            {
+                connection.Open();
+                return connection.Query<string>(query).FirstOrDefault();
+            }
+            //throw new NotImplementedException();
+        }
         public void Save(string query)
         {
             using (connection = new SqlConnection(DBHelper.ConnectionString))
