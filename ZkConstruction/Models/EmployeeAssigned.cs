@@ -9,6 +9,7 @@ namespace ZkConstruction.Models
     {
         public int id { get; set; }
         public int Proid { get; set; }
+        public int Siteid { get; set; }
         public int Employeeid { get; set; }
         public string Type { get; set; }
         public string CloseDateTime { get; set; }
