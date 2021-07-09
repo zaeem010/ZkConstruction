@@ -49,30 +49,39 @@
                                 <th>Site Name</th>
                                 <th>In</th>
                                 <th>Out</th>
+                                <th>Total Duration</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach (var lst in Model.ResultVMQList)
                             {
-                                <tr>
-                                    <td>@lst.SiteName</td>
-                                    @if (lst.StartDateTime != "")
+                            <tr>
+                                <td>@lst.SiteName</td>
+                                @if (lst.StartDateTime != "")
+                                {
+                                    <td>@Convert.ToDateTime(lst.StartDateTime).ToString("dd/MM/yyyy HH:mm")</td>
+                                }
+                                else
+                                {
+                                    <td></td>
+                                }
+                                @if (lst.CloseDateTime != "")
+                                {
+                                    <td>@Convert.ToDateTime(lst.CloseDateTime).ToString("dd/MM/yyyy HH:mm")</td>
+                                }
+                                else
+                                {
+                                    <td></td>
+                                }
+                                @foreach (var List in Model.sitedurationList)
+                                {
+                                    if (lst.Siteid == List.site)
                                     {
-                                        <td>@Convert.ToDateTime(lst.StartDateTime).ToString("dd/MM/yyyy HH:mm")</td>
+                                        <td>@List.TotalMins</td>
                                     }
-                                    else
-                                    {
-                                        <td></td>
-                                    }
-                                    @if (lst.CloseDateTime != "")
-                                    {
-                                        <td>@Convert.ToDateTime(lst.CloseDateTime).ToString("dd/MM/yyyy HH:mm")</td>
-                                    }
-                                    else
-                                    {
-                                        <td></td>
-                                    }
-                                </tr>
+                                }
+
+                            </tr>
                             }
                         </tbody>
                     </table>
@@ -101,6 +110,7 @@
                                                     <th>Employee Name</th>
                                                     <th>Start Date Time</th>
                                                     <th>Close Date Time</th>
+                                                    <th>Total Duration</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -125,6 +135,13 @@
                                                     else
                                                     {
                                                         <td></td>
+                                                    }
+                                                    @foreach (var List2 in Model.EmpdurationList)
+                                                    {
+                                                        if (List.Employeeid == List2.EmpAccount)
+                                                        {
+                                                            <td>@List2.TotalMins</td>
+                                                        }
                                                     }
                                                 </tr>
                                                     }

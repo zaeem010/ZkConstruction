@@ -14,6 +14,8 @@ namespace ZkConstruction.ViewModel
         public List<ResultVMQ> ResultVMQList { get; set; }
         public List<ResultManagerFirstVMQ> ResultManagerFirstVMQList { get; set; }
         public List<ResultManagerSecondVMQ> ResultManagerSecondVMQList { get; set; }
+        public List<siteduration> sitedurationList { get; set; }
+        public List<Empduration> EmpdurationList { get; set; }
         public string Stdate { get; set; }
         public string Endate { get; set; }
         public string EmpName { get; set; }

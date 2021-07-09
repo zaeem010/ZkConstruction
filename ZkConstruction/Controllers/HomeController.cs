@@ -39,7 +39,7 @@ namespace ZkConstruction.Controllers
                 CompanyList = _context.Company.ToList(),
                 SiteList = _context.Site.ToList(),
                 CustomerList = _context.Customer.ToList(),
-                EmployeeList = _context.DEmployee.ToList(),
+                EmployeeList = _context.DEmployee.FromSqlRaw("SELECT * FROM DEmployee WHERE (Designation NOT IN (1))").ToList(),
                 EmployeeAssignedPaintList = _context.EmployeeAssigned.FromSqlRaw("SELECT * FROM EmployeeAssigned WHERE(Type = 'Painting')").ToList(),
                 EmployeeAssignedFloorList = _context.EmployeeAssigned.FromSqlRaw("SELECT * FROM EmployeeAssigned WHERE(Type = 'Flooring')").ToList(),
                 EmployeeAssignedFloorListChecked = new Repo<EmpFloorCheckedVMQ>().GetAllData("SELECT EmployeeAssigned.id,EmployeeAssigned.StartDateTime, EmployeeAssigned.Proid, EmployeeAssigned.Employeeid, EmployeeAssigned.Type, DEmployee.Name AS EmpName, EmployeeAssigned.CloseDateTime FROM EmployeeAssigned INNER JOIN DEmployee ON EmployeeAssigned.Employeeid = DEmployee.AccountNo WHERE(EmployeeAssigned.Type = 'Flooring')").ToList(),

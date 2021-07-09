@@ -7,9 +7,20 @@ using System.Threading.Tasks;
 
 namespace ZkConstruction.ViewModelQuery
 {
+    public class Empduration
+    {
+        public int EmpAccount { get; set; }
+        public string TotalMins { get; set; }
+    }
+    public class siteduration
+    {
+        public int site { get; set; }
+        public string TotalMins { get; set; }
+    }
     public class ResultManagerSecondVMQ
     {
         public int Site { get; set; }
+        public int Employeeid { get; set; }
         public string EmpName { get; set; }
         public string StartDateTime { get; set; }
         public string CloseDateTime { get; set; }
