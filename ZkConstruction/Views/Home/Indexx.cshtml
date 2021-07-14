@@ -168,10 +168,52 @@
                                             <a data-toggle="modal" data-target="#FlRoom-@Lst.Proid">_@Lst.FlooringRoom</a>
                                             <a data-toggle="modal" data-target="#UpFlooring-@Lst.Proid"><span class="badge badge-primary"><i class="fa fa-upload"></i></span> </a>
                                             <a data-toggle="modal" data-target="#ShowUpFlooring-@Lst.Proid"><span class="badge badge-primary"><i class="fa fa-street-view"></i></span> </a>
+                                            <a data-toggle="modal" data-target="#DelieveryStatus-@Lst.Proid">
+                                                @if (Lst.DelieveryStatus != "Delievered")
+                                                {
+                                                    <span class="badge badge-warning"><i class="fa fa-industry"></i></span>
+                                                }
+                                                else
+                                                {
+                                                <span class="badge badge-success"><i class="fa fa-industry"></i></span>
+                                                }
+                                            </a>
+                                           
                                         </td>
                                         <td><a data-toggle="modal" data-target="#RmHours-@Lst.Proid">@Lst.RemainingHours</a></td>
                                         <td><a data-toggle="modal" data-target="#St-@Lst.Proid">@Convert.ToDateTime(Lst.StDate).ToString("dd/MM/yyyy")</a></td>
                                     </tr>
+                                    <!-- DelieveryStatus Modal -->
+                                    <div class="modal fade" id="DelieveryStatus-@Lst.Proid" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Delievery Status</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">×</span>
+                                                    </button>
+                                                </div>
+                                                <form method="post" asp-action="DelieveryStatus" asp-controller="HomeEdit" enctype="multipart/form-data">
+                                                    <div class="modal-body">
+                                                        <div class="row">
+                                                            <div class="col-md-5">
+                                                                <label>Select</label>
+                                                                <select class="form-control" name="Status">
+                                                                    <option value="Pending">Pending</option>
+                                                                    <option value="Delievered">Delievered</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-primary">Save changes</button>
+                                                    </div>
+                                                    <input type="hidden" name="Proid" value="@Lst.Proid" />
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <!-- ShowUpFlooring Modal -->
                                     <div class="modal fade" id="ShowUpFlooring-@Lst.Proid" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">

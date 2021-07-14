@@ -85,6 +85,7 @@ namespace ZkConstruction.ViewModelQuery
         public int site { get; set; }
         public string FlooringRoom { get; set; }
         public string StdateTimeFlooring { get; set; }
+        public string DelieveryStatus { get; set; }
     }
     public class SiteVisit1VMQ
     {

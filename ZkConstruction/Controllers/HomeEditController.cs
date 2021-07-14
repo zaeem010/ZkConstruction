@@ -328,5 +328,12 @@ namespace ZkConstruction.Controllers
             TempData["Update"] = "Inserted Successfully";
             return RedirectToAction("Indexx", "Home");
         }
+        [HttpPost]
+        public IActionResult DelieveryStatus(string Status, int Proid)
+        {
+            _context.Database.ExecuteSqlRaw("Update Home Set DelieveryStatus = '" + Status + "' WHERE (Proid = " + Proid + ")");
+            TempData["Update"] = "Updated Successfully";
+            return RedirectToAction("Indexx", "Home");
+        }
     }
 }
