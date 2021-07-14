@@ -39,6 +39,7 @@ namespace ZkConstruction.Data
         public DbSet<EmpassignClose> EmpassignClose { get; set; }
         public DbSet<EmployeeAssigned> EmployeeAssigned { get; set; }
         public DbSet<AbsentUser> AbsentUser { get; set; }
+        public DbSet<Documents> Documents { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
