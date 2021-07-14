@@ -1,0 +1,96 @@
+﻿@model ZkConstruction.ViewModel.AbsentUserVM
+@{
+    ViewData["Title"] = "Create";
+}
+<div class="content-wrapper">
+
+    <!-- Container-fluid starts -->
+    <!-- Main content starts -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="main-header">
+            </div>
+            <div id="mydiv" class="col-md-3">
+                <p class="bg-success text-center">@TempData["Insert"]</p>
+                <p class="bg-danger">@TempData["Duplicate"]</p>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <a asp-action="Index" class="btn btn-skype offset-lg-10"><i class="fa fa-list"></i> Absent List</a>
+            <div class="card" style="margin-top:20px">
+                <div class="card-header">
+                    <h5 class="card-header-text"><u>Form</u></h5>
+                </div>
+                <div class="card-block">
+                    @using (Html.BeginForm("Save", "AbsentUser", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label><b>Select Project</b></label>
+                                <select class="form-control chosen-select" asp-for="AbsentUser.Proid" asp-items="@(new SelectList(Model.ProjectList ,"Proid","Name"))">
+                                    <option disabled selected>Select</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label><b>Select Employee</b></label>
+                                <select class="form-control chosen-select" asp-for="AbsentUser.Employeeid" asp-items="@(new SelectList(Model.EmployeeList ,"AccountNo","Name"))">
+                                    <option disabled selected>Select</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label>Start Date Time</label>
+                                <input type="datetime-local" asp-for="AbsentUser.Start" id="st" class="form-control"/>
+                            </div>
+                            <div class="col-md-4 top">
+                                <label>End Date Time</label>
+                                <input type="datetime-local" asp-for="AbsentUser.End" id="en" class="form-control"/>
+                            </div>
+
+                            <div class="offset-md-4 col-md-6 " style="margin-top:20px">
+                                @if (Model.AbsentUser.id == 0)
+                                {
+                                    <button type="submit" class="btn btn-primary pull-right col-md-8" onclick="return confirm('Do you want to Save ..')" style="margin-top:0px"><i class="fa fa-plus"></i> Save </button>
+                                }
+                                else
+                                {
+                                    <button type="submit" class="btn btn-primary pull-right col-md-8" onclick="return confirm('Do you want to Update ..')" style="margin-top:0px"><i class="fa fa-plus"></i> Update </button>
+                                }
+
+                            </div>
+                            @Html.HiddenFor(m => m.AbsentUser.id)
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- Main content ends -->
+    <!-- Container-fluid ends -->
+</div>
+<script>
+    $('.chosen-select').chosen();
+    setTimeout(function () {
+        $('#mydiv').fadeOut('fast');
+    }, 3000); // <-- time in milliseconds
+
+    function adjust(v) {
+        if (v > 9) {
+            return v.toString();
+        } else {
+            return '0' + v.toString();
+        }
+    }
+    $(document).ready(function () {
+        var today = new Date();
+        var date = today.getFullYear() + '-' + adjust(today.getMonth() + 1) + '-' + adjust(today.getDate());
+        var time = adjust(today.getHours()) + ":" + adjust(today.getMinutes());
+        var dateTime = `${date}T${time}`;
+        //its working
+
+        $("#st").val(dateTime);
+        $("#en").val(dateTime);
+    });
+</script>

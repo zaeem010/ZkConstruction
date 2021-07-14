@@ -7,6 +7,14 @@ using System.Threading.Tasks;
 
 namespace ZkConstruction.ViewModelQuery
 {
+    public class AbsentVMQ
+    {
+        public int id { get; set; }
+        public string EmployeeName { get; set; }
+        public string ProjectName { get; set; }
+        public DateTime Start { get; set; }
+        public DateTime End { get; set; }
+    }
     public class Empduration
     {
         public int EmpAccount { get; set; }
