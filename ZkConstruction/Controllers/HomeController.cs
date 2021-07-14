@@ -26,7 +26,7 @@ namespace ZkConstruction.Controllers
         {
             _context = context;
         }
-        public IActionResult Indexx()
+        public IActionResult Indexx(Documents Documents)
         {
             //SqlParameter[] Parrameters = new SqlParameter[]
             //{
@@ -45,6 +45,8 @@ namespace ZkConstruction.Controllers
                 EmployeeAssignedFloorListChecked = new Repo<EmpFloorCheckedVMQ>().GetAllData("SELECT EmployeeAssigned.id,EmployeeAssigned.StartDateTime, EmployeeAssigned.Proid, EmployeeAssigned.Employeeid, EmployeeAssigned.Type, DEmployee.Name AS EmpName, EmployeeAssigned.CloseDateTime FROM EmployeeAssigned INNER JOIN DEmployee ON EmployeeAssigned.Employeeid = DEmployee.AccountNo WHERE(EmployeeAssigned.Type = 'Flooring')").ToList(),
                 EmployeeAssignedPaintListChecked = new Repo<EmpFloorCheckedVMQ>().GetAllData("SELECT EmployeeAssigned.id,EmployeeAssigned.StartDateTime, EmployeeAssigned.Proid, EmployeeAssigned.Employeeid, EmployeeAssigned.Type, DEmployee.Name AS EmpName, EmployeeAssigned.CloseDateTime FROM EmployeeAssigned INNER JOIN DEmployee ON EmployeeAssigned.Employeeid = DEmployee.AccountNo WHERE(EmployeeAssigned.Type = 'Painting')").ToList(),
                 ManagerList=_context.DEmployee.FromSqlRaw("SELECT * FROM DEmployee WHERE (Designation = 1)").ToList(),
+                Documents= Documents,
+                DocumentsList =_context.Documents.ToList(),
             };
             return View(VM);
         }

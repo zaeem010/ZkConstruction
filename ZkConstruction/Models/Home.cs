@@ -29,5 +29,6 @@ namespace ZkConstruction.Models
         public int RemainingHours { get; set; }
         public string StTime { get; set; }
         public string StdateTimeFlooring { get; set; }
+        public string DelieveryStatus { get; set; }
     }
 }

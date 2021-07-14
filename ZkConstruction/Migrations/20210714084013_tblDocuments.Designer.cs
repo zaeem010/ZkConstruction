@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ZkConstruction.Data;
 
-namespace ZkConstruction.Data.Migrations
+namespace ZkConstruction.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210714084013_tblDocuments")]
+    partial class tblDocuments
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -711,9 +713,6 @@ namespace ZkConstruction.Data.Migrations
 
                     b.Property<int>("Customerid")
                         .HasColumnType("int");
-
-                    b.Property<string>("DelieveryStatus")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Electricity")
                         .HasColumnType("nvarchar(max)");

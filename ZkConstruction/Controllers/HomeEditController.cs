@@ -1,21 +1,74 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using ZkConstruction.Data;
+using ZkConstruction.Models;
 
 namespace ZkConstruction.Controllers
 {
     public class HomeEditController : Controller
     {
         private readonly ApplicationDbContext _context;
-        public HomeEditController(ApplicationDbContext context)
+        private readonly IWebHostEnvironment host;
+        public HomeEditController(ApplicationDbContext context, IWebHostEnvironment host)
         {
             _context = context;
+            this.host = host;
+        }
+
+        [HttpPost]
+        public IActionResult UpFlooringSave(Documents Documents, int Proid)
+        {
+            Random r = new Random();
+            int num = r.Next();
+            var webrootpath = host.WebRootPath;
+            var files = HttpContext.Request.Form.Files;
+            for (int i = 0; i < files.Count(); i++) 
+                {
+                    var uploads = Path.Combine(webrootpath, "Uploads");
+                    var filename = Path.GetFileName(files[i].FileName);
+                    using (var stream = new FileStream(Path.Combine(uploads, num + filename), FileMode.Create))
+                    {
+                        files[i].CopyTo(stream);
+                    }
+                if (files[i].Name == "Documents.Img")
+                {
+                    Documents.Img = num + filename;
+                }
+                _context.Database.ExecuteSqlRaw("INSERT INTO Documents (Proid,Img,Type) VALUES ("+ Proid +",'"+ Documents.Img +"','FlooringDoc')");
+                }
+            TempData["Update"] = "Uploaded Successfully";
+            return RedirectToAction("Indexx","Home");
         }
         [HttpPost]
+        public IActionResult UpProSave(Documents Documents, int Proid)
+        {
+            Random r = new Random();
+            int num = r.Next();
+            var webrootpath = host.WebRootPath;
+            var files = HttpContext.Request.Form.Files;
+            for (int i = 0; i < files.Count(); i++) 
+                {
+                    var uploads = Path.Combine(webrootpath, "Uploads");
+                    var filename = Path.GetFileName(files[i].FileName);
+                    using (var stream = new FileStream(Path.Combine(uploads, num + filename), FileMode.Create))
+                    {
+                        files[i].CopyTo(stream);
+                    }
+                if (files[i].Name == "Documents.Img")
+                {
+                    Documents.Img = num + filename;
+                }
+                _context.Database.ExecuteSqlRaw("INSERT INTO Documents (Proid,Img,Type) VALUES ("+ Proid +",'"+ Documents.Img +"','ProjectDoc')");
+                }
+            TempData["Update"] = "Uploaded Successfully";
+            return RedirectToAction("Indexx","Home");
+        }
         public IActionResult ComSave(string Com ,int Proid)
         {
             _context.Database.ExecuteSqlRaw("Update Eproject Set Comid = '"+ Com +"' WHERE (Proid = "+ Proid +")");

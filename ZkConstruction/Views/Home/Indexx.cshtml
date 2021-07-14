@@ -84,932 +84,1063 @@
                             <tbody>
                                 @foreach (var Lst in Model.ManageVMQList)
                                 {
-                                <tr>
-                                    <td><a data-toggle="modal" data-target="#com-@Lst.Proid">@Lst.CompanyName.ToUpper()</a></td>
-                                    <td><a data-toggle="modal" data-target="#Sr-@Lst.Proid">@Lst.Sr</a></td>
-                                    <td><a data-toggle="modal" data-target="#Site-@Lst.Proid"> @Lst.SiteName</a></td>
-                                    <td><a data-toggle="modal" data-target="#Floor-@Lst.Proid">@Lst.Floor </a></td>
-                                    <td><a data-toggle="modal" data-target="#Cus-@Lst.Proid">@Lst.CustomerName.ToUpper()</a></td>
-                                    <td><a data-toggle="modal" data-target="#Work-@Lst.Proid">@Lst.WorkHours</a></td>
-                                    <td><a data-toggle="modal" data-target="#Hand-@Lst.Proid">@Convert.ToDateTime(Lst.HandDate).ToString("dd/MM/yyyy")</a></td>
-                                    <td>
-                                        @if (Lst.Pa == "Yes")
+                                    <tr>
+                                        <td>
+                                            <a data-toggle="modal" data-target="#com-@Lst.Proid">@Lst.CompanyName.ToUpper()</a>
+                                            <a data-toggle="modal" data-target="#UpPro-@Lst.Proid"><span class="badge badge-primary"><i class="fa fa-upload"></i></span> </a>
+                                            <a data-toggle="modal" data-target="#ShowUpPro-@Lst.Proid"><span class="badge badge-primary"><i class="fa fa-street-view"></i></span> </a>
+                                        </td>
+                                        <td><a data-toggle="modal" data-target="#Sr-@Lst.Proid">@Lst.Sr</a></td>
+                                        <td><a data-toggle="modal" data-target="#Site-@Lst.Proid"> @Lst.SiteName</a></td>
+                                        <td><a data-toggle="modal" data-target="#Floor-@Lst.Proid">@Lst.Floor </a></td>
+                                        <td><a data-toggle="modal" data-target="#Cus-@Lst.Proid">@Lst.CustomerName.ToUpper()</a></td>
+                                        <td><a data-toggle="modal" data-target="#Work-@Lst.Proid">@Lst.WorkHours</a></td>
+                                        <td><a data-toggle="modal" data-target="#Hand-@Lst.Proid">@Convert.ToDateTime(Lst.HandDate).ToString("dd/MM/yyyy")</a></td>
+                                        <td>
+                                            @if (Lst.Pa == "Yes")
                                             {
-                                        <a data-toggle="modal" data-target="#Paint-@Lst.Proid"><span style="color:limegreen"><b>@Lst.Pa</b></span></a>
+                                                <a data-toggle="modal" data-target="#Paint-@Lst.Proid"><span style="color:limegreen"><b>@Lst.Pa</b></span></a>
                                             }
                                             else
                                             {
-                                        <a data-toggle="modal" data-target="#Paint-@Lst.Proid"><span>No</span></a>
+                                                <a data-toggle="modal" data-target="#Paint-@Lst.Proid"><span>No</span></a>
                                             }
-                                    </td>
-                                    <td>
-                                        <a data-toggle="modal" data-target="#Flooring-@Lst.Proid">
-                                            @if (Lst.Fl == "Yes")
+                                        </td>
+                                        <td>
+                                            <a data-toggle="modal" data-target="#Flooring-@Lst.Proid">
+                                                @if (Lst.Fl == "Yes")
                                                 {
-                                            <span style="color:limegreen"><b>@Lst.Fl</b></span>
+                                                    <span style="color:limegreen"><b>@Lst.Fl</b></span>
                                                 }
                                                 else
                                                 {
-                                            <span>No</span>
+                                                    <span>No</span>
                                                 }
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <a data-toggle="modal" data-target="#Wallpaper-@Lst.Proid">
-                                            @if (Lst.Wa == "Yes")
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a data-toggle="modal" data-target="#Wallpaper-@Lst.Proid">
+                                                @if (Lst.Wa == "Yes")
                                                 {
-                                            <span style="color:limegreen"><b>@Lst.Wa</b></span>
+                                                    <span style="color:limegreen"><b>@Lst.Wa</b></span>
                                                 }
                                                 else
                                                 {
-                                            <span>No</span>
+                                                    <span>No</span>
                                                 }
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <a data-toggle="modal" data-target="#Cleaning-@Lst.Proid">
-                                            @if (Lst.Cl == "Yes")
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a data-toggle="modal" data-target="#Cleaning-@Lst.Proid">
+                                                @if (Lst.Cl == "Yes")
                                                 {
-                                            <span style="color:limegreen"><b>@Lst.Cl</b></span>
+                                                    <span style="color:limegreen"><b>@Lst.Cl</b></span>
                                                 }
                                                 else
                                                 {
-                                            <span>No</span>
+                                                    <span>No</span>
                                                 }
-                                        </a>
-                                    </td>
-                                    <td><a data-toggle="modal" data-target="#Manager-@Lst.Proid"> @Lst.ManagerName </a></td>
-                                    <td>
-                                        <a data-toggle="modal" data-target="#PaEmAdd-@Lst.Proid"><span class="badge badge-primary"><i class="fa fa-plus"></i></span></a>
-                                        @Lst.PaEm &nbsp; @Lst.PaEmNames
-                                    </td>
-                                    <td><a data-toggle="modal" data-target="#PaintHours-@Lst.Proid"> @Lst.PaintingHours </a></td>
-                                    <td><a data-toggle="modal" data-target="#StTime-@Lst.Proid"> @Convert.ToDateTime(Lst.StTime).ToString("dd/MM/yyyy HH:mm")</a></td>
-                                    <td>
-                                        <a data-toggle="modal" data-target="#Pastart-@Lst.Proid"><span class="badge badge-success"><i class="fa fa-eye"></i>&nbsp; In</span></a>
-                                        <a data-toggle="modal" data-target="#PaClosing-@Lst.Proid"><span class="badge badge-danger"><i class="fa fa-eye"></i>&nbsp; Out</span></a>
-                                    </td>
-                                    <td><a data-toggle="modal" data-target="#El-@Lst.Proid">@Lst.Electricity</a></td>
-                                    <td>
-                                        <a data-toggle="modal" data-target="#FlEmAdd-@Lst.Proid"><span class="badge badge-primary"><i class="fa fa-plus"></i></span></a>
-                                        @Lst.FlEm &nbsp; @Lst.FlEmNames
-                                    </td>
-                                    <td><a data-toggle="modal" data-target="#FlHours-@Lst.Proid">@Lst.FlooringHours</a></td>
-                                    <td><a data-toggle="modal" data-target="#FlStDate-@Lst.Proid">@Convert.ToDateTime(Lst.StdateTimeFlooring).ToString("dd/MM/yyyy HH:mm")</a></td>
-                                    <td>
-                                        <a data-toggle="modal" data-target="#FlStart-@Lst.Proid"><span class="badge badge-success"><i class="fa fa-eye"></i>&nbsp; In</span></a>
-                                        <a data-toggle="modal" data-target="#FlClosing-@Lst.Proid"><span class="badge badge-danger"><i class="fa fa-eye"></i>&nbsp; Out</span></a>
-                                    </td>
-                                    <td><a data-toggle="modal" data-target="#FlRoom-@Lst.Proid">_@Lst.FlooringRoom</a></td>
-                                    <td><a data-toggle="modal" data-target="#RmHours-@Lst.Proid">@Lst.RemainingHours</a></td>
-                                    <td><a data-toggle="modal" data-target="#St-@Lst.Proid">@Convert.ToDateTime(Lst.StDate).ToString("dd/MM/yyyy")</a></td>
-                                </tr>
-                                <!-- Com Modal -->
-                                <div class="modal fade" id="com-@Lst.Proid" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Company</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">×</span>
-                                                </button>
-                                            </div>
-                                            <form method="post" asp-action="ComSave" asp-controller="HomeEdit">
-                                                <div class="modal-body">
-                                                    <div class="row">
-                                                        <div class="col-md-5">
-                                                            <label>Select Company</label>
-                                                            <select name="Com" asp-items="@(new SelectList(Model.CompanyList ,"id","Name"))" class="form-control">
-                                                                <option disabled selected>Select</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
+                                            </a>
+                                        </td>
+                                        <td><a data-toggle="modal" data-target="#Manager-@Lst.Proid"> @Lst.ManagerName </a></td>
+                                        <td>
+                                            <a data-toggle="modal" data-target="#PaEmAdd-@Lst.Proid"><span class="badge badge-primary"><i class="fa fa-plus"></i></span></a>
+                                            @Lst.PaEm &nbsp; @Lst.PaEmNames
+                                        </td>
+                                        <td><a data-toggle="modal" data-target="#PaintHours-@Lst.Proid"> @Lst.PaintingHours </a></td>
+                                        <td><a data-toggle="modal" data-target="#StTime-@Lst.Proid"> @Convert.ToDateTime(Lst.StTime).ToString("dd/MM/yyyy HH:mm")</a></td>
+                                        <td>
+                                            <a data-toggle="modal" data-target="#Pastart-@Lst.Proid"><span class="badge badge-success"><i class="fa fa-eye"></i>&nbsp; In</span></a>
+                                            <a data-toggle="modal" data-target="#PaClosing-@Lst.Proid"><span class="badge badge-danger"><i class="fa fa-eye"></i>&nbsp; Out</span></a>
+                                        </td>
+                                        <td><a data-toggle="modal" data-target="#El-@Lst.Proid">@Lst.Electricity</a></td>
+                                        <td>
+                                            <a data-toggle="modal" data-target="#FlEmAdd-@Lst.Proid"><span class="badge badge-primary"><i class="fa fa-plus"></i></span></a>
+                                            @Lst.FlEm &nbsp; @Lst.FlEmNames
+                                        </td>
+                                        <td><a data-toggle="modal" data-target="#FlHours-@Lst.Proid">@Lst.FlooringHours</a></td>
+                                        <td><a data-toggle="modal" data-target="#FlStDate-@Lst.Proid">@Convert.ToDateTime(Lst.StdateTimeFlooring).ToString("dd/MM/yyyy HH:mm")</a></td>
+                                        <td>
+                                            <a data-toggle="modal" data-target="#FlStart-@Lst.Proid"><span class="badge badge-success"><i class="fa fa-eye"></i>&nbsp; In</span></a>
+                                            <a data-toggle="modal" data-target="#FlClosing-@Lst.Proid"><span class="badge badge-danger"><i class="fa fa-eye"></i>&nbsp; Out</span></a>
+                                        </td>
+                                        <td>
+                                            <a data-toggle="modal" data-target="#FlRoom-@Lst.Proid">_@Lst.FlooringRoom</a>
+                                            <a data-toggle="modal" data-target="#UpFlooring-@Lst.Proid"><span class="badge badge-primary"><i class="fa fa-upload"></i></span> </a>
+                                            <a data-toggle="modal" data-target="#ShowUpFlooring-@Lst.Proid"><span class="badge badge-primary"><i class="fa fa-street-view"></i></span> </a>
+                                        </td>
+                                        <td><a data-toggle="modal" data-target="#RmHours-@Lst.Proid">@Lst.RemainingHours</a></td>
+                                        <td><a data-toggle="modal" data-target="#St-@Lst.Proid">@Convert.ToDateTime(Lst.StDate).ToString("dd/MM/yyyy")</a></td>
+                                    </tr>
+                                    <!-- ShowUpFlooring Modal -->
+                                    <div class="modal fade" id="ShowUpFlooring-@Lst.Proid" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Upload</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">×</span>
+                                                    </button>
                                                 </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                    <button type="submit" class="btn btn-primary">Save changes</button>
-                                                </div>
-                                                <input type="hidden" name="Proid" value="@Lst.Proid" />
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
- <!-- Sr Modal -->
-                                <div class="modal fade" id="Sr-@Lst.Proid" tabindex="-1" role="dialog" aria-labelledby="SrLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Sr#</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">×</span>
-                                                </button>
-                                            </div>
-                                            <form method="post" asp-action="SrSave" asp-controller="HomeEdit">
-                                                <div class="modal-body">
-                                                    <div class="row">
-                                                        <div class="col-md-5">
-                                                            <label>Sr#</label>
-                                                            <input type="text" name="Sr" value="@Lst.Sr" class="form-control" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                    <button type="submit" class="btn btn-primary">Save changes</button>
-                                                </div>
-                                                <input type="hidden" name="Proid" value="@Lst.Proid" />
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
- <!-- Site Modal -->
-                                <div class="modal fade" id="Site-@Lst.Proid" tabindex="-1" role="dialog" aria-labelledby="SiteLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Site</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">×</span>
-                                                </button>
-                                            </div>
-                                            <form method="post" asp-action="SiteSave" asp-controller="HomeEdit">
-                                                <div class="modal-body">
-                                                    <div class="row">
-                                                        <div class="col-md-5">
-                                                            <label>Select Address</label>
-                                                            <select name="Site" asp-items="@(new SelectList(Model.SiteList,"id","Name"))" class="form-control">
-                                                                <option disabled selected>Select</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                    <button type="submit" class="btn btn-primary">Save changes</button>
-                                                </div>
-                                                <input type="hidden" name="Proid" value="@Lst.Proid" />
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
- <!-- Floor Modal -->
-                                <div class="modal fade" id="Floor-@Lst.Proid" tabindex="-1" role="dialog" aria-labelledby="SiteLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Floor</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">×</span>
-                                                </button>
-                                            </div>
-                                            <form method="post" asp-action="FloorSave" asp-controller="HomeEdit">
-                                                <div class="modal-body">
-                                                    <div class="row">
-                                                        <div class="col-md-5">
-                                                            <label>Floor</label>
-                                                            <input type="text" name="Floor" value="@Lst.Floor" class="form-control" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                    <button type="submit" class="btn btn-primary">Save changes</button>
-                                                </div>
-                                                <input type="hidden" name="Proid" value="@Lst.Proid" />
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
- <!-- Cus Modal -->
-                                <div class="modal fade" id="Cus-@Lst.Proid" tabindex="-1" role="dialog" aria-labelledby="SiteLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Customer</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">×</span>
-                                                </button>
-                                            </div>
-                                            <form method="post" asp-action="CusSave" asp-controller="HomeEdit">
-                                                <div class="modal-body">
-                                                    <div class="row">
-                                                        <div class="col-md-5">
-                                                            <label>Select Customer</label>
-                                                            <select name="Cus" asp-items="@(new SelectList(Model.CustomerList,"id","Name"))" class="form-control">
-                                                                <option disabled selected>Select</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                    <button type="submit" class="btn btn-primary">Save changes</button>
-                                                </div>
-                                                <input type="hidden" name="Proid" value="@Lst.Proid" />
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
- <!-- WorkHours Modal -->
-                                <div class="modal fade" id="Work-@Lst.Proid" tabindex="-1" role="dialog" aria-labelledby="SiteLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Work Hours</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">×</span>
-                                                </button>
-                                            </div>
-                                            <form method="post" asp-action="WorkSave" asp-controller="HomeEdit">
-                                                <div class="modal-body">
-                                                    <div class="row">
-                                                        <div class="col-md-5">
-                                                            <label>Work Hours</label>
-                                                            <input type="text" name="Work" value="@Lst.WorkHours" class="form-control" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                    <button type="submit" class="btn btn-primary">Save changes</button>
-                                                </div>
-                                                <input type="hidden" name="Proid" value="@Lst.Proid" />
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
- <!-- HandDate Modal -->
-                                <div class="modal fade" id="Hand-@Lst.Proid" tabindex="-1" role="dialog" aria-labelledby="SiteLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Ending Date</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">×</span>
-                                                </button>
-                                            </div>
-                                            <form method="post" asp-action="HandSave" asp-controller="HomeEdit">
-                                                <div class="modal-body">
-                                                    <div class="row">
-                                                        <div class="col-md-5">
-                                                            <label>Ending date</label>
-                                                            <input type="date" name="Hand" value="@Lst.HandDate" class="form-control" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                    <button type="submit" class="btn btn-primary">Save changes</button>
-                                                </div>
-                                                <input type="hidden" name="Proid" value="@Lst.Proid" />
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
- <!-- Electricity Modal -->
-                                <div class="modal fade" id="El-@Lst.Proid" tabindex="-1" role="dialog" aria-labelledby="SiteLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Electricity</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">×</span>
-                                                </button>
-                                            </div>
-                                            <form method="post" asp-action="ElSave" asp-controller="HomeEdit">
-                                                <div class="modal-body">
-                                                    <div class="row">
-                                                        <div class="col-md-5">
-                                                            <label>Select</label>
-                                                            <select class="form-control" name="El">
-                                                                <option selected disabled>Select</option>
-                                                                <option value="No">No</option>
-                                                                <option value="Yes">Yes</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                    <button type="submit" class="btn btn-primary">Save changes</button>
-                                                </div>
-                                                <input type="hidden" name="Proid" value="@Lst.Proid" />
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
- <!-- StDate Modal -->
-                                <div class="modal fade" id="St-@Lst.Proid" tabindex="-1" role="dialog" aria-labelledby="SiteLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Start Date</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">×</span>
-                                                </button>
-                                            </div>
-                                            <form method="post" asp-action="StSave" asp-controller="HomeEdit">
-                                                <div class="modal-body">
-                                                    <div class="row">
-                                                        <div class="col-md-5">
-                                                            <label>Start Date</label>
-                                                            <input type="date" name="St" value="@Lst.StDate" class="form-control" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                    <button type="submit" class="btn btn-primary">Save changes</button>
-                                                </div>
-                                                <input type="hidden" name="Proid" value="@Lst.Proid" />
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
- <!-- Paint Modal -->
-                                <div class="modal fade" id="Paint-@Lst.Proid" tabindex="-1" role="dialog" aria-labelledby="SiteLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Painting</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">×</span>
-                                                </button>
-                                            </div>
-                                            <form method="post" asp-action="PaintSave" asp-controller="HomeEdit">
-                                                <div class="modal-body">
-                                                    <div class="row">
-                                                        <div class="col-md-5">
-                                                            <label>Paint</label>
-                                                            <p>Yes</p>
-                                                            <input type="radio" name="Pa" value="Yes" />
-                                                            <p>No</p>
-                                                            <input type="radio" name="Pa" value="No" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                    <button type="submit" class="btn btn-primary">Save changes</button>
-                                                </div>
-                                                <input type="hidden" name="Proid" value="@Lst.Proid" />
-                                                <input type="hidden" name="Secid" value="3" />
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
- <!-- Flooring Modal -->
-                                <div class="modal fade" id="Flooring-@Lst.Proid" tabindex="-1" role="dialog" aria-labelledby="SiteLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Flooring</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">×</span>
-                                                </button>
-                                            </div>
-                                            <form method="post" asp-action="FlooringSave" asp-controller="HomeEdit">
-                                                <div class="modal-body">
-                                                    <div class="row">
-                                                        <div class="col-md-5">
-                                                            <label>Flooring</label>
-                                                            <p>Yes</p>
-                                                            <input type="radio" name="Fl" value="Yes" />
-                                                            <p>No</p>
-                                                            <input type="radio" name="Fl" value="No" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                    <button type="submit" class="btn btn-primary">Save changes</button>
-                                                </div>
-                                                <input type="hidden" name="Proid" value="@Lst.Proid" />
-                                                <input type="hidden" name="Secid" value="1" />
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
- <!-- Wallpaper Modal -->
-                                <div class="modal fade" id="Wallpaper-@Lst.Proid" tabindex="-1" role="dialog" aria-labelledby="SiteLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Wallpaper</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">×</span>
-                                                </button>
-                                            </div>
-                                            <form method="post" asp-action="WallpaperSave" asp-controller="HomeEdit">
-                                                <div class="modal-body">
-                                                    <div class="row">
-                                                        <div class="col-md-5">
-                                                            <label>Wallpaper</label>
-                                                            <p>Yes</p>
-                                                            <input type="radio" name="Wa" value="Yes" />
-                                                            <p>No</p>
-                                                            <input type="radio" name="Wa" value="No" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                    <button type="submit" class="btn btn-primary">Save changes</button>
-                                                </div>
-                                                <input type="hidden" name="Proid" value="@Lst.Proid" />
-                                                <input type="hidden" name="Secid" value="4" />
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
- <!-- Cleaning Modal -->
-                                <div class="modal fade" id="Cleaning-@Lst.Proid" tabindex="-1" role="dialog" aria-labelledby="SiteLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Cleaning</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">×</span>
-                                                </button>
-                                            </div>
-                                            <form method="post" asp-action="CleaningSave" asp-controller="HomeEdit">
-                                                <div class="modal-body">
-                                                    <div class="row">
-                                                        <div class="col-md-5">
-                                                            <label>Cleaning</label>
-                                                            <p>Yes</p>
-                                                            <input type="radio" name="Cl" value="Yes" />
-                                                            <p>No</p>
-                                                            <input type="radio" name="Cl" value="No" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                    <button type="submit" class="btn btn-primary">Save changes</button>
-                                                </div>
-                                                <input type="hidden" name="Proid" value="@Lst.Proid" />
-                                                <input type="hidden" name="Secid" value="5" />
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
- <!-- PaintHours Modal -->
-                                <div class="modal fade" id="PaintHours-@Lst.Proid" tabindex="-1" role="dialog" aria-labelledby="SiteLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Paint Hours</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">×</span>
-                                                </button>
-                                            </div>
-                                            <form method="post" asp-action="PaintHoursSave" asp-controller="HomeEdit">
-                                                <div class="modal-body">
-                                                    <div class="row">
-                                                        <div class="col-md-5">
-                                                            <label>Paint Hours</label>
-                                                            <input type="number" name="PaintHours" value="@Lst.PaintingHours" class="form-control" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                    <button type="submit" class="btn btn-primary">Save changes</button>
-                                                </div>
-                                                <input type="hidden" name="Proid" value="@Lst.Proid" />
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
- <!-- StTime Modal -->
-                                <div class="modal fade" id="StTime-@Lst.Proid" tabindex="-1" role="dialog" aria-labelledby="SiteLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Start Date Time</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">×</span>
-                                                </button>
-                                            </div>
-                                            <form method="post" asp-action="StTimeSave" asp-controller="HomeEdit">
-                                                <div class="modal-body">
-                                                    <div class="row">
-                                                        <div class="col-md-5">
-                                                            <label>Start Date Time</label>
-                                                            <input type="datetime-local" name="StTime" value="@Lst.StTime" class="form-control" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                    <button type="submit" class="btn btn-primary">Save changes</button>
-                                                </div>
-                                                <input type="hidden" name="Proid" value="@Lst.Proid" />
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
- <!-- StTime Modal -->
-                                <div class="modal fade" id="FlHours-@Lst.Proid" tabindex="-1" role="dialog" aria-labelledby="SiteLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Flooring Hours</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">×</span>
-                                                </button>
-                                            </div>
-                                            <form method="post" asp-action="FlHoursSave" asp-controller="HomeEdit">
-                                                <div class="modal-body">
-                                                    <div class="row">
-                                                        <div class="col-md-5">
-                                                            <label>Flooring Hours</label>
-                                                            <input type="number" name="FlHours" value="@Lst.FlooringHours" class="form-control" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                    <button type="submit" class="btn btn-primary">Save changes</button>
-                                                </div>
-                                                <input type="hidden" name="Proid" value="@Lst.Proid" />
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
- <!-- FlRoom Modal -->
-                                <div class="modal fade" id="FlRoom-@Lst.Proid" tabindex="-1" role="dialog" aria-labelledby="SiteLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Flooring Room</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">×</span>
-                                                </button>
-                                            </div>
-                                            <form method="post" asp-action="FlRoomSave" asp-controller="HomeEdit">
-                                                <div class="modal-body">
-                                                    <div class="row">
-                                                        <div class="col-md-5">
-                                                            <label>Flooring Room</label>
-                                                            <input type="text" name="FlRoom" value="@Lst.FlooringRoom" class="form-control" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                    <button type="submit" class="btn btn-primary">Save changes</button>
-                                                </div>
-                                                <input type="hidden" name="Proid" value="@Lst.Proid" />
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
- <!-- RmHours Modal -->
-                                <div class="modal fade" id="RmHours-@Lst.Proid" tabindex="-1" role="dialog" aria-labelledby="SiteLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Remaining Hours</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">×</span>
-                                                </button>
-                                            </div>
-                                            <form method="post" asp-action="RmHoursSave" asp-controller="HomeEdit">
-                                                <div class="modal-body">
-                                                    <div class="row">
-                                                        <div class="col-md-5">
-                                                            <label>Remaining Hours</label>
-                                                            <input type="number" name="RmHours" value="@Lst.RemainingHours" class="form-control" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                    <button type="submit" class="btn btn-primary">Save changes</button>
-                                                </div>
-                                                <input type="hidden" name="Proid" value="@Lst.Proid" />
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
- <!-- PaEmAdd Modal -->
-                                <div class="modal fade modal-xl" id="PaEmAdd-@Lst.Proid" tabindex="-1" role="dialog" aria-labelledby="SiteLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Assign Employees</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">×</span>
-                                                </button>
-                                            </div>
-                                            <form method="post" asp-action="PaEmAddSave" asp-controller="HomeEdit">
-                                                <div class="modal-body">
-                                                    <div class="row">
-                                                        <ul class="list-group">
-                                                            @foreach (var List in Model.EmployeeList)
+                                                <form method="post" asp-action="UpProDelete" asp-controller="HomeEdit" enctype="multipart/form-data">
+                                                    <div class="modal-body">
+                                                        <div class="row">
+                                                            @foreach (var Doc in Model.DocumentsList)
                                                             {
-                                                                valavailable = "NO";
-                                                                @foreach (var ListCheck in Model.EmployeeAssignedPaintList)
+                                                                if (Lst.Proid == Doc.Proid && Doc.Type == "FlooringDoc")
                                                                 {
-                                                                    if (List.AccountNo == ListCheck.Employeeid && Lst.Proid == ListCheck.Proid)
-                                                                    {
-                                                                        <li class="list-group-item"><span class="badge"><input type="checkbox" checked name="Empid" value="@List.AccountNo" /></span> @List.Name <input type="hidden" name="CloseDt" value="@ListCheck.CloseDateTime" /> </li>
-                                                                        valavailable = "Yes";
-                                                                    }
+                                                                    <div class="col-md-3">
+                                                                        <a href="~/Uploads/@Doc.Img" target="_blank"><img src="~/Uploads/@Doc.Img" alt="File" class="img img-rounded" style="height:150px;width:100px" /></a>
+                                                                    </div>
                                                                 }
-                                                                @if (valavailable == "NO")
-                                                                {
-                                                                    <li class="list-group-item"><span class="badge"><input type="checkbox" name="Empid" value="@List.AccountNo" /></span> @List.Name  <input type="hidden" name="CloseDt" value="" /></li>
-                                                                }
-                                                                <input type="hidden" name="AllEmp" value="@List.AccountNo" />
-
                                                             }
-                                                        </ul>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                    <button type="submit" class="btn btn-primary">Save changes</button>
-                                                </div>
-                                                <input type="hidden" name="Proid" value="@Lst.Proid" />
-                                                <input type="hidden" name="type" value="Painting" />
-                                                <input type="hidden" name="Siteid" value="@Lst.site" />
-                                            </form>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-primary">Save changes</button>
+                                                    </div>
+                                                    <input type="hidden" name="Proid" value="@Lst.Proid" />
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
- <!-- FlEmAdd Modal -->
-                                <div class="modal fade modal-xl" id="FlEmAdd-@Lst.Proid" tabindex="-1" role="dialog" aria-labelledby="SiteLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Assign Employees</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">×</span>
-                                                </button>
+                                    <!-- UpFlooring Modal -->
+                                    <div class="modal fade" id="UpFlooring-@Lst.Proid" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Upload</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">×</span>
+                                                    </button>
+                                                </div>
+                                                <form method="post" asp-action="UpFlooringSave" asp-controller="HomeEdit" enctype="multipart/form-data">
+                                                    <div class="modal-body">
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <label>Upload</label>
+                                                                <input type="file" asp-for="Documents.Img" class="form-control btn btn-primary" multiple />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-primary">Save changes</button>
+                                                    </div>
+                                                    <input type="hidden" name="Proid" value="@Lst.Proid" />
+                                                </form>
                                             </div>
-                                            <form method="post" asp-action="FlEmAddSave" asp-controller="HomeEdit">
-                                                <div class="modal-body">
-                                                    <div class="row">
-                                                        <ul class="list-group">
-                                                            @foreach (var List in Model.EmployeeList)
+                                        </div>
+                                    </div>
+                                    <!-- ShowUpPro Modal -->
+                                    <div class="modal fade" id="ShowUpPro-@Lst.Proid" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Upload</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">×</span>
+                                                    </button>
+                                                </div>
+                                                <form method="post" asp-action="UpProDelete" asp-controller="HomeEdit" enctype="multipart/form-data">
+                                                    <div class="modal-body">
+                                                        <div class="row">
+                                                            @foreach (var Doc in Model.DocumentsList)
+                                                            {
+                                                                if (Lst.Proid == Doc.Proid && Doc.Type == "ProjectDoc")
+                                                                {
+                                                                    <div class="col-md-3">
+                                                                        <a href="~/Uploads/@Doc.Img" target="_blank"><img src="~/Uploads/@Doc.Img" alt="File" class="img img-rounded" style="height:150px;width:100px" /></a>
+                                                                    </div>
+                                                                }
+                                                            }
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-primary">Save changes</button>
+                                                    </div>
+                                                    <input type="hidden" name="Proid" value="@Lst.Proid" />
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- UpPro Modal -->
+                                    <div class="modal fade" id="UpPro-@Lst.Proid" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Upload</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">×</span>
+                                                    </button>
+                                                </div>
+                                                <form method="post" asp-action="UpProSave" asp-controller="HomeEdit" enctype="multipart/form-data">
+                                                    <div class="modal-body">
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <label>Upload</label>
+                                                                <input type="file" asp-for="Documents.Img" class="form-control btn btn-primary" multiple />
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-primary">Save changes</button>
+                                                    </div>
+                                                    <input type="hidden" name="Proid" value="@Lst.Proid" />
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Com Modal -->
+                                    <div class="modal fade" id="com-@Lst.Proid" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Company</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">×</span>
+                                                    </button>
+                                                </div>
+                                                <form method="post" asp-action="ComSave" asp-controller="HomeEdit">
+                                                    <div class="modal-body">
+                                                        <div class="row">
+                                                            <div class="col-md-5">
+                                                                <label>Select Company</label>
+                                                                <select name="Com" asp-items="@(new SelectList(Model.CompanyList ,"id","Name"))" class="form-control">
+                                                                    <option disabled selected>Select</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-primary">Save changes</button>
+                                                    </div>
+                                                    <input type="hidden" name="Proid" value="@Lst.Proid" />
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Sr Modal -->
+                                    <div class="modal fade" id="Sr-@Lst.Proid" tabindex="-1" role="dialog" aria-labelledby="SrLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Sr#</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">×</span>
+                                                    </button>
+                                                </div>
+                                                <form method="post" asp-action="SrSave" asp-controller="HomeEdit">
+                                                    <div class="modal-body">
+                                                        <div class="row">
+                                                            <div class="col-md-5">
+                                                                <label>Sr#</label>
+                                                                <input type="text" name="Sr" value="@Lst.Sr" class="form-control" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-primary">Save changes</button>
+                                                    </div>
+                                                    <input type="hidden" name="Proid" value="@Lst.Proid" />
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Site Modal -->
+                                    <div class="modal fade" id="Site-@Lst.Proid" tabindex="-1" role="dialog" aria-labelledby="SiteLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Site</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">×</span>
+                                                    </button>
+                                                </div>
+                                                <form method="post" asp-action="SiteSave" asp-controller="HomeEdit">
+                                                    <div class="modal-body">
+                                                        <div class="row">
+                                                            <div class="col-md-5">
+                                                                <label>Select Address</label>
+                                                                <select name="Site" asp-items="@(new SelectList(Model.SiteList,"id","Name"))" class="form-control">
+                                                                    <option disabled selected>Select</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-primary">Save changes</button>
+                                                    </div>
+                                                    <input type="hidden" name="Proid" value="@Lst.Proid" />
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Floor Modal -->
+                                    <div class="modal fade" id="Floor-@Lst.Proid" tabindex="-1" role="dialog" aria-labelledby="SiteLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Floor</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">×</span>
+                                                    </button>
+                                                </div>
+                                                <form method="post" asp-action="FloorSave" asp-controller="HomeEdit">
+                                                    <div class="modal-body">
+                                                        <div class="row">
+                                                            <div class="col-md-5">
+                                                                <label>Floor</label>
+                                                                <input type="text" name="Floor" value="@Lst.Floor" class="form-control" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-primary">Save changes</button>
+                                                    </div>
+                                                    <input type="hidden" name="Proid" value="@Lst.Proid" />
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Cus Modal -->
+                                    <div class="modal fade" id="Cus-@Lst.Proid" tabindex="-1" role="dialog" aria-labelledby="SiteLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Customer</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">×</span>
+                                                    </button>
+                                                </div>
+                                                <form method="post" asp-action="CusSave" asp-controller="HomeEdit">
+                                                    <div class="modal-body">
+                                                        <div class="row">
+                                                            <div class="col-md-5">
+                                                                <label>Select Customer</label>
+                                                                <select name="Cus" asp-items="@(new SelectList(Model.CustomerList,"id","Name"))" class="form-control">
+                                                                    <option disabled selected>Select</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-primary">Save changes</button>
+                                                    </div>
+                                                    <input type="hidden" name="Proid" value="@Lst.Proid" />
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- WorkHours Modal -->
+                                    <div class="modal fade" id="Work-@Lst.Proid" tabindex="-1" role="dialog" aria-labelledby="SiteLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Work Hours</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">×</span>
+                                                    </button>
+                                                </div>
+                                                <form method="post" asp-action="WorkSave" asp-controller="HomeEdit">
+                                                    <div class="modal-body">
+                                                        <div class="row">
+                                                            <div class="col-md-5">
+                                                                <label>Work Hours</label>
+                                                                <input type="text" name="Work" value="@Lst.WorkHours" class="form-control" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-primary">Save changes</button>
+                                                    </div>
+                                                    <input type="hidden" name="Proid" value="@Lst.Proid" />
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- HandDate Modal -->
+                                    <div class="modal fade" id="Hand-@Lst.Proid" tabindex="-1" role="dialog" aria-labelledby="SiteLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Ending Date</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">×</span>
+                                                    </button>
+                                                </div>
+                                                <form method="post" asp-action="HandSave" asp-controller="HomeEdit">
+                                                    <div class="modal-body">
+                                                        <div class="row">
+                                                            <div class="col-md-5">
+                                                                <label>Ending date</label>
+                                                                <input type="date" name="Hand" value="@Lst.HandDate" class="form-control" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-primary">Save changes</button>
+                                                    </div>
+                                                    <input type="hidden" name="Proid" value="@Lst.Proid" />
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Electricity Modal -->
+                                    <div class="modal fade" id="El-@Lst.Proid" tabindex="-1" role="dialog" aria-labelledby="SiteLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Electricity</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">×</span>
+                                                    </button>
+                                                </div>
+                                                <form method="post" asp-action="ElSave" asp-controller="HomeEdit">
+                                                    <div class="modal-body">
+                                                        <div class="row">
+                                                            <div class="col-md-5">
+                                                                <label>Select</label>
+                                                                <select class="form-control" name="El">
+                                                                    <option selected disabled>Select</option>
+                                                                    <option value="No">No</option>
+                                                                    <option value="Yes">Yes</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-primary">Save changes</button>
+                                                    </div>
+                                                    <input type="hidden" name="Proid" value="@Lst.Proid" />
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- StDate Modal -->
+                                    <div class="modal fade" id="St-@Lst.Proid" tabindex="-1" role="dialog" aria-labelledby="SiteLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Start Date</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">×</span>
+                                                    </button>
+                                                </div>
+                                                <form method="post" asp-action="StSave" asp-controller="HomeEdit">
+                                                    <div class="modal-body">
+                                                        <div class="row">
+                                                            <div class="col-md-5">
+                                                                <label>Start Date</label>
+                                                                <input type="date" name="St" value="@Lst.StDate" class="form-control" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-primary">Save changes</button>
+                                                    </div>
+                                                    <input type="hidden" name="Proid" value="@Lst.Proid" />
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Paint Modal -->
+                                    <div class="modal fade" id="Paint-@Lst.Proid" tabindex="-1" role="dialog" aria-labelledby="SiteLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Painting</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">×</span>
+                                                    </button>
+                                                </div>
+                                                <form method="post" asp-action="PaintSave" asp-controller="HomeEdit">
+                                                    <div class="modal-body">
+                                                        <div class="row">
+                                                            <div class="col-md-5">
+                                                                <label>Paint</label>
+                                                                <p>Yes</p>
+                                                                <input type="radio" name="Pa" value="Yes" />
+                                                                <p>No</p>
+                                                                <input type="radio" name="Pa" value="No" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-primary">Save changes</button>
+                                                    </div>
+                                                    <input type="hidden" name="Proid" value="@Lst.Proid" />
+                                                    <input type="hidden" name="Secid" value="3" />
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Flooring Modal -->
+                                    <div class="modal fade" id="Flooring-@Lst.Proid" tabindex="-1" role="dialog" aria-labelledby="SiteLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Flooring</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">×</span>
+                                                    </button>
+                                                </div>
+                                                <form method="post" asp-action="FlooringSave" asp-controller="HomeEdit">
+                                                    <div class="modal-body">
+                                                        <div class="row">
+                                                            <div class="col-md-5">
+                                                                <label>Flooring</label>
+                                                                <p>Yes</p>
+                                                                <input type="radio" name="Fl" value="Yes" />
+                                                                <p>No</p>
+                                                                <input type="radio" name="Fl" value="No" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-primary">Save changes</button>
+                                                    </div>
+                                                    <input type="hidden" name="Proid" value="@Lst.Proid" />
+                                                    <input type="hidden" name="Secid" value="1" />
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Wallpaper Modal -->
+                                    <div class="modal fade" id="Wallpaper-@Lst.Proid" tabindex="-1" role="dialog" aria-labelledby="SiteLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Wallpaper</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">×</span>
+                                                    </button>
+                                                </div>
+                                                <form method="post" asp-action="WallpaperSave" asp-controller="HomeEdit">
+                                                    <div class="modal-body">
+                                                        <div class="row">
+                                                            <div class="col-md-5">
+                                                                <label>Wallpaper</label>
+                                                                <p>Yes</p>
+                                                                <input type="radio" name="Wa" value="Yes" />
+                                                                <p>No</p>
+                                                                <input type="radio" name="Wa" value="No" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-primary">Save changes</button>
+                                                    </div>
+                                                    <input type="hidden" name="Proid" value="@Lst.Proid" />
+                                                    <input type="hidden" name="Secid" value="4" />
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Cleaning Modal -->
+                                    <div class="modal fade" id="Cleaning-@Lst.Proid" tabindex="-1" role="dialog" aria-labelledby="SiteLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Cleaning</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">×</span>
+                                                    </button>
+                                                </div>
+                                                <form method="post" asp-action="CleaningSave" asp-controller="HomeEdit">
+                                                    <div class="modal-body">
+                                                        <div class="row">
+                                                            <div class="col-md-5">
+                                                                <label>Cleaning</label>
+                                                                <p>Yes</p>
+                                                                <input type="radio" name="Cl" value="Yes" />
+                                                                <p>No</p>
+                                                                <input type="radio" name="Cl" value="No" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-primary">Save changes</button>
+                                                    </div>
+                                                    <input type="hidden" name="Proid" value="@Lst.Proid" />
+                                                    <input type="hidden" name="Secid" value="5" />
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- PaintHours Modal -->
+                                    <div class="modal fade" id="PaintHours-@Lst.Proid" tabindex="-1" role="dialog" aria-labelledby="SiteLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Paint Hours</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">×</span>
+                                                    </button>
+                                                </div>
+                                                <form method="post" asp-action="PaintHoursSave" asp-controller="HomeEdit">
+                                                    <div class="modal-body">
+                                                        <div class="row">
+                                                            <div class="col-md-5">
+                                                                <label>Paint Hours</label>
+                                                                <input type="number" name="PaintHours" value="@Lst.PaintingHours" class="form-control" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-primary">Save changes</button>
+                                                    </div>
+                                                    <input type="hidden" name="Proid" value="@Lst.Proid" />
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- StTime Modal -->
+                                    <div class="modal fade" id="StTime-@Lst.Proid" tabindex="-1" role="dialog" aria-labelledby="SiteLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Start Date Time</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">×</span>
+                                                    </button>
+                                                </div>
+                                                <form method="post" asp-action="StTimeSave" asp-controller="HomeEdit">
+                                                    <div class="modal-body">
+                                                        <div class="row">
+                                                            <div class="col-md-5">
+                                                                <label>Start Date Time</label>
+                                                                <input type="datetime-local" name="StTime" value="@Lst.StTime" class="form-control" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-primary">Save changes</button>
+                                                    </div>
+                                                    <input type="hidden" name="Proid" value="@Lst.Proid" />
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- StTime Modal -->
+                                    <div class="modal fade" id="FlHours-@Lst.Proid" tabindex="-1" role="dialog" aria-labelledby="SiteLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Flooring Hours</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">×</span>
+                                                    </button>
+                                                </div>
+                                                <form method="post" asp-action="FlHoursSave" asp-controller="HomeEdit">
+                                                    <div class="modal-body">
+                                                        <div class="row">
+                                                            <div class="col-md-5">
+                                                                <label>Flooring Hours</label>
+                                                                <input type="number" name="FlHours" value="@Lst.FlooringHours" class="form-control" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-primary">Save changes</button>
+                                                    </div>
+                                                    <input type="hidden" name="Proid" value="@Lst.Proid" />
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- FlRoom Modal -->
+                                    <div class="modal fade" id="FlRoom-@Lst.Proid" tabindex="-1" role="dialog" aria-labelledby="SiteLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Flooring Room</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">×</span>
+                                                    </button>
+                                                </div>
+                                                <form method="post" asp-action="FlRoomSave" asp-controller="HomeEdit">
+                                                    <div class="modal-body">
+                                                        <div class="row">
+                                                            <div class="col-md-5">
+                                                                <label>Flooring Room</label>
+                                                                <input type="text" name="FlRoom" value="@Lst.FlooringRoom" class="form-control" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-primary">Save changes</button>
+                                                    </div>
+                                                    <input type="hidden" name="Proid" value="@Lst.Proid" />
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- RmHours Modal -->
+                                    <div class="modal fade" id="RmHours-@Lst.Proid" tabindex="-1" role="dialog" aria-labelledby="SiteLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Remaining Hours</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">×</span>
+                                                    </button>
+                                                </div>
+                                                <form method="post" asp-action="RmHoursSave" asp-controller="HomeEdit">
+                                                    <div class="modal-body">
+                                                        <div class="row">
+                                                            <div class="col-md-5">
+                                                                <label>Remaining Hours</label>
+                                                                <input type="number" name="RmHours" value="@Lst.RemainingHours" class="form-control" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-primary">Save changes</button>
+                                                    </div>
+                                                    <input type="hidden" name="Proid" value="@Lst.Proid" />
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- PaEmAdd Modal -->
+                                    <div class="modal fade modal-xl" id="PaEmAdd-@Lst.Proid" tabindex="-1" role="dialog" aria-labelledby="SiteLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Assign Employees</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">×</span>
+                                                    </button>
+                                                </div>
+                                                <form method="post" asp-action="PaEmAddSave" asp-controller="HomeEdit">
+                                                    <div class="modal-body">
+                                                        <div class="row">
+                                                            <ul class="list-group">
+                                                                @foreach (var List in Model.EmployeeList)
                                                                 {
                                                                     valavailable = "NO";
-                                                            @foreach (var ListCheckFloor in Model.EmployeeAssignedFloorList)
+                                                                    @foreach (var ListCheck in Model.EmployeeAssignedPaintList)
                                                                     {
-                                                                        if (List.AccountNo == ListCheckFloor.Employeeid && Lst.Proid == ListCheckFloor.Proid)
+                                                                        if (List.AccountNo == ListCheck.Employeeid && Lst.Proid == ListCheck.Proid)
                                                                         {
-                                                            <li class="list-group-item"><span class="badge"><input type="checkbox" checked name="Empid" value="@List.AccountNo" /></span> @List.Name <input type="hidden" name="CloseDt" value="@ListCheckFloor.CloseDateTime" /> </li>
+                                                                            <li class="list-group-item"><span class="badge"><input type="checkbox" checked name="Empid" value="@List.AccountNo" /></span> @List.Name <input type="hidden" name="CloseDt" value="@ListCheck.CloseDateTime" /> </li>
                                                                             valavailable = "Yes";
                                                                         }
                                                                     }
-                                                            @if (valavailable == "NO")
+                                                                    @if (valavailable == "NO")
                                                                     {
-                                                            <li class="list-group-item"><span class="badge"><input type="checkbox" name="Empid" value="@List.AccountNo" /></span> @List.Name <input type="hidden" name="CloseDt" value="" /> </li>
+                                                                        <li class="list-group-item"><span class="badge"><input type="checkbox" name="Empid" value="@List.AccountNo" /></span> @List.Name  <input type="hidden" name="CloseDt" value="" /></li>
                                                                     }
-                                                            <input type="hidden" name="AllEmp" value="@List.AccountNo" />
+                                                                    <input type="hidden" name="AllEmp" value="@List.AccountNo" />
+
                                                                 }
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                    <button type="submit" class="btn btn-primary">Save changes</button>
-                                                </div>
-                                                <input type="hidden" name="Proid" value="@Lst.Proid" />
-                                                <input type="hidden" name="type" value="Flooring" />
-                                                <input type="hidden" name="Siteid" value="@Lst.site" />
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
- <!-- Manager Modal -->
-                                <div class="modal fade" id="Manager-@Lst.Proid" tabindex="-1" role="dialog" aria-labelledby="SiteLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Manager</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">×</span>
-                                                </button>
-                                            </div>
-                                            <form method="post" asp-action="ManagerSave" asp-controller="HomeEdit">
-                                                <div class="modal-body">
-                                                    <div class="row">
-                                                        <div class="col-md-5">
-                                                            <label>Select Manger</label>
-                                                            <select name="Manager" asp-items="@(new SelectList(Model.ManagerList,"id","Name",Lst.Manager))" class="form-control">
-                                                                <option disabled selected>Select</option>
-                                                            </select>
+                                                            </ul>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                    <button type="submit" class="btn btn-primary">Save changes</button>
-                                                </div>
-                                                <input type="hidden" name="Proid" value="@Lst.Proid" />
-                                            </form>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-primary">Save changes</button>
+                                                    </div>
+                                                    <input type="hidden" name="Proid" value="@Lst.Proid" />
+                                                    <input type="hidden" name="type" value="Painting" />
+                                                    <input type="hidden" name="Siteid" value="@Lst.site" />
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
- <!-- FlStDate Modal -->
-                                <div class="modal fade" id="FlStDate-@Lst.Proid" tabindex="-1" role="dialog" aria-labelledby="SiteLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Start Date Time</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">×</span>
-                                                </button>
-                                            </div>
-                                            <form method="post" asp-action="FlStDateSave" asp-controller="HomeEdit">
-                                                <div class="modal-body">
-                                                    <div class="row">
-                                                        <div class="col-md-5">
-                                                            <label>Start Date Time</label>
-                                                            <input type="datetime-local" name="StTime" value="@Lst.StdateTimeFlooring" class="form-control" />
+                                    <!-- FlEmAdd Modal -->
+                                    <div class="modal fade modal-xl" id="FlEmAdd-@Lst.Proid" tabindex="-1" role="dialog" aria-labelledby="SiteLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Assign Employees</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">×</span>
+                                                    </button>
+                                                </div>
+                                                <form method="post" asp-action="FlEmAddSave" asp-controller="HomeEdit">
+                                                    <div class="modal-body">
+                                                        <div class="row">
+                                                            <ul class="list-group">
+                                                                @foreach (var List in Model.EmployeeList)
+                                                                {
+                                                                    valavailable = "NO";
+                                                                    @foreach (var ListCheckFloor in Model.EmployeeAssignedFloorList)
+                                                                    {
+                                                                        if (List.AccountNo == ListCheckFloor.Employeeid && Lst.Proid == ListCheckFloor.Proid)
+                                                                        {
+                                                                            <li class="list-group-item"><span class="badge"><input type="checkbox" checked name="Empid" value="@List.AccountNo" /></span> @List.Name <input type="hidden" name="CloseDt" value="@ListCheckFloor.CloseDateTime" /> </li>
+                                                                            valavailable = "Yes";
+                                                                        }
+                                                                    }
+                                                                    @if (valavailable == "NO")
+                                                                    {
+                                                                        <li class="list-group-item"><span class="badge"><input type="checkbox" name="Empid" value="@List.AccountNo" /></span> @List.Name <input type="hidden" name="CloseDt" value="" /> </li>
+                                                                    }
+                                                                    <input type="hidden" name="AllEmp" value="@List.AccountNo" />
+                                                                }
+                                                            </ul>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                    <button type="submit" class="btn btn-primary">Save changes</button>
-                                                </div>
-                                                <input type="hidden" name="Proid" value="@Lst.Proid" />
-                                            </form>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-primary">Save changes</button>
+                                                    </div>
+                                                    <input type="hidden" name="Proid" value="@Lst.Proid" />
+                                                    <input type="hidden" name="type" value="Flooring" />
+                                                    <input type="hidden" name="Siteid" value="@Lst.site" />
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
- <!-- FlClosing Modal -->
-                                <div class="modal fade" id="FlClosing-@Lst.Proid" tabindex="-1" role="dialog" aria-labelledby="SiteLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Closing Date Time</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">×</span>
-                                                </button>
+                                    <!-- Manager Modal -->
+                                    <div class="modal fade" id="Manager-@Lst.Proid" tabindex="-1" role="dialog" aria-labelledby="SiteLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Manager</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">×</span>
+                                                    </button>
+                                                </div>
+                                                <form method="post" asp-action="ManagerSave" asp-controller="HomeEdit">
+                                                    <div class="modal-body">
+                                                        <div class="row">
+                                                            <div class="col-md-5">
+                                                                <label>Select Manger</label>
+                                                                <select name="Manager" asp-items="@(new SelectList(Model.ManagerList,"id","Name",Lst.Manager))" class="form-control">
+                                                                    <option disabled selected>Select</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-primary">Save changes</button>
+                                                    </div>
+                                                    <input type="hidden" name="Proid" value="@Lst.Proid" />
+                                                </form>
                                             </div>
-                                            <form method="post" asp-action="FlClosingSave" asp-controller="HomeEdit">
-                                                <div class="modal-body">
-                                                    <div class="row">
-                                                        <ul class="list-group">
-                                                            @foreach (var FlClose in Model.EmployeeAssignedFloorListChecked)
+                                        </div>
+                                    </div>
+                                    <!-- FlStDate Modal -->
+                                    <div class="modal fade" id="FlStDate-@Lst.Proid" tabindex="-1" role="dialog" aria-labelledby="SiteLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Start Date Time</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">×</span>
+                                                    </button>
+                                                </div>
+                                                <form method="post" asp-action="FlStDateSave" asp-controller="HomeEdit">
+                                                    <div class="modal-body">
+                                                        <div class="row">
+                                                            <div class="col-md-5">
+                                                                <label>Start Date Time</label>
+                                                                <input type="datetime-local" name="StTime" value="@Lst.StdateTimeFlooring" class="form-control" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-primary">Save changes</button>
+                                                    </div>
+                                                    <input type="hidden" name="Proid" value="@Lst.Proid" />
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- FlClosing Modal -->
+                                    <div class="modal fade" id="FlClosing-@Lst.Proid" tabindex="-1" role="dialog" aria-labelledby="SiteLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Closing Date Time</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">×</span>
+                                                    </button>
+                                                </div>
+                                                <form method="post" asp-action="FlClosingSave" asp-controller="HomeEdit">
+                                                    <div class="modal-body">
+                                                        <div class="row">
+                                                            <ul class="list-group">
+                                                                @foreach (var FlClose in Model.EmployeeAssignedFloorListChecked)
                                                                 {
 
                                                                     if (Lst.Proid == FlClose.Proid)
                                                                     {
-                                                            <li class="list-group-item">
-                                                                <input type="hidden" value="@FlClose.Employeeid" name="Empid" />
-                                                                @FlClose.EmpName
-                                                                <span class="badge">
-                                                                    <input type="datetime-local" name="CloseDt" value="@FlClose.CloseDateTime" class="form-control" />
-                                                                </span>
-                                                            </li>
-                                                                        }
+                                                                        <li class="list-group-item">
+                                                                            <input type="hidden" value="@FlClose.Employeeid" name="Empid" />
+                                                                            @FlClose.EmpName
+                                                                            <span class="badge">
+                                                                                <input type="datetime-local" name="CloseDt" value="@FlClose.CloseDateTime" class="form-control" />
+                                                                            </span>
+                                                                        </li>
                                                                     }
+                                                                }
 
-                                                        </ul>
+                                                            </ul>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                    <button type="submit" class="btn btn-primary">Save changes</button>
-                                                </div>
-                                                <input type="hidden" name="Proid" value="@Lst.Proid" />
-                                                <input type="hidden" name="type" value="Flooring" />
-                                            </form>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-primary">Save changes</button>
+                                                    </div>
+                                                    <input type="hidden" name="Proid" value="@Lst.Proid" />
+                                                    <input type="hidden" name="type" value="Flooring" />
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <!-- PaClosing Modal -->
-                                <div class="modal fade" id="PaClosing-@Lst.Proid" tabindex="-1" role="dialog" aria-labelledby="SiteLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Closing Date Time</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">×</span>
-                                                </button>
-                                            </div>
-                                            <form method="post" asp-action="PaClosingSave" asp-controller="HomeEdit">
-                                                <div class="modal-body">
-                                                    <div class="row">
-                                                        <ul class="list-group">
-                                                            @foreach (var FlClose in Model.EmployeeAssignedPaintListChecked)
+                                    <!-- PaClosing Modal -->
+                                    <div class="modal fade" id="PaClosing-@Lst.Proid" tabindex="-1" role="dialog" aria-labelledby="SiteLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Closing Date Time</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">×</span>
+                                                    </button>
+                                                </div>
+                                                <form method="post" asp-action="PaClosingSave" asp-controller="HomeEdit">
+                                                    <div class="modal-body">
+                                                        <div class="row">
+                                                            <ul class="list-group">
+                                                                @foreach (var FlClose in Model.EmployeeAssignedPaintListChecked)
                                                                 {
 
                                                                     if (Lst.Proid == FlClose.Proid)
                                                                     {
-                                                            <li class="list-group-item">
-                                                                <input type="hidden" value="@FlClose.Employeeid" name="Empid" />
-                                                                @FlClose.EmpName
-                                                                <span class="badge">
-                                                                    <input type="datetime-local" name="CloseDt" value="@FlClose.CloseDateTime" class="form-control" />
-                                                                </span>
-                                                            </li>
-                                                                        }
+                                                                        <li class="list-group-item">
+                                                                            <input type="hidden" value="@FlClose.Employeeid" name="Empid" />
+                                                                            @FlClose.EmpName
+                                                                            <span class="badge">
+                                                                                <input type="datetime-local" name="CloseDt" value="@FlClose.CloseDateTime" class="form-control" />
+                                                                            </span>
+                                                                        </li>
                                                                     }
+                                                                }
 
-                                                        </ul>
+                                                            </ul>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                    <button type="submit" class="btn btn-primary">Save changes</button>
-                                                </div>
-                                                <input type="hidden" name="Proid" value="@Lst.Proid" />
-                                                <input type="hidden" name="type" value="Painting" />
-                                            </form>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-primary">Save changes</button>
+                                                    </div>
+                                                    <input type="hidden" name="Proid" value="@Lst.Proid" />
+                                                    <input type="hidden" name="type" value="Painting" />
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                 <!-- PaStart Modal -->
-                                <div class="modal fade" id="Pastart-@Lst.Proid" tabindex="-1" role="dialog" aria-labelledby="SiteLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Starting Date Time</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">×</span>
-                                                </button>
-                                            </div>
-                                            <form method="post" asp-action="PastartSave" asp-controller="HomeEdit">
-                                                <div class="modal-body">
-                                                    <div class="row">
-                                                        <ul class="list-group">
-                                                            @foreach (var FlClose in Model.EmployeeAssignedPaintListChecked)
+                                    <!-- PaStart Modal -->
+                                    <div class="modal fade" id="Pastart-@Lst.Proid" tabindex="-1" role="dialog" aria-labelledby="SiteLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Starting Date Time</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">×</span>
+                                                    </button>
+                                                </div>
+                                                <form method="post" asp-action="PastartSave" asp-controller="HomeEdit">
+                                                    <div class="modal-body">
+                                                        <div class="row">
+                                                            <ul class="list-group">
+                                                                @foreach (var FlClose in Model.EmployeeAssignedPaintListChecked)
                                                                 {
 
                                                                     if (Lst.Proid == FlClose.Proid)
                                                                     {
-                                                            <li class="list-group-item">
-                                                                <input type="hidden" value="@FlClose.Employeeid" name="Empid" />
-                                                                @FlClose.EmpName
-                                                                <span class="badge">
-                                                                    <input type="datetime-local" name="StartDt" value="@FlClose.StartDateTime" class="form-control" />
-                                                                </span>
-                                                            </li>
-                                                                        }
+                                                                        <li class="list-group-item">
+                                                                            <input type="hidden" value="@FlClose.Employeeid" name="Empid" />
+                                                                            @FlClose.EmpName
+                                                                            <span class="badge">
+                                                                                <input type="datetime-local" name="StartDt" value="@FlClose.StartDateTime" class="form-control" />
+                                                                            </span>
+                                                                        </li>
                                                                     }
-                                                        </ul>
+                                                                }
+                                                            </ul>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                    <button type="submit" class="btn btn-primary">Save changes</button>
-                                                </div>
-                                                <input type="hidden" name="Proid" value="@Lst.Proid" />
-                                                <input type="hidden" name="type" value="Painting" />
-                                            </form>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-primary">Save changes</button>
+                                                    </div>
+                                                    <input type="hidden" name="Proid" value="@Lst.Proid" />
+                                                    <input type="hidden" name="type" value="Painting" />
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                
-                                <!-- FlStart Modal -->
-                                <div class="modal fade" id="FlStart-@Lst.Proid" tabindex="-1" role="dialog" aria-labelledby="SiteLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Starting Date Time</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">×</span>
-                                                </button>
-                                            </div>
-                                            <form method="post" asp-action="FlStartSave" asp-controller="HomeEdit">
-                                                <div class="modal-body">
-                                                    <div class="row">
-                                                        <ul class="list-group">
-                                                            @foreach (var FlClose in Model.EmployeeAssignedFloorListChecked)
+
+                                    <!-- FlStart Modal -->
+                                    <div class="modal fade" id="FlStart-@Lst.Proid" tabindex="-1" role="dialog" aria-labelledby="SiteLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Starting Date Time</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">×</span>
+                                                    </button>
+                                                </div>
+                                                <form method="post" asp-action="FlStartSave" asp-controller="HomeEdit">
+                                                    <div class="modal-body">
+                                                        <div class="row">
+                                                            <ul class="list-group">
+                                                                @foreach (var FlClose in Model.EmployeeAssignedFloorListChecked)
                                                                 {
 
                                                                     if (Lst.Proid == FlClose.Proid)
                                                                     {
-                                                            <li class="list-group-item">
-                                                                <input type="hidden" value="@FlClose.Employeeid" name="Empid" />
-                                                                @FlClose.EmpName
-                                                                <span class="badge">
-                                                                    <input type="datetime-local" name="StartDt" value="@FlClose.StartDateTime" class="form-control" />
-                                                                </span>
-                                                            </li>
-                                                                        }
+                                                                        <li class="list-group-item">
+                                                                            <input type="hidden" value="@FlClose.Employeeid" name="Empid" />
+                                                                            @FlClose.EmpName
+                                                                            <span class="badge">
+                                                                                <input type="datetime-local" name="StartDt" value="@FlClose.StartDateTime" class="form-control" />
+                                                                            </span>
+                                                                        </li>
                                                                     }
-                                                        </ul>
+                                                                }
+                                                            </ul>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                    <button type="submit" class="btn btn-primary">Save changes</button>
-                                                </div>
-                                                <input type="hidden" name="Proid" value="@Lst.Proid" />
-                                                <input type="hidden" name="type" value="Flooring" />
-                                            </form>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-primary">Save changes</button>
+                                                    </div>
+                                                    <input type="hidden" name="Proid" value="@Lst.Proid" />
+                                                    <input type="hidden" name="type" value="Flooring" />
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
                                 }
 
                             </tbody>

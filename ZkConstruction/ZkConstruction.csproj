@@ -36,6 +36,10 @@
     <Compile Include="Migrations\20210708064820_tbl23.Designer.cs" />
     <Compile Include="Migrations\20210714070917_tblAbsentUser.cs" />
     <Compile Include="Migrations\20210714070917_tblAbsentUser.Designer.cs" />
+    <Compile Include="Migrations\20210714084013_tblDocuments.cs" />
+    <Compile Include="Migrations\20210714084013_tblDocuments.Designer.cs" />
+    <Compile Include="Migrations\20210714102534_jjj.cs" />
+    <Compile Include="Migrations\20210714102534_jjj.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
