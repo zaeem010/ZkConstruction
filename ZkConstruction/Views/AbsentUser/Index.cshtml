@@ -50,8 +50,8 @@
                                             <tr>
                                                 <td>@lst.EmployeeName</td>
                                                 <td>@lst.ProjectName</td>
-                                                <td>@lst.Start</td>
-                                                <td>@lst.End</td>
+                                                <td>@lst.Start.ToString("yyyy-MM-dd HH:mm")</td>
+                                                <td>@lst.End.ToString("yyyy-MM-dd HH:mm")</td>
                                                 <td style="width:30px; text-align:center;">
                                                     <a href="@Url.Action("Edit", new { id = lst.id })" class="badge badge-primary" data-toggle="tooltip" data-placement="left" title="Click Me To Edit"><i class="fa fa-pencil"></i></a>
                                                 </td>

@@ -41,12 +41,24 @@
                             </div>
                             <div class="col-md-4">
                                 <label>Start Date Time</label>
-                                <input type="datetime-local" asp-for="AbsentUser.Start" id="st" class="form-control"/>
+                                @if (Model.AbsentUser.id == 0)
+                                {
+                                    <input type="datetime-local" asp-for="AbsentUser.Start" id="st" class="form-control" />
+                                }
+                                else { 
+                            <input type="datetime-local" asp-for="AbsentUser.Start" class="form-control" />
+                                }
                             </div>
                             <div class="col-md-4 top">
                                 <label>End Date Time</label>
-                                <input type="datetime-local" asp-for="AbsentUser.End" id="en" class="form-control"/>
-                            </div>
+                                @if (Model.AbsentUser.id == 0)
+                                {
+                                    <input type="datetime-local" asp-for="AbsentUser.End" id="en" class="form-control" />
+                                }
+                                else {
+                            <input type="datetime-local" asp-for="AbsentUser.End"  class="form-control" />
+                                }
+                                </div>
 
                             <div class="offset-md-4 col-md-6 " style="margin-top:20px">
                                 @if (Model.AbsentUser.id == 0)
